@@ -3,6 +3,12 @@
     <label for="itemCheck">Item Check</label><br/>
     <h4 id="itemCheck">Botol</h4>
 </div>
+
+<div class="form-group mb-4">
+    <label for="approval">Approval</label><br/>
+    <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
+</div>
+
 <div class="form-group mb-4">
     <label for="namaProduct">Nama Product</label>
     <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
@@ -24,7 +30,7 @@
 
 <div class="form-group mb-4">
     <label for="NPT">NPT</label><br/>
-    <input type="radio" id="NPT" name="NPT" value="Valid" checked/>Valid<br/><input id="NPT" type="radio" name="NPT" value="Expired"/>Expired
+    <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="NPT" name="NPT" value="Valid" checked/>Valid</td><td style="padding:10px;"><input id="NPT" type="radio" name="NPT" value="Expired"/>Expired</td></tr></table>
 </div>
 
 <div class="form-row mb-4">
@@ -32,11 +38,11 @@
         .check_form {
             margin: 5px;
         }
-        .check_form, tr {
+        .check_form tr {
             border: 1px solid black;
             border-collapse: collapse;
         }
-        .check_form, td {
+        .check_form td {
             border: 1px solid black;
             border-collapse: collapse;
             padding: 8px;
