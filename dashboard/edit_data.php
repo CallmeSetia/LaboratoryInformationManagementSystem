@@ -35,6 +35,8 @@ function formShow(){
     }
     */
 
+
+
 }
 ?>
 
@@ -146,10 +148,8 @@ function formShow(){
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <!-- <div id="grafik-FULL-PID" class=""> -->
-                                    <form>
-                                        <?php formShow() ?>
 
-                                    </form>
+                                        <?php formShow() ?>
                                 </div>
                             </div>
                         </div>
