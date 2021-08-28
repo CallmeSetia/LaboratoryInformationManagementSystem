@@ -19,7 +19,7 @@ function formShow(){
         echo file_get_contents('../dashboard/edit_form/ps_p.php');
     } elseif (strtolower((string) $_POST['jenis']) == "cap") {
         echo file_get_contents('../dashboard/edit_form/ps_pc.php');
-    } elseif (strtolower((string) $_POST['jenis']) == "cartonBox") {
+    } elseif (strtolower((string) $_POST['jenis']) == "cartonbox") {
         echo file_get_contents('../dashboard/edit_form/ps_pcb.php');
     } elseif (strtolower((string) $_POST['jenis']) == "material") {
         echo file_get_contents('../dashboard/edit_form/p_pm.php');
