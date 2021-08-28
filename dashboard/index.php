@@ -3,10 +3,17 @@ session_start();
 //print_r($_SESSION);
 
 
-function tampilTombolTambahData() {
-    if (strtolower((string) $_SESSION['role']) == "siteman") {
+function tampilTombolTambahData()
+{
+    if (strtolower((string)$_SESSION['role']) == "siteman") {
         echo '<a href="tambah_data.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
     }
+}
+
+function tampilTombolEditData($jenis){
+        if (strtolower((string) $_SESSION['role']) == "analyst") {
+            echo '<form action="edit_data.php" method="POST"><input type="button" name="'.$jenis.'" class="btn btn-primary mb-2 " onclick="this.form.submit()" value="Edit"/></form>';
+        }
 }
 ?>
 
@@ -122,24 +129,25 @@ function tampilTombolTambahData() {
                                     <table id="zero-config" class="table table-hover" style="width:100%">
                                         <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
+                                            <th>Item Check</th>
+                                            <th>Nama Product</th>
                                             <th>Office</th>
                                             <th>Age</th>
                                             <th>Start date</th>
                                             <th>Salary</th>
-                                            <th class=""> ACTION</th>
+                                            <th class="" colspan="2"> ACTION</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
+                                            <td>Drum</td>
+                                            <td>Drum ABC</td>
                                             <td>Edinburgh</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
                                             <td>$320,800</td>
                                             <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td><?php  tampilTombolEditData("drum");   ?></td>
                                         </tr>
                                         <tr>
                                             <td>Garrett Winters</td>
