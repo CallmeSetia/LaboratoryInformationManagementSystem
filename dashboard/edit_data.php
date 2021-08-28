@@ -12,7 +12,7 @@ function tampilTombolTambahData() {
 }
 
 function formShow(){
-    echo file_get_contents('../dashboard/edit_form/p_pm.php');
+    echo file_get_contents('../dashboard/edit_form/ps_pd.php');
     /*
      if (strtolower((string) $_POST['drum']) == "drum") {
         echo 'testDrum';
@@ -132,10 +132,6 @@ function formShow(){
                                     <!-- <div id="grafik-FULL-PID" class=""> -->
                                     <form>
                                         <?php formShow() ?>
-                                        <div class="form-group mb-4">
-                                            <button type="submit" class="btn btn-primary mt-4">Submit</button>
-                                            <button type="reset" class="btn btn-outline-danger mt-4">Reset</button>
-                                        </div>
 
                                     </form>
                                 </div>

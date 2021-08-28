@@ -1,14 +1,20 @@
+<form action="#" method="POST">
 <div class="form-group mb-4">
     <label for="itemCheck">Item Check</label><br/>
     <h4 id="itemCheck">Botol</h4>
 </div>
 <div class="form-group mb-4">
-    <label for="namaProduct">Nama Prouct</label>
+    <label for="namaProduct">Nama Product</label>
     <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
 </div>
 <div class="form-group mb-4">
     <label for="jumlahProduct">Jumlah Product</label>
     <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
+</div>
+
+<div class="form-group mb-4">
+    <label for="cekSampel">Cek Sampel</label>
+    <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
 </div>
 
 <div class="form-group mb-4">
@@ -53,3 +59,9 @@
     </table>
     * Pengecekan dilakukan apabila diperlukan
 </div>
+
+<div class="form-group mb-4">
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    <button type="reset" class="btn btn-outline-danger mt-4">Reset</button>
+</div>
+</form>
