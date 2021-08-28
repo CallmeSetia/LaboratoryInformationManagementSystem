@@ -12,13 +12,29 @@ function tampilTombolTambahData() {
 }
 
 function formShow(){
-    echo file_get_contents('../dashboard/edit_form/ps_pd.php');
+
+    if (strtolower((string) $_POST['jenis']) == "drum") {
+        echo file_get_contents('../dashboard/edit_form/ps_pd.php');
+    } elseif (strtolower((string) $_POST['jenis']) == "pail") {
+        echo file_get_contents('../dashboard/edit_form/ps_p.php');
+    } elseif (strtolower((string) $_POST['jenis']) == "cap") {
+        echo file_get_contents('../dashboard/edit_form/ps_pc.php');
+    } elseif (strtolower((string) $_POST['jenis']) == "cartonBox") {
+        echo file_get_contents('../dashboard/edit_form/ps_pcb.php');
+    } elseif (strtolower((string) $_POST['jenis']) == "material") {
+        echo file_get_contents('../dashboard/edit_form/p_pm.php');
+    } elseif (strtolower((string) $_POST['jenis']) == "ibc") {
+        echo file_get_contents('../dashboard/edit_form/ps_ibc.php');
+    }
     /*
-     if (strtolower((string) $_POST['drum']) == "drum") {
-        echo 'testDrum';
-        echo file_get_contents('/edit_form/p_pm.php');
+
+    if(isset($_POST['value'])) {
+        echo file_get_contents('../dashboard/edit_form/ps_pd.php');
+    } else {
+        echo file_get_contents('../dashboard/edit_form/ps_pcb.php');
     }
     */
+
 }
 ?>
 

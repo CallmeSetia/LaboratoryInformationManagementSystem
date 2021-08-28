@@ -12,7 +12,7 @@ function tampilTombolTambahData()
 
 function tampilTombolEditData($jenis){
         if (strtolower((string) $_SESSION['role']) == "analyst") {
-            echo '<form action="edit_data.php" method="POST"><input type="button" name="'.$jenis.'" class="btn btn-primary mb-2 " onclick="this.form.submit()" value="Edit"/></form>';
+            echo '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
         }
 }
 ?>
@@ -150,49 +150,54 @@ function tampilTombolEditData($jenis){
                                             <td><?php  tampilTombolEditData("drum");   ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
+                                            <td>Pail</td>
+                                            <td>Pail DEF</td>
                                             <td>Tokyo</td>
                                             <td>63</td>
                                             <td>2011/07/25</td>
                                             <td>$170,750</td>
                                             <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td><?php  tampilTombolEditData("pail");   ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
+                                            <td>Cap</td>
+                                            <td>Cap GHI</td>
                                             <td>San Francisco</td>
                                             <td>66</td>
                                             <td>2009/01/12</td>
                                             <td>$86,000</td>
                                             <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td><?php  tampilTombolEditData("cap");   ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
+                                            <td>Carton Box</td>
+                                            <td>Carton Box JKL</td>
                                             <td>Edinburgh</td>
                                             <td>22</td>
                                             <td>2012/03/29</td>
                                             <td>$433,060</td>
                                             <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td><?php  tampilTombolEditData("cartonBox");   ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
+                                            <td>Material</td>
+                                            <td>Material MNO</td>
                                             <td>Tokyo</td>
                                             <td>33</td>
                                             <td>2008/11/28</td>
                                             <td>$162,700</td>
                                             <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td><?php  tampilTombolEditData("material");   ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
+                                            <td>IBC</td>
+                                            <td>IBC PQR</td>
                                             <td>Tokyo</td>
                                             <td>55</td>
                                             <td>2010/10/14</td>
                                             <td>$327,900</td>
                                             <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td><?php  tampilTombolEditData("ibc");   ?></td>
                                         </tr>
                                         <tr>
                                             <td>Colleen Hurst</td>
