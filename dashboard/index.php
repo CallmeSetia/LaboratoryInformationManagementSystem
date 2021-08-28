@@ -6,7 +6,7 @@ session_start();
 function tampilTombolTambahData()
 {
     if (strtolower((string)$_SESSION['role']) == "siteman") {
-        echo '<a href="tambah_data.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
+        echo '<a href="tambah_data_pkg.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
     }
 }
 
