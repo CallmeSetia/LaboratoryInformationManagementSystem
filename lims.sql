@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2021 at 01:54 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 7.4.20
+-- Generation Time: Aug 28, 2021 at 02:38 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -644,6 +644,108 @@ INSERT INTO `tbl_data_item_pkg` (`id_item_pkg`, `item_code`, `packaging_name`, `
 (591, 'P08-007', 'PAIL YAMALUBE 2T OBM 20L', 'KP'),
 (592, 'P08-009', 'PAIL WITE 20L', 'NIOPLAS UNGGUL'),
 (593, 'P08-035', 'Pail Jerry Can 18L set cap seal', 'PJW');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_detail_pkg_ibc`
+--
+
+CREATE TABLE `tbl_detail_pkg_ibc` (
+  `id_ibc` int(10) NOT NULL,
+  `kondisi_vn` varchar(2) NOT NULL,
+  `terdapat_lk` varchar(5) NOT NULL,
+  `kotoran` varchar(5) NOT NULL,
+  `air_oli` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_detail_pkg_p`
+--
+
+CREATE TABLE `tbl_detail_pkg_p` (
+  `id_p` int(10) NOT NULL,
+  `warna_pail` varchar(2) NOT NULL,
+  `terdapat_lk` varchar(5) NOT NULL,
+  `terdapat_lpb` varchar(5) NOT NULL,
+  `kondisi_seal` varchar(2) NOT NULL,
+  `kotoran` varchar(5) NOT NULL,
+  `karat` varchar(5) NOT NULL,
+  `benda_asing` varchar(5) NOT NULL,
+  `kotoran_ytb` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_detail_pkg_pc`
+--
+
+CREATE TABLE `tbl_detail_pkg_pc` (
+  `id_pc` int(10) NOT NULL,
+  `warna_cap` varchar(2) NOT NULL,
+  `kotoran` varchar(5) NOT NULL,
+  `goresan_pc` varchar(5) NOT NULL,
+  `cacat_pc` varchar(5) NOT NULL,
+  `lubang` varchar(5) NOT NULL,
+  `kondisi_seal` varchar(2) NOT NULL,
+  `terdapat_bami` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_detail_pkg_pcb`
+--
+
+CREATE TABLE `tbl_detail_pkg_pcb` (
+  `id_pcb` int(10) NOT NULL,
+  `kondisi_cart` varchar(2) NOT NULL,
+  `warna_cart` varchar(2) NOT NULL,
+  `kotoran_l` varchar(5) NOT NULL,
+  `gambar` varchar(5) NOT NULL,
+  `label` varchar(5) NOT NULL,
+  `kotoran_d` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_detail_pkg_pd`
+--
+
+CREATE TABLE `tbl_detail_pkg_pd` (
+  `id_pd` int(10) NOT NULL,
+  `warna_drum` varchar(2) NOT NULL,
+  `terdapat_lk` varchar(5) NOT NULL,
+  `terdapat_lpb` varchar(5) NOT NULL,
+  `kondisi_seal` varchar(2) NOT NULL,
+  `kotoran` varchar(5) NOT NULL,
+  `karat` varchar(5) NOT NULL,
+  `benda_asing` varchar(5) NOT NULL,
+  `bau_ytb` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_detail_pkg_pm`
+--
+
+CREATE TABLE `tbl_detail_pkg_pm` (
+  `id_pm` int(10) NOT NULL,
+  `warna_botol` varchar(2) NOT NULL,
+  `kondisi_screw` varchar(2) NOT NULL,
+  `tempat_lubang` varchar(5) NOT NULL,
+  `label_depan` varchar(2) NOT NULL,
+  `label_belakang` varchar(2) NOT NULL,
+  `cacat` varchar(5) NOT NULL,
+  `posisi_ldb` varchar(2) NOT NULL,
+  `kotoran` varchar(5) NOT NULL,
+  `benda_asing` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
