@@ -1,13 +1,29 @@
 <?php
+echo
+require_once '../assets/functions.php';
+require_once  '../koneksi/koneksi.php';
 session_start();
-//print_r($_SESSION);
 
+// ==== KONEKSI DATABASE
+$koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
+
+if ($koneksi->connect_errno) {
+    echo "Connection Error: " . $koneksi->connect_error;
+}
+// ===== END
 
 function tampilTombolTambahData() {
     if (strtolower((string) $_SESSION['role']) == "siteman") {
         echo '<a href="tambah_data.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
     }
 }
+
+
+
+//$item_kode = (string) $dataDariMysql;
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -120,6 +136,7 @@ function tampilTombolTambahData() {
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <!-- <div id="grafik-FULL-PID" class=""> -->
                                 <form>
+
                                     <div class="form-group mb-4">
                                         <label for="docNumber">Document No.</label>
                                         <input type="text" class="form-control" id="docNumber" placeholder="Doc No">
@@ -130,15 +147,26 @@ function tampilTombolTambahData() {
                                     </div>
 
                                     <div class="form-row mb-4">
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-4">
                                             <label for="issuedDate">Item Code</label> <br>
-                                            <select class="selectpicker"  id="issuedDate" data-live-search="true">
-                                                <option>Fries</option>
-                                                <option>Burger, Shake and a Smile</option>
-                                                <option>Sugar, Spice and all things nice</option>
+
+                                            <select class="selectpicker"  id="itemCode" data-live-search="true">
+                                                <option value="" selected disabled hidden>Item Code</option>
+                                                <?php
+                                                $sqlSelectItem = "SELECT * FROM `tbl_data_item_pkg`";
+                                                $hasilQuery = $koneksi->query($sqlSelectItem);
+
+                                                while($row = $hasilQuery->fetch_array() ) {?>
+                                                    <option value="<?php echo $row[2]?>"><?php echo strtoupper($row[1]); ?></option>
+                                                <?php }?>
                                             </select>
+                                            <span id="prints">asdsd</span>
+
+
+
                                         </div>
-                                        <div class="form-group col-md-10">
+
+                                        <div class="form-group col-md-5">
                                             <label for="productName">Product Name</label>
                                             <input type="text" class="form-control" id="productName" placeholder="Product Name">
                                         </div>
@@ -148,7 +176,22 @@ function tampilTombolTambahData() {
                                         <button type="submit" class="btn btn-primary mt-4">Submit</button>
                                         <button type="reset" class="btn btn-outline-danger mt-4">Reset</button>
                                     </div>
+                                    <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $("#itemCode").change(function () {
+                                                $("#prints").text($(this).find('option:selected').text());
+                                                $("#productName").val($(this).val());
 
+                                                var selectedItemCode = $(this).find('option:selected').text();
+                                                var arr =  selectedItemCode.split("-");
+                                                var buffArr = arr.split("P");
+
+                                                console.log(arr);
+
+
+                                            });
+                                        });
+                                    </script>
                                 </form>
                             </div>
                         </div>
