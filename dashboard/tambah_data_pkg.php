@@ -1,5 +1,4 @@
 <?php
-echo
 require_once '../assets/functions.php';
 require_once  '../koneksi/koneksi.php';
 session_start();
@@ -43,7 +42,7 @@ if (isset($_POST['submited'])) {
     }
     // ====== END KONEKSI
 
-    $sqlInsertUtama = "INSERT INTO `tbl_utama`(`id_utama`, `doc_no`, `date`, `receive_time`,  `id_item_pkg`, `item_check`, `quantity`, `packaging_condition`, `status`, `remark`, `submitted`, `received`) 
+    $sqlInsertUtama = "INSERT INTO `tbl_utama_pkg`(`id_utama`, `doc_no`, `date`, `receive_time`,  `id_item_pkg`, `item_check`, `quantity`, `packaging_condition`, `status`, `remark`, `submitted`, `received`) 
                         VALUES ('NULL','$docNumber','$issuedDate','$receiveTime', '$itemId','$itemType','$Quantity', '$PackagingCondition',
                                 '$status','$remark','$Submitted','$Received')";
 
