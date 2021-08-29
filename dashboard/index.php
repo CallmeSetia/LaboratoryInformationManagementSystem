@@ -2,6 +2,16 @@
 session_start();
 //print_r($_SESSION);
 
+require_once '../assets/functions.php';
+require_once  '../koneksi/koneksi.php';
+
+// ==== KONEKSI DATABASE
+$koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
+
+if ($koneksi->connect_errno) {
+    echo "Connection Error: " . $koneksi->connect_error;
+}
+// ====== END KONEKSI
 
 function tampilTombolTambahData()
 {
@@ -12,9 +22,84 @@ function tampilTombolTambahData()
 
 function tampilTombolEditData($jenis){
         if (strtolower((string) $_SESSION['role']) == "analyst") {
-            echo '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+            return '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
         }
+        else if (strtolower((string) $_SESSION['role']) == "siteman") {
+            return '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+        }
+
 }
+
+
+function tampilTabel($jenis_tabel, $koneksi) {
+    if (strtolower($jenis_tabel) == "packaging"){
+        echo '
+         <table id="zero-config" class="table table-hover" style="width:100%">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Receive Time</th>
+                <th>Item Code</th>
+                <th>Packaging Name</th>
+                <th>Supplier Name</th>
+                <th>Quantity</th>
+                <th>Packaging Condition</th>
+                <th>Status</th>
+                <th>Remark</th>
+                <th>Submitted</th>
+                <th>Received</th>
+                <th>Finnish Time</th>
+                <th>Status Approval</th>
+                <th colspan="" class=""> ACTION</th>
+                
+                </tr>
+            </thead>
+            <tbody> ';
+
+        // ====== END KONEKSI
+        $hasilQuery = $koneksi->query("SELECT * FROM `tbl_utama_pkg` LEFT JOIN tbl_data_item_pkg ON tbl_data_item_pkg.id_item_pkg = tbl_utama_pkg.id_item_pkg");
+        if ($num_rows = $hasilQuery->num_rows > 0) {
+            while ($row = $hasilQuery->fetch_assoc()){
+                echo '
+                            <tr>
+                                <td>'.$row['date'] .'</td>
+                                <td>'.$row['receive_time'] .'</td>
+                                <td>'.$row['item_code'] .'</td>
+                                <td>'.$row['packaging_name'] .'</td>
+                                <td>'.$row['suplier_name'] .'</td>
+                                <td>'.$row['quantity'] .'</td>
+                                <td>'.$row['packaging_condition'] .'</td>
+                                <td>'.$row['status'] .'</td>
+                                <td>'.$row['remark'] .'</td>
+                                <td>'.$row['submitted'] .'</td>
+                                <td>'.$row['received'] .'</td>
+                                <td>'.$row['finnish_time'] .'</td>
+                                <td>XXX</td>';
+
+                                if (strtolower((string) $_SESSION['role']) == "analyst") {
+                                    echo '<td>'.tampilTombolEditData("material").'</td>';
+                                }
+                                else if (strtolower((string) $_SESSION['role']) == "siteman") {
+                                    echo '<td>'.tampilTombolEditData("material").'</td>';
+                                }
+
+                    echo ' </tr>';
+            }
+        }
+        else {
+            echo '
+                <tr>
+                    <td colspan="14" class="text-center">Tidak Ada Data</td>
+                </tr>
+                ';
+        }
+        echo '
+                </tbody>
+            </table>';
+
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -80,23 +165,23 @@ function tampilTombolEditData($jenis){
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu">
                         <div class="dropdown-toggle">
-                            <span>Hallo, <?php echo (string) $_SESSION['username'];  ?> </span>
+                            <span>Hallo, <?php echo (string) $_SESSION['nama_akun'];  ?> </span>
                         </div>
                     </li>
 
                     <li class="menu">
-                        <a href="" aria-expanded="false" onClick="window.location.reload();" class="dropdown-toggle">
+                        <a href="index.php?page=packaging" aria-expanded="false" onClick="window.location.reload();" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-                                <span>MENU</span>
+                                <span>Packaging</span>
                             </div>
                         </a>
                     </li>
                         <li class="menu">
-                            <a href="<?php echo "index.php?role=".$_SESSION['role']."" ?>" aria-expanded="false" class="dropdown-toggle">
+                            <a href="index.php?page=additive" aria-expanded="false" class="dropdown-toggle">
                                 <div class="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                                    <span>MENU</span>
+                                    <span>Additive</span>
                                 </div>
                             </a>
                         </li>
@@ -120,165 +205,35 @@ function tampilTombolEditData($jenis){
             <!-- HALAMAN FULL -->
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing ">
                 <div class="widget-content widget-content-area text-right ">
-                    <?php  tampilTombolTambahData();   ?>
-
+                    <?php
+                        if (isset($_GET['page'])){
+                            if($_GET['page'] == "packaging") {
+                                tampilTombolTambahData();
+                                echo '
+                                    <div class="bio-skill-box box box-shadow text-left">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <div class="table-responsive mb-4 mt-4"> ';
+                                                    tampilTabel("packaging", $koneksi);
+                                echo '</div>
+                                            </div>
+                                        </div>
+                                    </div>';
+                            }
+                            else if ($_GET['page'] == "additive"){
+                                // pass
+                            }
+                        }
+                        else { ?>
                     <div class="bio-skill-box box box-shadow text-left">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <div class="table-responsive mb-4 mt-4">
-                                    <table id="zero-config" class="table table-hover" style="width:100%">
-                                        <thead>
-                                        <tr>
-                                            <th>Item Check</th>
-                                            <th>Nama Product</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                            <th class="" colspan="2"> ACTION</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Drum</td>
-                                            <td>Drum ABC</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                            <td><?php  tampilTombolEditData("drum");   ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pail</td>
-                                            <td>Pail DEF</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                            <td><?php  tampilTombolEditData("pail");   ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cap</td>
-                                            <td>Cap GHI</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                            <td><?php  tampilTombolEditData("cap");   ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Carton Box</td>
-                                            <td>Carton Box JKL</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                            <td><?php  tampilTombolEditData("cartonbox");   ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Material</td>
-                                            <td>Material MNO</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                            <td><?php  tampilTombolEditData("material");   ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>IBC</td>
-                                            <td>IBC PQR</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                            <td><?php  tampilTombolEditData("ibc");   ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>$103,600</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>30</td>
-                                            <td>2008/12/19</td>
-                                            <td>$90,560</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2013/03/03</td>
-                                            <td>$342,000</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>San Francisco</td>
-                                            <td>36</td>
-                                            <td>2008/10/16</td>
-                                            <td>$470,600</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>43</td>
-                                            <td>2012/12/18</td>
-                                            <td>$313,500</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>$385,750</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                            <th></th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                <a href="index.php?page=packaging"><button class="btn btn-primary btn-large">PACKAGING</button></a>
+                                <a href="index.php?page=additive"></a><button class="btn btn-primary btn-large">ADDITIVE</button>
                             </div>
                         </div>
                     </div>
+                 <?php }?>
                 </div>
             </div>
 
