@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2021 at 10:51 PM
+-- Generation Time: Aug 29, 2021 at 04:18 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -645,7 +645,6 @@ INSERT INTO `tbl_data_item_pkg` (`id_item_pkg`, `item_code`, `packaging_name`, `
                                                                                                    (592, 'P08-009', 'PAIL WITE 20L', 'NIOPLAS UNGGUL'),
                                                                                                    (593, 'P08-035', 'Pail Jerry Can 18L set cap seal', 'PJW');
 
-
 -- --------------------------------------------------------
 
 --
@@ -773,24 +772,43 @@ INSERT INTO `tbl_user` (`id_user`, `nama_akun`, `username`, `password`, `role`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_utama`
+-- Table structure for table `tbl_utama_add`
 --
 
-CREATE TABLE `tbl_utama` (
-                             `id_utama` int(255) NOT NULL,
-                             `doc_no` varchar(255) NOT NULL,
-                             `date` date NOT NULL,
-                             `receive_time` varchar(255) NOT NULL,
-                             `finnish_time` varchar(255) NOT NULL,
-                             `id_item_pkg` int(255) NOT NULL,
-                             `item_check` varchar(255) NOT NULL,
-                             `quantity` int(255) NOT NULL,
-                             `packaging_condition` varchar(255) NOT NULL,
-                             `status` varchar(255) NOT NULL,
-                             `remark` varchar(255) NOT NULL,
-                             `submitted` varchar(255) NOT NULL,
-                             `received` varchar(255) NOT NULL
+CREATE TABLE `tbl_utama_add` (
+    `id_utama` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_utama_pkg`
+--
+
+CREATE TABLE `tbl_utama_pkg` (
+                                 `id_utama` int(255) NOT NULL,
+                                 `doc_no` varchar(255) NOT NULL,
+                                 `date` varchar(255) NOT NULL,
+                                 `receive_time` varchar(255) NOT NULL,
+                                 `finnish_time` varchar(255) NOT NULL,
+                                 `id_item_pkg` int(255) NOT NULL,
+                                 `item_check` varchar(255) NOT NULL,
+                                 `quantity` int(255) NOT NULL,
+                                 `packaging_condition` varchar(255) NOT NULL,
+                                 `status` varchar(255) NOT NULL,
+                                 `remark` varchar(255) NOT NULL,
+                                 `submitted` varchar(255) NOT NULL,
+                                 `received` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_utama_pkg`
+--
+
+INSERT INTO `tbl_utama_pkg` (`id_utama`, `doc_no`, `date`, `receive_time`, `finnish_time`, `id_item_pkg`, `item_check`, `quantity`, `packaging_condition`, `status`, `remark`, `submitted`, `received`) VALUES
+                                                                                                                                                                                                            (5, 'DA-1', '29-Aug-2021', '10:40', '', 544, 'LABEL', 1000, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', ''),
+                                                                                                                                                                                                            (6, 'DA-2', '29-Aug-2021', '11:41', '', 11, 'BOTOL', 2100, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', ''),
+                                                                                                                                                                                                            (7, 'DA-3', '29-Aug-2021', '12:40', '', 15, 'BOTOL', 500, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', '');
 
 --
 -- Indexes for dumped tables
@@ -815,9 +833,15 @@ ALTER TABLE `tbl_user`
     ADD PRIMARY KEY (`id_user`);
 
 --
--- Indexes for table `tbl_utama`
+-- Indexes for table `tbl_utama_add`
 --
-ALTER TABLE `tbl_utama`
+ALTER TABLE `tbl_utama_add`
+    ADD PRIMARY KEY (`id_utama`);
+
+--
+-- Indexes for table `tbl_utama_pkg`
+--
+ALTER TABLE `tbl_utama_pkg`
     ADD PRIMARY KEY (`id_utama`);
 
 --
@@ -843,10 +867,16 @@ ALTER TABLE `tbl_user`
     MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tbl_utama`
+-- AUTO_INCREMENT for table `tbl_utama_add`
 --
-ALTER TABLE `tbl_utama`
-    MODIFY `id_utama` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `tbl_utama_add`
+    MODIFY `id_utama` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_utama_pkg`
+--
+ALTER TABLE `tbl_utama_pkg`
+    MODIFY `id_utama` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
