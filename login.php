@@ -52,10 +52,12 @@ if (isset($_POST['submitLogin'])) { // Cek Apakah sudah submit ? - Method POST
         $password = "";
         $role = "";
         $id_user = "";
+        $nama_akun = "";
 
         if($row = $hasil->fetch_assoc()) { // AMBIL DATA BERKAITAN DENGAN USER ex: userName, Role
             //echo "id: " . $row["id_user"]. " - Name: " . $row["username"]. " password " . $row["password"]. "<br>"; // DEBUGG
             $id_user = $row["id_user"];
+            $nama_akun = $row["nama_akun"];
             $username = $row["username"];
             $password = $row["password"];
             $role = $row["role"];
@@ -63,6 +65,7 @@ if (isset($_POST['submitLogin'])) { // Cek Apakah sudah submit ? - Method POST
 
         // MASUKAN KE SESSION
         $_SESSION['id_user'] = $id_user;
+        $_SESSION['nama_akun'] = $nama_akun;
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['role'] = strtolower($role);
@@ -75,6 +78,7 @@ if (isset($_POST['submitLogin'])) { // Cek Apakah sudah submit ? - Method POST
 
         // RESET SESSION
         $_SESSION['id_user']    = NULL;
+        $_SESSION['nama_akun']  = NULL;
         $_SESSION['username']   = NULL;
         $_SESSION['password']   = NULL;
         $_SESSION['role']       = NULL;
