@@ -25,7 +25,7 @@ function tampilTombolEditData($jenis){
             return '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
         }
         else if (strtolower((string) $_SESSION['role']) == "siteman") {
-            return '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+            return '<form action="edit_data.php" method="POST"><button name="id_utama" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
         }
 
 }
@@ -38,6 +38,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
             <thead>
             <tr>
                 <th>Date</th>
+                <th>Doc No</th>
                 <th>Receive Time</th>
                 <th>Item Code</th>
                 <th>Packaging Name</th>
@@ -63,6 +64,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 echo '
                             <tr>
                                 <td>'.$row['date'] .'</td>
+                                <td>'.$row['doc_no'] .'</td>
                                 <td>'.$row['receive_time'] .'</td>
                                 <td>'.$row['item_code'] .'</td>
                                 <td>'.$row['packaging_name'] .'</td>
@@ -74,13 +76,25 @@ function tampilTabel($jenis_tabel, $koneksi) {
                                 <td>'.$row['submitted'] .'</td>
                                 <td>'.$row['received'] .'</td>
                                 <td>'.$row['finnish_time'] .'</td>
-                                <td>XXX</td>';
+                                <td> </td>';
 
                                 if (strtolower((string) $_SESSION['role']) == "analyst") {
-                                    echo '<td>'.tampilTombolEditData("material").'</td>';
+
+                                    // KONVERSI JADi Jenis Package
+                                    $itemCheck = strtolower($row['item_check']);
+                                    $jenisPackage = "";
+
+                                    if ($itemCheck == "botol" || $itemCheck == "tube") $jenisPackage = "material";
+                                    elseif ($itemCheck == "cap" || $itemCheck == "cover cap") $jenisPackage = "cap";
+                                    elseif ($itemCheck == "pail") $jenisPackage = "pail";
+                                    elseif ($itemCheck == "drum") $jenisPackage = "drum";
+                                    elseif ($itemCheck == "carton") $jenisPackage = "cartonbox";
+
+                                    echo '<td>'.tampilTombolEditData($jenisPackage).'</td>';
                                 }
                                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
-                                    echo '<td>'.tampilTombolEditData("material").'</td>';
+
+                                    echo '<td>'.tampilTombolEditData($row['id_utama']).'</td>';
                                 }
 
                     echo ' </tr>';
