@@ -1,6 +1,6 @@
 <?php
 require_once '../assets/functions.php';
-require_once  '../koneksi/koneksi.php';
+include  '../koneksi/koneksi.php';
 session_start();
 //print_r($_SESSION);
 
@@ -13,19 +13,37 @@ function tampilTombolTambahData() {
 
 function formShow(){
 
-    if (strtolower((string) $_POST['jenis']) == "drum") {
-        echo file_get_contents('../dashboard/edit_form/ps_pd.php');
-    } elseif (strtolower((string) $_POST['jenis']) == "pail") {
-        echo file_get_contents('../dashboard/edit_form/ps_p.php');
-    } elseif (strtolower((string) $_POST['jenis']) == "cap") {
-        echo file_get_contents('../dashboard/edit_form/ps_pc.php');
-    } elseif (strtolower((string) $_POST['jenis']) == "cartonbox") {
-        echo file_get_contents('../dashboard/edit_form/ps_pcb.php');
-    } elseif (strtolower((string) $_POST['jenis']) == "material") {
-        echo file_get_contents('../dashboard/edit_form/p_pm.php');
-    } elseif (strtolower((string) $_POST['jenis']) == "ibc") {
-        echo file_get_contents('../dashboard/edit_form/ps_ibc.php');
+    // ANALYST
+    if (isset($_POST['jenis'])) {
+        if (strtolower((string) $_POST['jenis']) == "drum") {
+            echo file_get_contents('../dashboard/edit_form/ps_pd.php');
+        } elseif (strtolower((string) $_POST['jenis']) == "pail") {
+            echo file_get_contents('../dashboard/edit_form/ps_p.php');
+        } elseif (strtolower((string) $_POST['jenis']) == "cap") {
+            echo file_get_contents('../dashboard/edit_form/ps_pc.php');
+        } elseif (strtolower((string) $_POST['jenis']) == "cartonbox") {
+            echo file_get_contents('../dashboard/edit_form/ps_pcb.php');
+        } elseif (strtolower((string) $_POST['jenis']) == "material") {
+            echo file_get_contents('../dashboard/edit_form/p_pm.php');
+        } elseif (strtolower((string) $_POST['jenis']) == "ibc") {
+            echo file_get_contents('../dashboard/edit_form/ps_ibc.php');
+        }
     }
+
+
+    // SITEMAN
+    else if (isset($_POST['id_utama'])){
+        if ($_POST['id_utama'] != NULL && $_POST['id_utama'] > -1 && $_POST['id_utama'] != ""){
+            echo include('../dashboard/edit_form/data_utama_edit.php');
+        }
+        else {
+            echo "1";
+        }
+    }
+    else {
+        echo "0";
+    }
+
     /*
 
     if(isset($_POST['value'])) {
@@ -147,7 +165,6 @@ function formShow(){
 
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <!-- <div id="grafik-FULL-PID" class=""> -->
 
                                         <?php formShow() ?>
                                 </div>
