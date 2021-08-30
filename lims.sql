@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2021 at 04:18 AM
+-- Generation Time: Aug 30, 2021 at 01:37 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -28,10 +28,118 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_data_item_add` (
-                                     `tbl_item_add` int(255) NOT NULL,
+                                     `id_item_add` int(255) NOT NULL,
                                      `additive` varchar(255) NOT NULL,
                                      `weight` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_data_item_add`
+--
+
+INSERT INTO `tbl_data_item_add` (`id_item_add`, `additive`, `weight`) VALUES
+                                                                          (1, 'AD1274', '160 KG'),
+                                                                          (2, 'AD1319', '163 KG'),
+                                                                          (3, 'AD1341', '194 KG'),
+                                                                          (4, 'AD1354', '185.97 kg'),
+                                                                          (5, 'AD1406', '170 KG'),
+                                                                          (6, 'AD1419', '180 Kg'),
+                                                                          (7, 'AD1440', '193 KG'),
+                                                                          (8, 'AD1441', '199 KG'),
+                                                                          (9, 'AD1456', '198 kg'),
+                                                                          (10, 'AD1473', '160 KG'),
+                                                                          (11, 'AD1504', '189 KG'),
+                                                                          (12, 'AD42V', '18 kg'),
+                                                                          (13, 'BASE OIL AL70P', '200 L'),
+                                                                          (14, 'BASE OIL N100', '200 L'),
+                                                                          (15, 'BASE OIL N460/N150BS', '200 L'),
+                                                                          (16, 'BASE OIL WBASE10', '200 L'),
+                                                                          (17, 'D60', '156 kg'),
+                                                                          (18, 'DJ-56', '185 Kg'),
+                                                                          (19, 'K35', '220 kg'),
+                                                                          (20, 'LG17', '10 KG'),
+                                                                          (21, 'LJ127', '175 kg'),
+                                                                          (22, 'PB HV 100', '170 KG'),
+                                                                          (23, 'TZ1015', '25 KG'),
+                                                                          (24, 'TZ1129', '192 KG'),
+                                                                          (25, 'TZ1143', '175 KG '),
+                                                                          (26, 'TZ1159', '175 Kg'),
+                                                                          (27, 'TZ1183', '190 KG'),
+                                                                          (28, 'TZ1184', '175 KG'),
+                                                                          (29, 'TZ1186', '175 KG'),
+                                                                          (30, 'TZ1210', '203 kg'),
+                                                                          (31, 'TZ1211', '195 KG'),
+                                                                          (32, 'TZ1216', '191 kg'),
+                                                                          (33, 'TZ1217', '189 KG'),
+                                                                          (34, 'TZ1228', '163 kg'),
+                                                                          (35, 'TZ1233', '160 KG'),
+                                                                          (36, 'TZ1253', '175 kg'),
+                                                                          (37, 'TZ1255', '180 KG'),
+                                                                          (38, 'TZ1262', '211 kg'),
+                                                                          (39, 'TZ1270', '195 KG'),
+                                                                          (40, 'TZ1278', '204 KG'),
+                                                                          (41, 'TZ1280', '187 kg'),
+                                                                          (42, 'TZ1282', '200 KG'),
+                                                                          (43, 'TZ1285', '202 KG'),
+                                                                          (44, 'TZ1286', '235 KG'),
+                                                                          (45, 'TZ129C', '190 KG'),
+                                                                          (46, 'TZ1410', '195 Kg'),
+                                                                          (47, 'TZ1416', '204 Kg'),
+                                                                          (48, 'TZ165C', '180 Kg'),
+                                                                          (49, 'TZ176E', '152 Kg'),
+                                                                          (50, 'TZ249A', '204 KG'),
+                                                                          (51, 'TZ259C', '50 Kg'),
+                                                                          (52, 'TZ265M', '175 kg'),
+                                                                          (53, 'TZ265N', '170 kg'),
+                                                                          (54, 'TZ266', '188 kg'),
+                                                                          (55, 'TZ29', '20 Kg'),
+                                                                          (56, 'TZ307B', '17 Kg'),
+                                                                          (57, 'TZ30B', '16 Kg'),
+                                                                          (58, 'TZ30D', '16 Kg'),
+                                                                          (59, 'TZ345', '223 Kg'),
+                                                                          (60, 'TZ354', '160 KG'),
+                                                                          (61, 'TZ35V', '175 Kg'),
+                                                                          (62, 'TZ375B', '176 Kg'),
+                                                                          (63, 'TZ392N', '175 kg'),
+                                                                          (64, 'TZ400', '188 Kg'),
+                                                                          (65, 'TZ410', '190 kg'),
+                                                                          (66, 'TZ424', '15 KG'),
+                                                                          (67, 'TZ425B', '199 KG'),
+                                                                          (68, 'TZ447', '17 kg'),
+                                                                          (69, 'TZ483', '180  kg'),
+                                                                          (70, 'TZ507C', '199 KG'),
+                                                                          (71, 'TZ52C', '240 KG'),
+                                                                          (72, 'TZ536E', '200 KG'),
+                                                                          (73, 'TZ562C', '180 Kg'),
+                                                                          (74, 'TZ571', '180 kg'),
+                                                                          (75, 'TZ606B', '200 kg'),
+                                                                          (76, 'TZ630D', '193 KG'),
+                                                                          (77, 'TZ698', '190 kg'),
+                                                                          (78, 'TZ705B', '190 kg'),
+                                                                          (79, 'TZ734', '180 Kg'),
+                                                                          (80, 'TZ747C', '175 kg'),
+                                                                          (81, 'TZ747F', '175 kg'),
+                                                                          (82, 'TZ773', '16 KG'),
+                                                                          (83, 'TZ802', '175 KG'),
+                                                                          (84, 'TZ804', '229 Kg'),
+                                                                          (85, 'TZ818', '180 Kg'),
+                                                                          (86, 'TZ844', '205 kg'),
+                                                                          (87, 'TZ8460', '213 KG'),
+                                                                          (88, 'TZ916', '193 kg'),
+                                                                          (89, 'TZ925', '204 KG'),
+                                                                          (90, 'TZ948', '197 kg'),
+                                                                          (91, 'TZ960B', '184 Kg'),
+                                                                          (92, 'TZ966', '189 Kg'),
+                                                                          (93, 'UNISOL LIQUID BLUE A', '200 KG'),
+                                                                          (94, 'UNISOL LIQUID GREEN 5B', '20 KG'),
+                                                                          (95, 'UNISOL LIQUID YELLOW DRHF', '20 KG'),
+                                                                          (96, 'AD1483', ''),
+                                                                          (97, 'AD1503', ''),
+                                                                          (98, 'AD1382', ''),
+                                                                          (99, '100 HV-S', ''),
+                                                                          (100, 'YUBASE 3', ''),
+                                                                          (101, 'TZ351E', ''),
+                                                                          (102, 'TZ672', '');
 
 -- --------------------------------------------------------
 
@@ -776,8 +884,22 @@ INSERT INTO `tbl_user` (`id_user`, `nama_akun`, `username`, `password`, `role`) 
 --
 
 CREATE TABLE `tbl_utama_add` (
-    `id_utama` int(11) NOT NULL
+                                 `id_utama` int(11) NOT NULL,
+                                 `doc_no` varchar(255) NOT NULL,
+                                 `date` varchar(255) NOT NULL,
+                                 `lot_no` varchar(255) NOT NULL,
+                                 `id_item_add` int(255) NOT NULL,
+                                 `quantity` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_utama_add`
+--
+
+INSERT INTO `tbl_utama_add` (`id_utama`, `doc_no`, `date`, `lot_no`, `id_item_add`, `quantity`) VALUES
+                                                                                                    (2, 'DA-ADD-1', '29-Aug-2021', '124142455', 23, 2141),
+                                                                                                    (5, 'DA-1', '29-Aug-2021', '2', 3, 1000),
+                                                                                                    (8, 'DA-1', '29-Aug-2021', 'afaf', 4, 2255);
 
 -- --------------------------------------------------------
 
@@ -806,9 +928,11 @@ CREATE TABLE `tbl_utama_pkg` (
 --
 
 INSERT INTO `tbl_utama_pkg` (`id_utama`, `doc_no`, `date`, `receive_time`, `finnish_time`, `id_item_pkg`, `item_check`, `quantity`, `packaging_condition`, `status`, `remark`, `submitted`, `received`) VALUES
-                                                                                                                                                                                                            (5, 'DA-1', '29-Aug-2021', '10:40', '', 544, 'LABEL', 1000, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', ''),
-                                                                                                                                                                                                            (6, 'DA-2', '29-Aug-2021', '11:41', '', 11, 'BOTOL', 2100, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', ''),
-                                                                                                                                                                                                            (7, 'DA-3', '29-Aug-2021', '12:40', '', 15, 'BOTOL', 500, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', '');
+                                                                                                                                                                                                            (5, 'DA-1', '29-Aug-2021', '10:40', '', 544, 'LABEL', 1000, 'Sesuai dengan Spect Product', 'OKE', '', 'SETIAAA', ''),
+                                                                                                                                                                                                            (6, 'DA-2', '29-Aug-2021', '11:41', '', 11, 'BOTOL', 2100, 'Sesuai dengan Spect Product', 'OK', '', 'SETIAA', ''),
+                                                                                                                                                                                                            (7, 'DA-3', '29-Aug-2021', '12:40', '', 15, 'BOTOL', 500, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', ''),
+                                                                                                                                                                                                            (8, 'DA-4', '29-Aug-2021', '14:40', '', 14, 'BOTOL', 400, 'Sesuai dengan Spect Product', 'OK', '', 'SETIA', ''),
+                                                                                                                                                                                                            (9, 'DA-ADD-1', '29-Aug-2021', '', '', 27, 'NULL', 2141, '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -818,7 +942,7 @@ INSERT INTO `tbl_utama_pkg` (`id_utama`, `doc_no`, `date`, `receive_time`, `finn
 -- Indexes for table `tbl_data_item_add`
 --
 ALTER TABLE `tbl_data_item_add`
-    ADD PRIMARY KEY (`tbl_item_add`);
+    ADD PRIMARY KEY (`id_item_add`);
 
 --
 -- Indexes for table `tbl_data_item_pkg`
@@ -852,7 +976,7 @@ ALTER TABLE `tbl_utama_pkg`
 -- AUTO_INCREMENT for table `tbl_data_item_add`
 --
 ALTER TABLE `tbl_data_item_add`
-    MODIFY `tbl_item_add` int(255) NOT NULL AUTO_INCREMENT;
+    MODIFY `id_item_add` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `tbl_data_item_pkg`
@@ -870,13 +994,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_utama_add`
 --
 ALTER TABLE `tbl_utama_add`
-    MODIFY `id_utama` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id_utama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_utama_pkg`
 --
 ALTER TABLE `tbl_utama_pkg`
-    MODIFY `id_utama` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+    MODIFY `id_utama` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
