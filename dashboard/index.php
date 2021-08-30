@@ -16,7 +16,13 @@ if ($koneksi->connect_errno) {
 function tampilTombolTambahData()
 {
     if (strtolower((string)$_SESSION['role']) == "siteman") {
-        echo '<a href="tambah_data_pkg.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
+        if ($_GET['page'] == "packaging") {
+            echo '<a href="tambah_data_pkg.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
+        }
+        else {
+            echo '<a href="tambah_data_add.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
+        }
+
     }
 }
 
@@ -25,9 +31,8 @@ function tampilTombolEditData($jenis, $pkgn, $itmc, $idipg, $tglIn){
         return '<form action="edit_data.php?type='.$jenis.'" method="POST"><button name="data_edit" value="'.$jenis.'#'.$pkgn.'#'.$itmc.'#'.$idipg.'#'.$tglIn.'" class="btn btn-primary mb-2 ">Edit</button></form>';
     }
     else if (strtolower((string) $_SESSION['role']) == "siteman") {
-        return '<form action="edit_data.php?type='.$jenis.'" method="POST"><button name="id_utama" value="'.$jenis.'#'.$pkgn.'#'.$itmc.'#'.$idipg.'#'.$tglIn.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+        return '<form action="edit_data_notUsed.php" method="POST"><button name="id_utama" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
     }
-
 }
 
 
@@ -77,31 +82,28 @@ function tampilTabel($jenis_tabel, $koneksi) {
                                 <td>'.$row['received'] .'</td>
                                 <td>'.$row['finnish_time'] .'</td>
                                 <td> </td>';
+                // KONVERSI JADi Jenis Package
+                $itemCheck = strtolower($row['item_check']);
+                $jenisPackage = "";
+                $pkg_name = $row['packaging_name'];
+                $itm_code = $row['item_code'];
+                $id_pkg = $row['id_item_pkg'];
+                $tgl_masuk = $row['date'];
 
-                                if (strtolower((string) $_SESSION['role']) == "analyst") {
+                if ($itemCheck == "botol" || $itemCheck == "tube") $jenisPackage = "material";
+                elseif ($itemCheck == "cap" || $itemCheck == "cover cap") $jenisPackage = "cap";
+                elseif ($itemCheck == "pail") $jenisPackage = "pail";
+                elseif ($itemCheck == "drum") $jenisPackage = "drum";
+                elseif ($itemCheck == "carton") $jenisPackage = "cartonbox";
 
-                                    // KONVERSI JADi Jenis Package
-                                    $itemCheck = strtolower($row['item_check']);
-                                    $jenisPackage = "";
-                                    $pkg_name = $row['packaging_name'];
-                                    $itm_code = $row['item_code'];
-                                    $id_pkg = $row['id_item_pkg'];
-                                    $tgl_masuk = $row['date'];
+                if (strtolower((string) $_SESSION['role']) == "analyst") {
+                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
+                }
+                else if (strtolower((string) $_SESSION['role']) == "siteman") {
+                    echo '<td>'.tampilTombolEditData($row['id_utama'], NULL, NULL, NULL, NULL).'</td>';
+                }
 
-                                    if ($itemCheck == "botol" || $itemCheck == "tube") $jenisPackage = "material";
-                                    elseif ($itemCheck == "cap" || $itemCheck == "cover cap") $jenisPackage = "cap";
-                                    elseif ($itemCheck == "pail") $jenisPackage = "pail";
-                                    elseif ($itemCheck == "drum") $jenisPackage = "drum";
-                                    elseif ($itemCheck == "carton") $jenisPackage = "cartonbox";
-
-                                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
-                                }
-                                else if (strtolower((string) $_SESSION['role']) == "siteman") {
-
-                                    echo '<td>'.tampilTombolEditData($row['id_utama']).'</td>';
-                                }
-
-                    echo ' </tr>';
+                echo ' </tr>';
             }
         }
         else {
@@ -115,6 +117,61 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 </tbody>
             </table>';
 
+    }
+
+    // ADDITIVE
+    else if (strtolower($jenis_tabel) == "additive") {
+        echo '
+         <table id="zero-config" class="table table-hover" style="width:100%">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Doc No</th>
+                <th>Lot Number</th>
+                <th>Additive</th>
+                <th>Weight</th>
+                <th>Quantity</th>
+                <th colspan="" class=""> ACTION</th>
+                </tr>
+            </thead>
+            <tbody> ';
+
+        // ====== END KONEKSI
+        $hasilQuery = $koneksi->query("SELECT * FROM `tbl_utama_add` LEFT JOIN tbl_data_item_add ON tbl_data_item_add.id_item_add = tbl_utama_add.id_item_add");
+        if ($num_rows = $hasilQuery->num_rows > 0) {
+            while ($row = $hasilQuery->fetch_assoc()) {
+                echo '
+                <tr>
+                     <td>'.$row['date'] .'</td>
+                     <td>'.$row['doc_no'] .'</td>
+                     <td>'.$row['lot_no'] .'</td>
+                     <td>'.$row['additive'] .'</td>
+                     <td>'.$row['weight'] .'</td>
+                     <td>'.$row['quantity'] .'</td>
+                     
+                     <td>Ini Action</td>';
+//                    if (strtolower((string) $_SESSION['role']) == "analyst") {
+//                        echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
+//                    }
+//                    else if (strtolower((string) $_SESSION['role']) == "siteman") {
+//                        echo '<td>'.tampilTombolEditData($row['id_utama'], NULL, NULL, NULL, NULL).'</td>';
+//                    }
+
+
+                echo '</tr>';
+            }
+
+        }
+        else {
+            echo '
+                <tr>
+                    <td colspan="9" class="text-center">Tidak AdAa Data</td>
+                </tr>
+                ';
+        }
+        echo '
+                </tbody>
+            </table>';
     }
 }
 
@@ -180,39 +237,39 @@ function tampilTabel($jenis_tabel, $koneksi) {
     <div class="sidebar-wrapper sidebar-theme">
         <nav id="sidebar">
             <div class="shadow-bottom"></div>
-                <ul class="list-unstyled menu-categories" id="accordionExample">
-                    <li class="menu">
-                        <div class="dropdown-toggle">
-                            <span>Hallo, <?php echo (string) $_SESSION['nama_akun'];  ?> </span>
+            <ul class="list-unstyled menu-categories" id="accordionExample">
+                <li class="menu">
+                    <div class="dropdown-toggle">
+                        <span>Hallo, <?php echo (string) $_SESSION['nama_akun'];  ?> </span>
+                    </div>
+                </li>
+
+                <li class="menu">
+                    <a href="index.php?page=packaging" aria-expanded="false" onClick="window.location.reload();" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                            <span>Packaging</span>
                         </div>
-                    </li>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="index.php?page=additive" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            <span>Additive</span>
+                        </div>
+                    </a>
+                </li>
 
-                    <li class="menu">
-                        <a href="index.php?page=packaging" aria-expanded="false" onClick="window.location.reload();" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-                                <span>Packaging</span>
-                            </div>
-                        </a>
-                    </li>
-                        <li class="menu">
-                            <a href="index.php?page=additive" aria-expanded="false" class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                                    <span>Additive</span>
-                                </div>
-                            </a>
-                        </li>
-
-                    <li class="menu">
-                        <a href="../logout.php" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                                <span> Logout</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                <li class="menu">
+                    <a href="../logout.php" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                            <span> Logout</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
             <div class="shadow-bottom"></div>
         </nav>
     </div>
@@ -224,34 +281,44 @@ function tampilTabel($jenis_tabel, $koneksi) {
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing ">
                 <div class="widget-content widget-content-area text-right ">
                     <?php
-                        if (isset($_GET['page'])){
-                            if($_GET['page'] == "packaging") {
-                                tampilTombolTambahData();
-                                echo '
+                    if (isset($_GET['page'])){
+                        if($_GET['page'] == "packaging") {
+                            tampilTombolTambahData();
+                            echo '
                                     <div class="bio-skill-box box box-shadow text-left">
                                         <div class="row">
                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                                 <div class="table-responsive mb-4 mt-4"> ';
-                                                    tampilTabel("packaging", $koneksi);
-                                echo '</div>
+                            tampilTabel("packaging", $koneksi);
+                            echo '</div>
                                             </div>
                                         </div>
                                     </div>';
-                            }
-                            else if ($_GET['page'] == "additive"){
-                                // pass
-                            }
                         }
-                        else { ?>
-                    <div class="bio-skill-box box box-shadow text-left">
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <a href="index.php?page=packaging"><button class="btn btn-primary btn-large">PACKAGING</button></a>
-                                <a href="index.php?page=additive"></a><button class="btn btn-primary btn-large">ADDITIVE</button>
+                        else if ($_GET['page'] == "additive"){
+                            tampilTombolTambahData();
+                            echo '
+                                    <div class="bio-skill-box box box-shadow text-left">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <div class="table-responsive mb-4 mt-4"> ';
+                            tampilTabel("additive", $koneksi);
+                            echo '</div>
+                                            </div>
+                                        </div>
+                                    </div>';
+                        }
+                    }
+                    else { ?>
+                        <div class="bio-skill-box box box-shadow text-left">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <a href="index.php?page=packaging"><button class="btn btn-primary btn-large">PACKAGING</button></a>
+                                    <a href="index.php?page=additive"><button class="btn btn-primary btn-large">ADDITIVE</button></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                 <?php }?>
+                    <?php }?>
                 </div>
             </div>
 
