@@ -20,13 +20,13 @@ function tampilTombolTambahData()
     }
 }
 
-function tampilTombolEditData($jenis){
-        if (strtolower((string) $_SESSION['role']) == "analyst") {
-            return '<form action="edit_data.php" method="POST"><button name="jenis" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
-        }
-        else if (strtolower((string) $_SESSION['role']) == "siteman") {
-            return '<form action="edit_data.php" method="POST"><button name="id_utama" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
-        }
+function tampilTombolEditData($jenis, $pkgn, $itmc, $idipg, $tglIn){
+    if (strtolower((string) $_SESSION['role']) == "analyst") {
+        return '<form action="edit_data.php?type='.$jenis.'" method="POST"><button name="data_edit" value="'.$jenis.'#'.$pkgn.'#'.$itmc.'#'.$idipg.'#'.$tglIn.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+    }
+    else if (strtolower((string) $_SESSION['role']) == "siteman") {
+        return '<form action="edit_data.php?type='.$jenis.'" method="POST"><button name="id_utama" value="'.$jenis.'#'.$pkgn.'#'.$itmc.'#'.$idipg.'#'.$tglIn.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+    }
 
 }
 
@@ -83,6 +83,10 @@ function tampilTabel($jenis_tabel, $koneksi) {
                                     // KONVERSI JADi Jenis Package
                                     $itemCheck = strtolower($row['item_check']);
                                     $jenisPackage = "";
+                                    $pkg_name = $row['packaging_name'];
+                                    $itm_code = $row['item_code'];
+                                    $id_pkg = $row['id_item_pkg'];
+                                    $tgl_masuk = $row['date'];
 
                                     if ($itemCheck == "botol" || $itemCheck == "tube") $jenisPackage = "material";
                                     elseif ($itemCheck == "cap" || $itemCheck == "cover cap") $jenisPackage = "cap";
@@ -90,7 +94,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                                     elseif ($itemCheck == "drum") $jenisPackage = "drum";
                                     elseif ($itemCheck == "carton") $jenisPackage = "cartonbox";
 
-                                    echo '<td>'.tampilTombolEditData($jenisPackage).'</td>';
+                                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
                                 }
                                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
 
