@@ -156,11 +156,11 @@ function formShow(){
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <form action="../dashboard/throw_data.php" method="POST">
-                                        <div class="form-group mb-4">
+                                        <div class="form-group mb-4" id="tombolSR">
                                             <label for="namaProduct">Nama Product</label>
                                             <h4><?php echo ($dE_buffer[1]) ?></h4>
                                         </div>
-                                        <div class="form-group mb-4">
+                                        <div class="form-group mb-4" id="tombolSR">
                                             <label for="itemCode">Item Code</label>
                                             <h4><?php echo ($dE_buffer[2]) ?></h4>
                                         </div>
