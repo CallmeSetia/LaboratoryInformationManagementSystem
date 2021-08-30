@@ -167,11 +167,11 @@ function formShow(){
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <form action="../dashboard/throw_data.php" method="POST">
-                                        <div class="form-group mb-4">
+                                        <div class="form-group mb-4" id="descNI">
                                             <label for="namaProduct">Nama Product</label>
                                             <h4><?php echo ($dE_buffer[1]) ?></h4>
                                         </div>
-                                        <div class="form-group mb-4">
+                                        <div class="form-group mb-4" id="descNI">
                                             <label for="itemCode">Item Code</label>
                                             <h4><?php echo ($dE_buffer[2]) ?></h4>
                                         </div>
@@ -505,7 +505,7 @@ function formShow(){
                                                 echo '<br><h4>Data edit tidak tersedia karena type barang tidak sesuai aturan!</h4>';
                                                 echo '
                                                 <style>
-                                                    #tombolSR {
+                                                    #tombolSR, #descNI {
                                                     display: none;
                                                     }
                                                 </style>
@@ -515,7 +515,7 @@ function formShow(){
                                             echo 'none';
                                             echo '
                                                 <style>
-                                                    #tombolSR {
+                                                    #tombolSR, #descNI {
                                                     display: none;
                                                     }
                                                 </style>
