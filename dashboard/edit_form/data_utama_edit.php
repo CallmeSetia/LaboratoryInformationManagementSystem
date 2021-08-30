@@ -16,7 +16,7 @@ include  '../koneksi/koneksi.php';
 //    print_r($row);
 ?>
 
-<form  action="../dashboard/throw_update_utama.php" method="POST">
+<form  action="throw_update_utama.php" method="POST">
 
     <input type="hidden" name="idUtama" value="<?= $id_utama?>">
     

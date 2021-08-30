@@ -18,18 +18,7 @@ function formShow(){
     $data_edit = $_POST['data_edit'];
     $dE_buffer = explode('#', $data_edit);
 
-    // SITEMAN
-    if (isset($_POST['id_utama'])){
-        if ($_POST['id_utama'] != NULL && $_POST['id_utama'] > -1 && $_POST['id_utama'] != ""){
-            echo include('../dashboard/edit_form/data_utama_edit.php');
-        }
-        else {
-            echo "1";
-        }
-    }
-    else {
-        echo "0";
-    }
+
 
     /*
 
@@ -167,11 +156,11 @@ function formShow(){
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <form action="../dashboard/throw_data.php" method="POST">
-                                        <div class="form-group mb-4" id="descNI">
+                                        <div class="form-group mb-4">
                                             <label for="namaProduct">Nama Product</label>
                                             <h4><?php echo ($dE_buffer[1]) ?></h4>
                                         </div>
-                                        <div class="form-group mb-4" id="descNI">
+                                        <div class="form-group mb-4">
                                             <label for="itemCode">Item Code</label>
                                             <h4><?php echo ($dE_buffer[2]) ?></h4>
                                         </div>
@@ -505,7 +494,7 @@ function formShow(){
                                                 echo '<br><h4>Data edit tidak tersedia karena type barang tidak sesuai aturan!</h4>';
                                                 echo '
                                                 <style>
-                                                    #tombolSR, #descNI {
+                                                    #tombolSR {
                                                     display: none;
                                                     }
                                                 </style>
@@ -515,17 +504,17 @@ function formShow(){
                                             echo 'none';
                                             echo '
                                                 <style>
-                                                    #tombolSR, #descNI {
+                                                    #tombolSR {
                                                     display: none;
                                                     }
                                                 </style>
                                                 ';
                                         }
                                         ?>
-                                    <div class="form-group mb-4" id="tombolSR">
-                                        <form action="../dashboard/throw_data.php" method="POST"><button type="submit" name="jenisData" value="<?php echo ($jd.'#'.$dE_buffer[3]) ?>" class="btn btn-primary mt-4 ">Submit</button></form>
-                                        <button type="reset" class="btn btn-outline-danger mt-4">Reset</button>
-                                    </div>
+                                        <div class="form-group mb-4" id="tombolSR">
+                                            <form action="../dashboard/throw_data.php" method="POST"><button type="submit" name="jenisData" value="<?php echo ($jd.'#'.$dE_buffer[3]) ?>" class="btn btn-primary mt-4 ">Submit</button></form>
+                                            <button type="reset" class="btn btn-outline-danger mt-4">Reset</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

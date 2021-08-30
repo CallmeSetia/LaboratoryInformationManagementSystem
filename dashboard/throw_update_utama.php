@@ -21,7 +21,7 @@ if (isset($_POST['updated'])) {
     $issuedDate = $_POST['issuedDate'];
     $receiveTime = $_POST['receiveTime'];
 
-    $itemCode = $_POST['itemCode'];
+//    $itemCode = $_POST['itemCode'];
     $itemType = $_POST['itemType'];
     $itemId = $_POST['itemId'];
     $productName = $_POST['productName'];
@@ -43,6 +43,7 @@ if (isset($_POST['updated'])) {
 
     if ($hasilUpdate) {
         $FLAG_UPDATE = 1;
+        header("Location: index.php?page=packaging");
     }
     else {
         $FLAG_UPDATE = -1;

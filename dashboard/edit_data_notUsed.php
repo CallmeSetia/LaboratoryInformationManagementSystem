@@ -15,8 +15,10 @@ $data_edit = $_POST['data_edit'];
 $dE_buffer = explode('#', $data_edit);
 
 function formShow(){
-    $data_edit = $_POST['data_edit'];
-    $dE_buffer = explode('#', $data_edit);
+   if (isset( $_POST['data_edit'])) {
+       $data_edit = $_POST['data_edit'];
+       $dE_buffer = explode('#', $data_edit);
+   }
     // ANALYST
     if (isset($_POST['data_edit'])) {
         if (strtolower((string) $dE_buffer[0]) == "drum") {
@@ -172,17 +174,19 @@ function formShow(){
 
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <?php if ($_GET['test'] == "test"){
-                                        echo 'ya muncul';
-                                    } ?>
-                                    <div class="form-group mb-4">
-                                        <label for="namaProduct">Nama Product</label>
-                                        <h4><?php echo ($dE_buffer[1]) ?></h4>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for="itemCode">Item Code</label>
-                                        <h4><?php echo ($dE_buffer[2]) ?></h4>
-                                    </div>
+                                    <?php if (isset($_GET['asdsad'])){
+                                        if ($_GET['asdsad'] == "test") {
+                                        echo 'ya muncul'; ?>
+                                         <div class="form-group mb-4">
+                                            <label for="namaProduct">Nama Product</label>
+                                            <h4><?php echo ($dE_buffer[1]) ?></h4>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="itemCode">Item Code</label>
+                                            <h4><?php echo ($dE_buffer[2]) ?></h4>
+                                        </div>
+                                   <?php }} ?>
+
                                         <?php formShow() ?>
                                 </div>
                             </div>
