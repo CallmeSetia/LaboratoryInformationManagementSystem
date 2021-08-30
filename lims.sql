@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2021 at 01:37 PM
+-- Generation Time: Aug 30, 2021 at 01:57 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -761,6 +761,8 @@ INSERT INTO `tbl_data_item_pkg` (`id_item_pkg`, `item_code`, `packaging_name`, `
 
 CREATE TABLE `tbl_detail_pkg_ibc` (
                                       `id_ibc` int(10) NOT NULL,
+                                      `tgl_cek` varchar(15) NOT NULL,
+                                      `approval` int(1) NOT NULL,
                                       `kondisi_vn` varchar(2) NOT NULL,
                                       `terdapat_lk` varchar(5) NOT NULL,
                                       `kotoran` varchar(5) NOT NULL,
@@ -775,6 +777,8 @@ CREATE TABLE `tbl_detail_pkg_ibc` (
 
 CREATE TABLE `tbl_detail_pkg_p` (
                                     `id_p` int(10) NOT NULL,
+                                    `tgl_cek` varchar(15) NOT NULL,
+                                    `approval` int(1) NOT NULL,
                                     `warna_pail` varchar(2) NOT NULL,
                                     `terdapat_lk` varchar(5) NOT NULL,
                                     `terdapat_lpb` varchar(5) NOT NULL,
@@ -793,6 +797,8 @@ CREATE TABLE `tbl_detail_pkg_p` (
 
 CREATE TABLE `tbl_detail_pkg_pc` (
                                      `id_pc` int(10) NOT NULL,
+                                     `tgl_cek` varchar(15) NOT NULL,
+                                     `approval` int(1) NOT NULL,
                                      `warna_cap` varchar(2) NOT NULL,
                                      `kotoran` varchar(5) NOT NULL,
                                      `goresan_pc` varchar(5) NOT NULL,
@@ -810,12 +816,15 @@ CREATE TABLE `tbl_detail_pkg_pc` (
 
 CREATE TABLE `tbl_detail_pkg_pcb` (
                                       `id_pcb` int(10) NOT NULL,
+                                      `tgl_cek` varchar(15) NOT NULL,
+                                      `approval` int(1) NOT NULL,
                                       `kondisi_cart` varchar(2) NOT NULL,
                                       `warna_cart` varchar(2) NOT NULL,
                                       `kotoran_l` varchar(5) NOT NULL,
                                       `gambar` varchar(5) NOT NULL,
                                       `label` varchar(5) NOT NULL,
-                                      `kotoran_d` varchar(5) NOT NULL
+                                      `kotoran_d` varchar(5) NOT NULL,
+                                      `coa` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -826,6 +835,8 @@ CREATE TABLE `tbl_detail_pkg_pcb` (
 
 CREATE TABLE `tbl_detail_pkg_pd` (
                                      `id_pd` int(10) NOT NULL,
+                                     `tgl_cek` varchar(15) NOT NULL,
+                                     `approval` int(1) NOT NULL,
                                      `warna_drum` varchar(2) NOT NULL,
                                      `terdapat_lk` varchar(5) NOT NULL,
                                      `terdapat_lpb` varchar(5) NOT NULL,
@@ -844,15 +855,18 @@ CREATE TABLE `tbl_detail_pkg_pd` (
 
 CREATE TABLE `tbl_detail_pkg_pm` (
                                      `id_pm` int(10) NOT NULL,
-                                     `warna_botol` varchar(2) NOT NULL,
-                                     `kondisi_screw` varchar(2) NOT NULL,
-                                     `tempat_lubang` varchar(5) NOT NULL,
-                                     `label_depan` varchar(2) NOT NULL,
-                                     `label_belakang` varchar(2) NOT NULL,
-                                     `cacat` varchar(5) NOT NULL,
-                                     `posisi_ldb` varchar(2) NOT NULL,
-                                     `kotoran` varchar(5) NOT NULL,
-                                     `benda_asing` varchar(5) NOT NULL
+                                     `tgl_cek` varchar(15) NOT NULL,
+                                     `approval` int(1) NOT NULL,
+                                     `warna_botol` varchar(100) NOT NULL,
+                                     `kondisi_screw` varchar(100) NOT NULL,
+                                     `tempat_lubang` varchar(100) NOT NULL,
+                                     `label_depan` varchar(100) NOT NULL,
+                                     `label_belakang` varchar(100) NOT NULL,
+                                     `cacat` varchar(100) NOT NULL,
+                                     `posisi_ldb` varchar(100) NOT NULL,
+                                     `kotoran` varchar(100) NOT NULL,
+                                     `benda_asing` varchar(100) NOT NULL,
+                                     `npt` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -884,12 +898,7 @@ INSERT INTO `tbl_user` (`id_user`, `nama_akun`, `username`, `password`, `role`) 
 --
 
 CREATE TABLE `tbl_utama_add` (
-                                 `id_utama` int(11) NOT NULL,
-                                 `doc_no` varchar(255) NOT NULL,
-                                 `date` varchar(255) NOT NULL,
-                                 `lot_no` varchar(255) NOT NULL,
-                                 `id_item_add` int(255) NOT NULL,
-                                 `quantity` int(255) NOT NULL
+    `id_utama` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
