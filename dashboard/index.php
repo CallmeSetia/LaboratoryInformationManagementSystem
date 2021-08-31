@@ -46,8 +46,12 @@ function getId($type, $number) {
 }
 
 function tampilTombolPrint($idAF, $idTF, $pP){
-    if($idAF == $idTF) return '<form action="'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button>';
-    else return '<button name="data_edit" value="y" class="btn btn-primary mb-2 " disabled>Print</button>';
+    if($idAF == $idTF) {
+        return '<form action="'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button>';
+    }
+    else {
+        return '<button name="data_edit" value="y" class="btn btn-primary mb-2 " disabled>Print</button>';
+    }
 }
 
 function tampilTombolEditData($jenis, $pkgn, $itmc, $idipg, $tglIn){
@@ -153,7 +157,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 }
 
                 if (strtolower((string) $_SESSION['role']) == "analyst") {
-                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td><td>'. tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
+                    echo '<td style="vertical-align: top;padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td><td style="vertical-align: top; padding-top: 20px;">'. tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
                 }
                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
                     echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_pkg, NULL).'</td>';
@@ -212,7 +216,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 $tgl_masuk = $row['date'];
 
                    if (strtolower((string) $_SESSION['role']) == "analyst") {
-                       echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
+                       echo '<td style="vertical-align: top; padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td><td style="vertical-align: top; padding-top: 20px;">'. tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
                    }
                    else if (strtolower((string) $_SESSION['role']) == "siteman") {
                         echo '<td>'.tampilTombolEditData($row['id_utama'], "additive", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "additive", NULL, NULL, NULL).'</td>';
