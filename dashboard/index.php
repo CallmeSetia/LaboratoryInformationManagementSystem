@@ -47,7 +47,7 @@ function getId($type, $number) {
 
 function tampilTombolPrint($idAF, $idTF, $pP){
     if($idAF == $idTF) {
-        return '<form action="'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button>';
+        return '<form action="../dashboard/form_print/'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button>';
     }
     else {
         return '<button name="data_edit" value="y" class="btn btn-primary mb-2 " disabled>Print</button>';
