@@ -63,20 +63,50 @@ function getDetailPKG($type, $number){
     if ($num_rows = $queryDetail->num_rows > 0) {
         while ($rowP = $queryDetail->fetch_assoc()){
             if ($type = "pm") {
-                return ($rowP['id_pm']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_botol']. '+'  .$rowP['kondisi_screw']. '+'  .$rowP['tempat_lubang']. '+'  .$rowP['label_depan']. '+'  .$rowP['cacat']. '+'  .$rowP['posisi_ldb']. '+'  .$rowP['kotoran']. '+'  .$rowP['benda_asing']. '+'  .$rowP['npt']);
+                return ($rowP['id_pm']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_botol']. '+'  .$rowP['kondisi_screw']. '+'  .$rowP['tempat_lubang']. '+'  .$rowP['label_depan']. '+'  .$rowP['label_belakang']. '+'  .$rowP['cacat']. '+'  .$rowP['posisi_ldb']. '+'  .$rowP['kotoran']. '+'  .$rowP['benda_asing']. '+'  .$rowP['npt']. '+'  .$rowP['doc_no']);
             } elseif ($type = "pd") {
-                return ($rowP['id_pd']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_drum']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']);
+                return ($rowP['id_pd']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_drum']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']. '+'  .$rowP['doc_no']);
             } elseif ($type = "pcb") {
-                return ($rowP['id_pcb']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_cart']. '+'  .$rowP['warna_cart']. '+'  .$rowP['kotoran_l']. '+'  .$rowP['gambar']. '+'  .$rowP['label']. '+'  .$rowP['kotoran_d']. '+'  .$rowP['coa']);
+                return ($rowP['id_pcb']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_cart']. '+'  .$rowP['warna_cart']. '+'  .$rowP['kotoran_l']. '+'  .$rowP['gambar']. '+'  .$rowP['label']. '+'  .$rowP['kotoran_d']. '+'  .$rowP['coa']. '+'  .$rowP['doc_no']);
             } elseif ($type = "pc") {
-                return ($rowP['id_pc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_cap']. '+'  .$rowP['kotoran']. '+'  .$rowP['goresan_pc']. '+'  .$rowP['cacat_pc']. '+'  .$rowP['lubang']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['terdapat_bami']);
+                return ($rowP['id_pc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_cap']. '+'  .$rowP['kotoran']. '+'  .$rowP['goresan_pc']. '+'  .$rowP['cacat_pc']. '+'  .$rowP['lubang']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['terdapat_bami']. '+'  .$rowP['doc_no']);
             } elseif ($type = "p") {
-                return ($rowP['id_p']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_pail']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']);
+                return ($rowP['id_p']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_pail']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']. '+'  .$rowP['doc_no']);
             } elseif ($type = "ibc") {
-                return ($rowP['id_ibc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_vn']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['kotoran']. '+'  .$rowP['air_oli']);
+                return ($rowP['id_ibc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_vn']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['kotoran']. '+'  .$rowP['air_oli']. '+'  .$rowP['doc_no']);
             } else {
                 return 0;
             }
+        }
+    }
+}
+
+function getIdA($number) {
+    $DB_HOST = "127.0.0.1";
+    $DB_USER = "root";
+    $DB_PASS = "";
+    $DB_DATABASE = "lims";
+    $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
+    // tbl_utama
+    $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_add WHERE id_add=". $number);
+    if ($num_rows = $queryDetail->num_rows > 0) {
+        while ($rowP = $queryDetail->fetch_assoc()){
+            return $rowP["id_add"];
+        }
+    }
+}
+
+function getDetailADD($number){
+    $DB_HOST = "127.0.0.1";
+    $DB_USER = "root";
+    $DB_PASS = "";
+    $DB_DATABASE = "lims";
+    $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
+    // tbl_utama
+    $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_add LEFT JOIN tbl_utama_add ON tbl_detail_add.id_add = tbl_utama_add.id_utama LEFT JOIN tbl_data_item_add ON tbl_utama_add.id_item_add = tbl_data_item_add.id_item_add WHERE id_utama = ". $number);
+    if ($num_rows = $queryDetail->num_rows > 0) {
+        while ($rowP = $queryDetail->fetch_assoc()){
+            return ($rowP['id_add']. '+'  .$rowP['item_check']. '+'  .$rowP['quantity']. '+'  .$rowP['nama_produk']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['lot_no']. '+'  .$rowP['nama_psdd']. '+'  .$rowP['berat_psdpl']. '+'  .$rowP['seal_tdb']. '+'  .$rowP['bocorl']. '+'  .$rowP['kotoranba']. '+'  .$rowP['penyok']. '+'  .$rowP['karat']. '+'  .$rowP['doc_no']);
         }
     }
 }
@@ -261,8 +291,12 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 $id_pkg = $row['id_item_add'];
                 $tgl_masuk = $row['date'];
 
+                $idA = $row['id_utama'];
+                $idT = getIdA($row['id_utama']);
+                $dataCol = getDetailADD($row['id_utama']);
+
                    if (strtolower((string) $_SESSION['role']) == "analyst") {
-                       echo '<td style="vertical-align: top; padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td><td style="vertical-align: top; padding-top: 20px;">'. tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
+                       echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk). tampilTombolPrint($idA, $idT, "add", $dataCol) .'</td>';
                    }
                    else if (strtolower((string) $_SESSION['role']) == "siteman") {
                         echo '<td>'.tampilTombolEditData($row['id_utama'], "additive", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "additive", NULL, NULL, NULL).'</td>';
