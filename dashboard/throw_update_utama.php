@@ -79,3 +79,32 @@ else if (isset($_POST['updated-additive'])) {
     }
 
 }
+else if (isset($_POST['updated-additive'])) {
+    echo "<pre>";
+    print_r($_POST);
+
+    $idUtama = $_POST['idUtama'];
+
+    $docNumber = $_POST['docNumber'];
+    $issuedDate = $_POST['issuedDate'];
+    $receiveTime = $_POST['receiveTime'];
+    $lotNumber = $_POST['lotNumber'];
+
+    $itemId = $_POST['itemId'];
+    $weight = $_POST['weight'];
+
+    $Quantity = $_POST['Quantity'];
+
+    $sql_update = "UPDATE `tbl_utama_add` SET `id_utama`='$idUtama',`doc_no`='$docNumber',`date`='$issuedDate',`lot_no`='$lotNumber',`id_item_add`='$itemId',`quantity`='$Quantity' WHERE `id_utama` = '$idUtama'";
+
+    $hasilUpdate = $koneksi -> query($sql_update);
+
+    if ($hasilUpdate) {
+        $FLAG_UPDATE = 1;
+        header("Location: index.php?page=additive");
+    }
+    else {
+        $FLAG_UPDATE = -1;
+    }
+
+}
