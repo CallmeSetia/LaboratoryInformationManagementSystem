@@ -47,10 +47,10 @@ function getId($type, $number) {
 
 function tampilTombolPrint($idAF, $idTF, $pP){
     if($idAF == $idTF) {
-        return '<form action="../dashboard/form_print/'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button>';
+        return '<form action="../dashboard/form_print/'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button></form>';
     }
     else {
-        return '<button name="data_edit" value="y" class="btn btn-primary mb-2 " disabled>Print</button>';
+        return '<button name="data_edit" value="y" class="btn btn-primary mb-2 " disabled>Print</button></form>';
     }
 }
 
@@ -59,7 +59,7 @@ function tampilTombolEditData($jenis, $pkgn, $itmc, $idipg, $tglIn){
         return '<form action="edit_data.php?type='.$jenis.'" method="POST"><button name="data_edit" value="'.$jenis.'#'.$pkgn.'#'.$itmc.'#'.$idipg.'#'.$tglIn.'" class="btn btn-primary mb-2 ">Edit</button></form>';
     }
     else if (strtolower((string) $_SESSION['role']) == "siteman") {
-        return '<form action="edit_data_notUsed.php" method="POST"><button name="id_utama" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
+        return '<form action="edit_data_utama.php" method="POST"><input type="hidden" name="mode" value="'.$pkgn.'"/><button name="id_utama" value="'.$jenis.'" class="btn btn-primary mb-2 ">Edit</button></form>';
     }
 }
 
@@ -117,7 +117,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                                 <td>'.$row['submitted'] .'</td>
                                 <td>'.$row['received'] .'</td>
                                 <td>'.$row['finnish_time'] .'</td>
-                                <td> </td>';
+                               ';
                 // KONVERSI JADi Jenis Package
                 $itemCheck = strtolower($row['item_check']);
                 $jenisPackage = "";
@@ -157,7 +157,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 }
 
                 if (strtolower((string) $_SESSION['role']) == "analyst") {
-                    echo '<td style="vertical-align: top;padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td><td style="vertical-align: top; padding-top: 20px;">'. tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
+                    echo '<td style="vertical-align: top;padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk). tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
                 }
                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
                     echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_pkg, NULL).'</td>';
