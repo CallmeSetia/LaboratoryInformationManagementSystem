@@ -18,6 +18,11 @@ if ($koneksi->connect_errno) {
 }
 // ====== END KONEKSI
 
+
+//
+//
+//
+
 function tampilTombolTambahData()
 {
     if (strtolower((string)$_SESSION['role']) == "siteman") {
@@ -31,12 +36,14 @@ function tampilTombolTambahData()
     }
 }
 
+//getId("pm", $row['id_item_pkg']); // pm, 19
 function getId($type, $number) {
     $DB_HOST = "127.0.0.1";
     $DB_USER = "root";
     $DB_PASS = "";
     $DB_DATABASE = "lims";
     $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
+    // tbl_utama
     $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_pkg_". $type ." WHERE id_" . $type ."=". $number);
     if ($num_rows = $queryDetail->num_rows > 0) {
         while ($rowP = $queryDetail->fetch_assoc()){
@@ -123,33 +130,36 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 $jenisPackage = "";
                 $pkg_name = $row['packaging_name'];
                 $itm_code = $row['item_code'];
+
                 $id_pkg = $row['id_item_pkg'];
+                $id_utama = $row['id_utama'];
+
                 $tgl_masuk = $row['date'];
-                $idA = $row['id_item_pkg'];
+                $idA = $row['id_utama'];
 
                 if ($itemCheck == "botol" || $itemCheck == "tube") {
                     $jenisPackage = "material";
-                    $idT = getId("pm", $row['id_item_pkg']);
+                    $idT = getId("pm", $row['id_utama']);
                     $halamanPrint = "pm";
                 } elseif ($itemCheck == "cap" || $itemCheck == "cover cap") {
                     $jenisPackage = "cap";
-                    $idT = getId("pc", $row['id_item_pkg']);
+                    $idT = getId("pc", $row['id_utama']);
                     $halamanPrint = "pc";
                 } elseif ($itemCheck == "pail") {
                     $jenisPackage = "pail";
-                    $idT = getId("p", $row['id_item_pkg']);
+                    $idT = getId("p", $row['id_utama']);
                     $halamanPrint = "p";
                 } elseif ($itemCheck == "drum") {
                     $jenisPackage = "drum";
-                    $idT = getId("pd", $row['id_item_pkg']);
+                    $idT = getId("pd", $row['id_utama']);
                     $halamanPrint = "pd";
                 } elseif ($itemCheck == "carton") {
                     $jenisPackage = "cartonbox";
-                    $idT = getId("pcb", $row['id_item_pkg']);
+                    $idT = getId("pcb", $row['id_utama']);
                     $halamanPrint = "pcb";
                 } elseif ($itemCheck == "ibc") {
                     $jenisPackage = "ibc";
-                    $idT = getId("ibc", $row['id_item_pkg']);
+                    $idT = getId("ibc", $row['id_utama']);
                     $halamanPrint = "ibc";
                 } else {
                     $idT = "";
@@ -157,10 +167,10 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 }
 
                 if (strtolower((string) $_SESSION['role']) == "analyst") {
-                    echo '<td style="vertical-align: top;padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk). tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
+                    echo '<td style="vertical-align: top;padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_utama, $tgl_masuk). tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
                 }
                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
-                    echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_pkg, NULL).'</td>';
+                    echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_utama, NULL).'</td>';
                 }
 
                 echo ' </tr>';
