@@ -52,12 +52,41 @@ function getId($type, $number) {
     }
 }
 
-function tampilTombolPrint($idAF, $idTF, $pP){
+function getDetailPKG($type, $number){
+    $DB_HOST = "127.0.0.1";
+    $DB_USER = "root";
+    $DB_PASS = "";
+    $DB_DATABASE = "lims";
+    $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
+    // tbl_utama
+    $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_pkg_". $type ." LEFT JOIN tbl_utama_pkg ON tbl_detail_pkg_". $type . ".id_" . $type." = tbl_utama_pkg.id_utama LEFT JOIN tbl_data_item_pkg ON tbl_utama_pkg.id_item_pkg = tbl_data_item_pkg.id_item_pkg WHERE id_utama = ". $number);
+    if ($num_rows = $queryDetail->num_rows > 0) {
+        while ($rowP = $queryDetail->fetch_assoc()){
+            if ($type = "pm") {
+                return ($rowP['id_pm']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_botol']. '+'  .$rowP['kondisi_screw']. '+'  .$rowP['tempat_lubang']. '+'  .$rowP['label_depan']. '+'  .$rowP['cacat']. '+'  .$rowP['posisi_ldb']. '+'  .$rowP['kotoran']. '+'  .$rowP['benda_asing']. '+'  .$rowP['npt']);
+            } elseif ($type = "pd") {
+                return ($rowP['id_pd']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_drum']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']);
+            } elseif ($type = "pcb") {
+                return ($rowP['id_pcb']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_cart']. '+'  .$rowP['warna_cart']. '+'  .$rowP['kotoran_l']. '+'  .$rowP['gambar']. '+'  .$rowP['label']. '+'  .$rowP['kotoran_d']. '+'  .$rowP['coa']);
+            } elseif ($type = "pc") {
+                return ($rowP['id_pc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_cap']. '+'  .$rowP['kotoran']. '+'  .$rowP['goresan_pc']. '+'  .$rowP['cacat_pc']. '+'  .$rowP['lubang']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['terdapat_bami']);
+            } elseif ($type = "p") {
+                return ($rowP['id_p']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_pail']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']);
+            } elseif ($type = "ibc") {
+                return ($rowP['id_ibc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_vn']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['kotoran']. '+'  .$rowP['air_oli']);
+            } else {
+                return 0;
+            }
+        }
+    }
+}
+
+function tampilTombolPrint($idAF, $idTF, $pP, $dataIn){
     if($idAF == $idTF) {
-        return '<form action="../dashboard/form_print/'. $pP .'.php?print='. $idAF.'" method="POST"><button name="data_edit" value="y" class="btn btn-primary mb-2 ">Print</button></form>';
+        return '<form action="../dashboard/halaman_print.php?data='. $pP .'" method="POST"><button name="data_print" value="'. $dataIn .'" class="btn btn-primary mb-2 ">Print</button></form>';
     }
     else {
-        return '<button name="data_edit" value="y" class="btn btn-primary mb-2 " disabled>Print</button></form>';
+        return '<button class="btn btn-primary mb-2 " disabled>Print</button></form>';
     }
 }
 
@@ -141,33 +170,40 @@ function tampilTabel($jenis_tabel, $koneksi) {
                     $jenisPackage = "material";
                     $idT = getId("pm", $row['id_utama']);
                     $halamanPrint = "pm";
+                    $dataCol = getDetailPKG("pm", $row['id_utama']);
                 } elseif ($itemCheck == "cap" || $itemCheck == "cover cap") {
                     $jenisPackage = "cap";
                     $idT = getId("pc", $row['id_utama']);
                     $halamanPrint = "pc";
+                    $dataCol = getDetailPKG("pc", $row['id_utama']);
                 } elseif ($itemCheck == "pail") {
                     $jenisPackage = "pail";
                     $idT = getId("p", $row['id_utama']);
                     $halamanPrint = "p";
+                    $dataCol = getDetailPKG("p", $row['id_utama']);
                 } elseif ($itemCheck == "drum") {
                     $jenisPackage = "drum";
                     $idT = getId("pd", $row['id_utama']);
                     $halamanPrint = "pd";
+                    $dataCol = getDetailPKG("pd", $row['id_utama']);
                 } elseif ($itemCheck == "carton") {
                     $jenisPackage = "cartonbox";
                     $idT = getId("pcb", $row['id_utama']);
                     $halamanPrint = "pcb";
+                    $dataCol = getDetailPKG("pcb", $row['id_utama']);
                 } elseif ($itemCheck == "ibc") {
                     $jenisPackage = "ibc";
                     $idT = getId("ibc", $row['id_utama']);
                     $halamanPrint = "ibc";
+                    $dataCol = getDetailPKG("ibc", $row['id_utama']);
                 } else {
                     $idT = "";
                     $halamanPrint = "";
+                    $dataCol = "";
                 }
 
                 if (strtolower((string) $_SESSION['role']) == "analyst") {
-                    echo '<td style="vertical-align: top;padding-top: 20px;">'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_utama, $tgl_masuk). tampilTombolPrint($idA, $idT, $halamanPrint) .'</td>';
+                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_utama, $tgl_masuk). tampilTombolPrint($idA, $idT, $halamanPrint, $dataCol) .'</td>';
                 }
                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
                     echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_utama, NULL).'</td>';

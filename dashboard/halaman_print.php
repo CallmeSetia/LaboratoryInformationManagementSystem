@@ -2,14 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DN-PC-F-034-02 Pengecekan Packaging Material</title>
-    <link rel="stylesheet" href="table-styling.css">
+    <title>Halaman Print</title>
+    <link rel="stylesheet" href="../template_table/template/table-styling.css">
 </head>
 <body>
+<!-- <body onload="window.print()"> -->
 <div class="wrapper">
-    <table class="content">
+    <?php
+    require_once '../assets/functions.php';
+    include  '../koneksi/koneksi.php';
+    session_start();
+    //print_r($_SESSION);
+
+    if (isset( $_POST['data_print'])){
+        $data_print = $_POST['data_print'];
+        $dP_buffer = explode('+', $data_print);
+        print_r($dP_buffer);
+        /*if ($data_print[1] == "pm"){
+            $wB_buffer = explode('+', )
+        }*/
+    }
+
+    $jd = '';
+    if (isset($_GET['data'])){
+        if ($_GET['data'] == "pm") {
+            $jd = "pm";
+            echo '
+        <table class="content">
         <tr style="padding: 0px; overflow: hidden;">
-            <td style="padding: 0px" style="width: 180px"><img src="../../template_table/logo/logo.png" alt="logo" style="width: 150px; padding-left: 5px; padding-right: 5px"/></td>
+            <td style="padding: 0px" style="width: 180px"><img src="../template_table/logo/logo.png" alt="logo" style="width: 150px; padding-left: 5px; padding-right: 5px"/></td>
             <td style="padding: 0px"><h1 style="text-align: center">Pengecekan Sample Packaging Material</h1></td>
             <td style="width: 250px; padding: 0px">
                 <table class="content-0">
@@ -62,11 +83,10 @@
 
 
     <hr style="border-top: 3px dotted black; width: 810px; margin: 0 auto;margin-top: 5px; margin-bottom: 5px"/>
-
-
+    
     <table class="content">
         <tr style="padding: 0px; overflow: hidden;">
-            <td style="padding: 0px" style="width: 180px"><img src="../logo/logo.png" alt="logo" style="width: 150px; padding-left: 5px; padding-right: 5px"/></td>
+            <td style="padding: 0px" style="width: 180px"><img src="../template_table/logo/logo.png" alt="logo" style="width: 150px; padding-left: 5px; padding-right: 5px"/></td>
             <td style="padding: 0px"><h1 style="text-align: center">Pengecekan Sample Packaging Material</h1></td>
             <td style="width: 250px; padding: 0px">
                 <table class="content-0">
@@ -81,7 +101,7 @@
                 <div style="width:780px;height: 200px;">
                     <div style="float: left">
                         <table class="content-1a">
-                            <tr><td>Item Check</td><td>:</td><td colspan="3">Box</td></tr>
+                            <tr><td>Item Check</td><td>:</td><td colspan="3">Bottle</td></tr>
                             <tr><td>Nama Product</td><td>:</td><td colspan="3">Nama produk</td></tr>
                             <tr><td>Jumlah Product</td><td>:</td><td colspan="3">Jumlah produk</td></tr>
                             <tr><td>Cek Sampel</td><td>:</td><td colspan="3">8</td></tr>
@@ -116,6 +136,52 @@
             </td>
         </tr>
     </table><p style="width: 810px; margin: 0 auto">* Pengecekan dilakukan apabila diperlukan</p>
+        ';
+        } elseif ($_GET['data'] == "ibc") {
+            $jd = "ibc";
+            echo '';
+        } elseif ($_GET['data'] == "p") {
+            $jd = "p";
+            echo '';
+        } elseif ($_GET['data'] == "pc") {
+            $jd = "pc";
+            echo '';
+        } elseif ($_GET['data'] == "pcb") {
+            $jd = "pcb";
+            echo '';
+        } elseif ($_GET['data'] == "pd") {
+            $jd = "pd";
+            echo '';
+        } elseif ($_GET['data'] == "add") {
+            $jd = "add";
+            echo '';
+        } else {
+            echo '<br><h4>Data tabel tidak tersedia karena type barang tidak sesuai aturan!</h4>';
+            echo '
+                                                <style>
+                                                    #tombolSR {
+                                                    display: none;
+                                                    }
+                                                    #topLabel {
+                                                    display: none;
+                                                    }
+                                                </style>
+                                                ';
+        }
+    } else {
+        echo 'none';
+        echo '
+                                                <style>
+                                                    #tombolSR {
+                                                    display: none;
+                                                    }
+                                                    #topLabel {
+                                                    display: none;
+                                                    }
+                                                </style>
+                                                ';
+    }
+    ?>
 </div>
 </body>
 </html>
