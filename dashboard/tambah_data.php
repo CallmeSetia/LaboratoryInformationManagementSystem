@@ -11,7 +11,11 @@ if ($koneksi->connect_errno) {
     echo "Connection Error: " . $koneksi->connect_error;
 }
 // ===== END
+// === INSERT TO MYSQL
 
+
+
+//
 function tampilTombolTambahData() {
     if (strtolower((string) $_SESSION['role']) == "siteman") {
         echo '<a href="tambah_data.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
@@ -86,39 +90,7 @@ function tampilTombolTambahData() {
     <div class="sidebar-wrapper sidebar-theme">
         <nav id="sidebar">
             <div class="shadow-bottom"></div>
-            <ul class="list-unstyled menu-categories" id="accordionExample">
-                <li class="menu">
-                    <div class="dropdown-toggle">
-                        <span>Hallo, <?php echo (string) $_SESSION['username'];  ?> </span>
-                    </div>
-                </li>
-
-                <li class="menu">
-                    <a href="" aria-expanded="false" onClick="window.location.reload();" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-                            <span>MENU</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="menu">
-                    <a href="<?php echo "index.php?role=".$_SESSION['role']."" ?>" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                            <span>MENU</span>
-                        </div>
-                    </a>
-                </li>
-
-                <li class="menu">
-                    <a href="../logout.php" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
-                            <span> Logout</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+            <?php include'menu.php' ; ?>
             <div class="shadow-bottom"></div>
         </nav>
     </div>
@@ -135,22 +107,27 @@ function tampilTombolTambahData() {
                         <div class="row mt-5">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <!-- <div id="grafik-FULL-PID" class=""> -->
-                                <form>
+                                <form action="POST">
 
                                     <div class="form-group mb-4">
                                         <label for="docNumber">Document No.</label>
-                                        <input type="text" class="form-control" id="docNumber" placeholder="Doc No">
+                                        <input type="text" class="form-control" id="docNumber" name="docNumber" placeholder="Doc No">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="issuedDate">Issued Date</label>
-                                        <input type="text" class="form-control" id="issuedDate" placeholder="Issued Date">
+                                        <input type="text" class="form-control" id="issuedDate" name="issuedDate" placeholder="Issued Date">
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="issuedDate">Receive Time</label>
+                                        <input type="text" class="form-control" id="receiveTime" name="receiveTime" placeholder="Receive Time">
                                     </div>
 
                                     <div class="form-row mb-4">
                                         <div class="form-group col-md-4">
-                                            <label for="issuedDate">Item Code</label> <br>
+                                            <label for="itemCode">Item Code</label> <br>
 
-                                            <select class="selectpicker"  id="itemCode" data-live-search="true">
+                                            <select class="selectpicker"  id="itemCode" name="itemCode" data-live-search="true">
                                                 <option value="" selected disabled hidden>Item Code</option>
                                                 <?php
                                                 $sqlSelectItem = "SELECT * FROM `tbl_data_item_pkg`";
@@ -160,34 +137,114 @@ function tampilTombolTambahData() {
                                                     <option value="<?php echo $row[2]?>"><?php echo strtoupper($row[1]); ?></option>
                                                 <?php }?>
                                             </select>
-                                            <span id="prints">asdsd</span>
-
-
-
+                                            <!--  <span id="prints">asdsd</span>-->
+                                            <input type="hidden" name="itemType" id="prints" value="NULL" >
                                         </div>
 
                                         <div class="form-group col-md-5">
                                             <label for="productName">Product Name</label>
-                                            <input type="text" class="form-control" id="productName" placeholder="Product Name">
+                                            <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name">
                                         </div>
 
                                     </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="Quantity">Quantity</label>
+                                        <input type="text" class="form-control" id="Quantity" name="Quantity" placeholder="Quantity">
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="PackagingCondition">Packaging Condition</label>
+                                        <input type="text" class="form-control" id="PackagingCondition" name="PackagingCondition" placeholder="Packaging Condition">
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="status">Status</label>
+                                        <input type="text" class="form-control" id="status" name="status"  placeholder="Status" required>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="remark">Remark</label>
+                                        <input type="text" class="form-control" id="remark"  name="remark"  placeholder="Remark">
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="Submitted">Submitted Name</label>
+                                        <input type="text" class="form-control" id="Submitted" name="Submitted"  placeholder="Submitted Name">
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="Received">Received Name</label>
+                                        <input type="text" class="form-control" id="Received" name="Received" placeholder="Received Name">
+                                    </div>
+
+                                    <input type="hidden" name="submited" value="submited" />
                                     <div class="form-group mb-4">
                                         <button type="submit" class="btn btn-primary mt-4">Submit</button>
                                         <button type="reset" class="btn btn-outline-danger mt-4">Reset</button>
                                     </div>
+
                                     <script type="text/javascript">
                                         $(document).ready(function () {
                                             $("#itemCode").change(function () {
-                                                $("#prints").text($(this).find('option:selected').text());
+                                                // $("#prints").text($(this).find('option:selected').text());
                                                 $("#productName").val($(this).val());
 
                                                 var selectedItemCode = $(this).find('option:selected').text();
                                                 var arr =  selectedItemCode.split("-");
-                                                var buffArr = arr.split("P");
+                                                var typeItem = arr[0].split("P");
 
-                                                console.log(arr);
+                                                console.log(typeItem[1]);
+                                                console.log(arr[1]);
 
+                                                // PARSING ITME CODE to Product Type
+
+                                                if (typeItem[1] == 08 || typeItem[1] == "08" ) { // PAIL
+                                                    $("#prints").text("PAIL");
+                                                    console.log("PAIL");
+                                                }
+                                                else if (typeItem[1] == 01 || typeItem[1] == "01" ) { // BOTOL
+                                                    if (arr[1] > 252 && arr[1] < 256) {
+                                                        $("#prints").val("TUBE");
+                                                        console.log("TUBE");
+                                                    }
+                                                    else {
+                                                        $("#prints").val("BOTOL");
+                                                        console.log("BOTOL");
+                                                    }
+                                                }
+                                                else if (typeItem[1] == 04 || typeItem[1] == "04" ) { // DRUM
+                                                    $("#prints").val("DRUM");
+                                                    console.log("DRUM");
+                                                }
+
+                                                else if (typeItem[1] == 05 || typeItem[1] == "05" ) { // LABEL
+                                                    $("#prints").val("LABEL");
+                                                    console.log("LABEL");
+                                                }
+
+                                                else if (typeItem[1] == 03 || typeItem[1] == "03" ) { // CARTON
+                                                    $("#prints").val("CARTON");
+                                                    console.log("CARTON");
+                                                }
+
+                                                else if (typeItem[1] == 02 || typeItem[1] == "02" ) { // CAP
+                                                    if (arr[1] == 26) {
+                                                        $("#prints").val("COVER CAP");
+                                                        console.log("COVER CAP");
+                                                    }
+                                                    else {
+                                                        $("#prints").val("CAP");
+                                                        console.log("CAP");
+                                                    }
+
+                                                }
+                                                else { // DRUM
+                                                    $("#prints").val("DRUM");
+                                                    console.log("DRUM");
+                                                }
+
+                                                // console.log($("#prints").val());
 
                                             });
                                         });
