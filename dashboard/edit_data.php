@@ -156,11 +156,11 @@ function formShow(){
                             <div class="row mt-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <form action="../dashboard/throw_data.php" method="POST">
-                                        <div class="form-group mb-4" id="tombolSR">
+                                        <div class="form-group mb-4" id="topLabel">
                                             <label for="namaProduct">Nama Product</label>
                                             <h4><?php echo ($dE_buffer[1]) ?></h4>
                                         </div>
-                                        <div class="form-group mb-4" id="tombolSR">
+                                        <div class="form-group mb-4" id="topLabel">
                                             <label for="itemCode">Item Code</label>
                                             <h4><?php echo ($dE_buffer[2]) ?></h4>
                                         </div>
@@ -243,10 +243,6 @@ function formShow(){
     </div>
 
     <div class="form-group mb-4">
-        <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
-    </div>
-    <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
     </div>
@@ -292,10 +288,6 @@ function formShow(){
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
     </div>
 
-    <div class="form-group mb-4">
-        <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
-    </div>
     <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
@@ -347,10 +339,6 @@ function formShow(){
     </div>
 
     <div class="form-group mb-4">
-        <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
-    </div>
-    <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
     </div>
@@ -397,10 +385,6 @@ function formShow(){
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
     </div>
 
-    <div class="form-group mb-4">
-        <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
-    </div>
     <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
@@ -455,10 +439,6 @@ function formShow(){
     </div>
 
     <div class="form-group mb-4">
-        <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
-    </div>
-    <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
     </div>
@@ -490,11 +470,75 @@ function formShow(){
         </table>
     </div>
                                                 ';
+                                            } elseif ($_GET['type'] == "add") {
+                                                $jd = "add";
+                                                echo '
+    <style>
+    #topLabel {
+    display: none;
+    }
+    </style>
+    <div class="form-group mb-4">
+    <label for="namaProduct">Additive</label>
+    <h4>'. $dE_buffer[1] .'</h4>
+    </div>
+    <div class="form-group mb-4">
+    <label for="itemCode">Lot Number</label>
+    <h4>'. $dE_buffer[2] .'</h4>
+    </div>
+                                        
+    <div class="form-group mb-4">
+    <label for="tglIn">Tanggal Item Masuk</label><br/>
+    <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="approval">Approval</label><br/>
+        <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
+    </div>
+    
+    <div class="form-group mb-4">
+        <label for="item_check">Item Check</label><br/>
+        <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="item_check" name="item_check" value="baseOil" checked/>Base Oil</td><td style="padding:10px;"><input id="item_check" type="radio" name="item_check" value="additive"/>Additive</td></tr></table>
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="namaProduct">Nama Product</label>
+        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
+    </div>
+    <div class="form-group mb-4">
+        <label for="jumlahProduct">Jumlah Product</label>
+        <input type="text" class="form-control" id="jumlahProduct" name="jumlahProduct" placeholder="Jumlah Product">
+    </div>
+    
+    <div class="form-group mb-4">
+    <label for="tglEdit">Tanggal Pengecekan</label>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+    </div>
+
+    <div class="form-row mb-4">
+        <label for="check_form">Pengecekan</label><br/>
+        <table class="check_form" id="pengecekan">
+                        <tr><td>No</td><td style="width: 430px">Item Pengecekan</td><td rowspan="2" style="width: 80px; text-align: center">Result</td></tr>
+                        <tr><td colspan="2">Visual</td></tr>
+                        <tr><td>1</td><td>Nama Produk sesuai dengan dokumen</td><td style="text-align: center"><input type="radio" name="1,1" value="OK1,1" checked/>OK<br/><input type="radio" name="1,1" value="NG1,1"/>NG</td></tr>
+                        <tr><td>2</td><td>Berat Produk sesuai dengan packing list</td><td style="text-align: center"><input type="radio" name="2,1" value="OK2,1" checked/>OK<br/><input type="radio" name="2,1" value="NG2,1"/>NG</td></tr>
+                        <tr><td>3</td><td>Seal terpasang dengan baik</td><td style="text-align: center"><input type="radio" name="3,1" value="OK3,1" checked/>OK<br/><input type="radio" name="3,1" value="NG3,1"/>NG</td></tr>
+                        <tr><td>4</td><td>Bocor /lubang</td><td style="text-align: center"><input type="radio" name="4,1" value="Ada4,1" checked/>Ada<br/><input type="radio" name="4,1" value="Tidak4,1"/>Tidak</td></tr>
+                        <tr><td>5</td><td>Kotoran / Benda asing</td><td style="text-align: center"><input type="radio" name="5,1" value="Ada5,1" checked/>Ada<br/><input type="radio" name="5,1" value="Tidak5,1"/>Tidak</td></tr>
+                        <tr><td>6</td><td>Penyok</td><td style="text-align: center"><input type="radio" name="6,1" value="Ada6,1" checked/>Ada<br/><input type="radio" name="6,1" value="Tidak6,1"/>Tidak</td></tr>
+                        <tr><td>7</td><td>Karat</td><td style="text-align: center"><input type="radio" name="7,1" value="Ada7,1" checked/>Ada<br/><input type="radio" name="7,1" value="Tidak7,1"/>Tidak</td></tr>
+                    </table>
+    </div>
+                                                ';
                                             } else {
                                                 echo '<br><h4>Data edit tidak tersedia karena type barang tidak sesuai aturan!</h4>';
                                                 echo '
                                                 <style>
                                                     #tombolSR {
+                                                    display: none;
+                                                    }
+                                                    #topLabel {
                                                     display: none;
                                                     }
                                                 </style>
@@ -505,6 +549,9 @@ function formShow(){
                                             echo '
                                                 <style>
                                                     #tombolSR {
+                                                    display: none;
+                                                    }
+                                                    #topLabel {
                                                     display: none;
                                                     }
                                                 </style>

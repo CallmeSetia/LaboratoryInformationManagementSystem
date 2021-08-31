@@ -35,6 +35,9 @@ function tampilTombolEditData($jenis, $pkgn, $itmc, $idipg, $tglIn){
     }
 }
 
+function tampilTombolPrint() {
+
+}
 
 function tampilTabel($jenis_tabel, $koneksi) {
     if (strtolower($jenis_tabel) == "packaging"){
@@ -138,6 +141,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
 
         // ====== END KONEKSI
         $hasilQuery = $koneksi->query("SELECT * FROM `tbl_utama_add` LEFT JOIN tbl_data_item_add ON tbl_data_item_add.id_item_add = tbl_utama_add.id_item_add");
+        $jenisPackage = "add";
         if ($num_rows = $hasilQuery->num_rows > 0) {
             while ($row = $hasilQuery->fetch_assoc()) {
                 echo '
@@ -150,12 +154,17 @@ function tampilTabel($jenis_tabel, $koneksi) {
                      <td>'.$row['quantity'] .'</td>
                      
                      <td>Ini Action</td>';
-//                    if (strtolower((string) $_SESSION['role']) == "analyst") {
-//                        echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
-//                    }
-//                    else if (strtolower((string) $_SESSION['role']) == "siteman") {
-//                        echo '<td>'.tampilTombolEditData($row['id_utama'], NULL, NULL, NULL, NULL).'</td>';
-//                    }
+                $pkg_name = $row['additive'];
+                $itm_code = $row['lot_no'];
+                $id_pkg = $row['id_item_add'];
+                $tgl_masuk = $row['date'];
+
+                   if (strtolower((string) $_SESSION['role']) == "analyst") {
+                       echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk).'</td>';
+                   }
+                   else if (strtolower((string) $_SESSION['role']) == "siteman") {
+                        echo '<td>'.tampilTombolEditData($row['id_utama'], NULL, NULL, NULL, NULL).'</td>';
+                   }
 
 
                 echo '</tr>';
