@@ -18,7 +18,6 @@
         $data_print = $_POST['data_print'];
         $dP_buffer = explode('+', $data_print);
         if($dP_buffer[4] == '1') $appr =  "Approved"; else $appr =  "Declined";
-        echo '<br><br>';
         /*if ($data_print[1] == "pm"){
             $wB_buffer = explode('+', )
         }*/
