@@ -59,6 +59,7 @@ function getDetailPKG($type, $number){
     $DB_DATABASE = "lims";
     $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
     // tbl_utama
+    echo $type;
     $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_pkg_". $type ." LEFT JOIN tbl_utama_pkg ON tbl_detail_pkg_". $type . ".id_" . $type." = tbl_utama_pkg.id_utama LEFT JOIN tbl_data_item_pkg ON tbl_utama_pkg.id_item_pkg = tbl_data_item_pkg.id_item_pkg WHERE id_utama = ". $number);
     if ($num_rows = $queryDetail->num_rows > 0) {
         while ($rowP = $queryDetail->fetch_assoc()){
@@ -73,7 +74,7 @@ function getDetailPKG($type, $number){
 //                echo "INI PC";
                 return ($rowP['id_pc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_cap']. '+'  .$rowP['kotoran']. '+'  .$rowP['goresan_pc']. '+'  .$rowP['cacat_pc']. '+'  .$rowP['lubang']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['terdapat_bami']. '+'  .$rowP['doc_no']);
             } elseif ($type == "p") {
-                return ($rowP['id_p']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_pail']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']. '+'  .$rowP['doc_no']);
+                return ($rowP['id_p']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_pail']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['kotoran_ytb']. '+'  .$rowP['doc_no']);
             } elseif ($type == "ibc") {
                 return ($rowP['id_ibc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_vn']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['kotoran']. '+'  .$rowP['air_oli']. '+'  .$rowP['doc_no']);
             } else {
