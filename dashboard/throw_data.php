@@ -6,6 +6,8 @@ session_start();
 $incoming_data = $_POST['jenisData'];
 $inD_buffer = explode('#', $incoming_data);
 
+
+
 function throwData() {
     function grabData($tabData, $idData) {
         error_reporting(0);
@@ -59,6 +61,7 @@ function throwData() {
     $DB_DATABASE = "lims";
     $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (strtolower((string) $inD_buffer[0]) == "pc") {
+        print_r($_POST);
         if (grabData("pc", $inD_buffer[1]) == $inD_buffer[1]) {
             $sql_update = "UPDATE tbl_detail_pkg_pc SET tgl_cek='" . $_POST['tgl_cek'] . "', approval = '". $_POST['approval'] . "', jml_produk = '". $_POST['jumlahProduct'] . "', cek_sampel = '". $_POST['cekSampel'] ."', warna_cap = '". $_POST['1,1'] . "#" . $_POST['1,2'] . "#" . $_POST['1,3'] . "#" . $_POST['1,4'] . "#" . $_POST['1,5'] . "#" . $_POST['1,6'] . "#" . $_POST['1,7'] . "#" . $_POST['1,8'] ."', kotoran = '". $_POST['2,1'] . "#" . $_POST['2,2'] . "#" . $_POST['2,3'] . "#" . $_POST['2,4'] . "#" . $_POST['2,5'] . "#" . $_POST['2,6'] . "#" . $_POST['2,7'] . "#" . $_POST['2,8'] ."', goresan_pc = '". $_POST['3,1'] . "#" . $_POST['3,2'] . "#" . $_POST['3,3'] . "#" . $_POST['3,4'] . "#" . $_POST['3,5'] . "#" . $_POST['3,6'] . "#" . $_POST['3,7'] . "#" . $_POST['3,8'] ."', cacat_pc = '". $_POST['4,1'] . "#" . $_POST['4,2'] . "#" . $_POST['4,3'] . "#" . $_POST['4,4'] . "#" . $_POST['4,5'] . "#" . $_POST['4,6'] . "#" . $_POST['4,7'] . "#" . $_POST['4,8'] ."', lubang = '". $_POST['5,1'] . "#" . $_POST['5,2'] . "#" . $_POST['5,3'] . "#" . $_POST['5,4'] . "#" . $_POST['5,5'] . "#" . $_POST['5,6'] . "#" . $_POST['5,7'] . "#" . $_POST['5,8'] ."', kondisi_seal = '". $_POST['6,1'] . "#" . $_POST['6,2'] . "#" . $_POST['6,3'] . "#" . $_POST['6,4'] . "#" . $_POST['6,5'] . "#" . $_POST['6,6'] . "#" . $_POST['6,7'] . "#" . $_POST['6,8'] ."', terdapat_bami = '". $_POST['7,1'] . "#" . $_POST['7,2'] . "#" . $_POST['7,3'] . "#" . $_POST['7,4'] . "#" . $_POST['7,5'] . "#" . $_POST['7,6'] . "#" . $_POST['7,7'] . "#" . $_POST['7,8'] ."' WHERE id_pc=" . $inD_buffer[1];
             if ($conn->query($sql_update) === TRUE) {
@@ -67,6 +70,7 @@ function throwData() {
                 echo "Data gagal diperbarui!";
             }
         } elseif (grabData("pc", $inD_buffer[1]) != $inD_buffer[1]) {
+            print_r($_POST);
             $sql_insert = "INSERT INTO tbl_detail_pkg_" . $inD_buffer[0] . " (id_pc, tgl_cek, approval, jml_produk, cek_sampel, warna_cap, kotoran, goresan_pc, cacat_pc, lubang, kondisi_seal, terdapat_bami) VALUES ('" . $inD_buffer[1] . "', '" . $_POST['tgl_cek'] . "', '" . $_POST['approval'] . "', '" . $_POST['jumlahProduct'] . "', '" . $_POST['cekSampel'] . "' ,'" . $_POST['1,1'] . "#" . $_POST['1,2'] . "#" . $_POST['1,3'] . "#" . $_POST['1,4'] . "#" . $_POST['1,5'] . "#" . $_POST['1,6'] . "#" . $_POST['1,7'] . "#" . $_POST['1,8'] . "', '" . $_POST['2,1'] . "#" . $_POST['2,2'] . "#" . $_POST['2,3'] . "#" . $_POST['2,4'] . "#" . $_POST['2,5'] . "#" . $_POST['2,6'] . "#" . $_POST['2,7'] . "#" . $_POST['2,8'] . "', '" . $_POST['3,1'] . "#" . $_POST['3,2'] . "#" . $_POST['3,3'] . "#" . $_POST['3,4'] . "#" . $_POST['3,5'] . "#" . $_POST['3,6'] . "#" . $_POST['3,7'] . "#" . $_POST['3,8'] . "', '" . $_POST['4,1'] . "#" . $_POST['4,2'] . "#" . $_POST['4,3'] . "#" . $_POST['4,4'] . "#" . $_POST['4,5'] . "#" . $_POST['4,6'] . "#" . $_POST['4,7'] . "#" . $_POST['4,8'] . "', '" . $_POST['5,1'] . "#" . $_POST['5,2'] . "#" . $_POST['5,3'] . "#" . $_POST['5,4'] . "#" . $_POST['5,5'] . "#" . $_POST['5,6'] . "#" . $_POST['5,7'] . "#" . $_POST['5,8'] . "', '" . $_POST['6,1'] . "#" . $_POST['6,2'] . "#" . $_POST['6,3'] . "#" . $_POST['6,4'] . "#" . $_POST['6,5'] . "#" . $_POST['6,6'] . "#" . $_POST['6,7'] . "#" . $_POST['6,8'] . "', '" . $_POST['7,1'] . "#" . $_POST['7,2'] . "#" . $_POST['7,3'] . "#" . $_POST['7,4'] . "#" . $_POST['7,5'] . "#" . $_POST['7,6'] . "#" . $_POST['7,7'] . "#" . $_POST['7,8'] . "')";
             if ($conn->query($sql_insert) === TRUE) {
                 echo "Data telah tersimpan!";
@@ -132,6 +136,8 @@ function throwData() {
             }
         } elseif (grabData("pm", $inD_buffer[1]) != $inD_buffer[1]) {
             $sql_insert = "INSERT INTO tbl_detail_pkg_" . $inD_buffer[0] . " (id_pm, tgl_cek, approval, jml_produk, cek_sampel, warna_botol, kondisi_screw, tempat_lubang, label_depan, label_belakang, cacat, posisi_ldb, kotoran, benda_asing, npt) VALUES ('" . $inD_buffer[1] . "', '" . $_POST['tgl_cek'] . "', '" . $_POST['approval'] . "', '" . $_POST['jumlahProduct'] . "', '" . $_POST['cekSampel'] . "' ,'" . $_POST['1,1'] . "#" . $_POST['1,2'] . "#" . $_POST['1,3'] . "#" . $_POST['1,4'] . "#" . $_POST['1,5'] . "#" . $_POST['1,6'] . "#" . $_POST['1,7'] . "#" . $_POST['1,8'] . "', '" . $_POST['2,1'] . "#" . $_POST['2,2'] . "#" . $_POST['2,3'] . "#" . $_POST['2,4'] . "#" . $_POST['2,5'] . "#" . $_POST['2,6'] . "#" . $_POST['2,7'] . "#" . $_POST['2,8'] . "', '" . $_POST['3,1'] . "#" . $_POST['3,2'] . "#" . $_POST['3,3'] . "#" . $_POST['3,4'] . "#" . $_POST['3,5'] . "#" . $_POST['3,6'] . "#" . $_POST['3,7'] . "#" . $_POST['3,8'] . "', '" . $_POST['4,1'] . "#" . $_POST['4,2'] . "#" . $_POST['4,3'] . "#" . $_POST['4,4'] . "#" . $_POST['4,5'] . "#" . $_POST['4,6'] . "#" . $_POST['4,7'] . "#" . $_POST['4,8'] . "', '" . $_POST['5,1'] . "#" . $_POST['5,2'] . "#" . $_POST['5,3'] . "#" . $_POST['5,4'] . "#" . $_POST['5,5'] . "#" . $_POST['5,6'] . "#" . $_POST['5,7'] . "#" . $_POST['5,8'] . "', '" . $_POST['6,1'] . "#" . $_POST['6,2'] . "#" . $_POST['6,3'] . "#" . $_POST['6,4'] . "#" . $_POST['6,5'] . "#" . $_POST['6,6'] . "#" . $_POST['6,7'] . "#" . $_POST['6,8'] . "', '" . $_POST['7,1'] . "#" . $_POST['7,2'] . "#" . $_POST['7,3'] . "#" . $_POST['7,4'] . "#" . $_POST['7,5'] . "#" . $_POST['7,6'] . "#" . $_POST['7,7'] . "#" . $_POST['7,8'] . "', '" . $_POST['8,1'] . "#" . $_POST['8,2'] . "#" . $_POST['8,3'] . "#" . $_POST['8,4'] . "#" . $_POST['8,5'] . "#" . $_POST['8,6'] . "#" . $_POST['8,7'] . "#" . $_POST['8,8'] . "', '" . $_POST['9,1'] . "#" . $_POST['9,2'] . "#" . $_POST['9,3'] . "#" . $_POST['9,4'] . "#" . $_POST['9,5'] . "#" . $_POST['9,6'] . "#" . $_POST['9,7'] . "#" . $_POST['9,8'] . "', '" . $_POST['NPT'] . "')";
+
+
             if ($conn->query($sql_insert) === TRUE) {
                 echo "Data telah tersimpan!";
             } else {
@@ -175,6 +181,19 @@ function throwData() {
     } else {
         echo '<br><h4>Data tidak dikenali!</h4>';
     }
+
+
+    // RECEIVED NAME DAN FINISH TIME - BUKAD ADDIRIVE
+    if (!(strtolower((string) $inD_buffer[0]) == "add")) {
+        $sql_updateReceiveName = "UPDATE `tbl_utama_pkg` SET `finnish_time` = '". $_POST['finnish_time']."', `received` = '". $_POST['received_name']."' WHERE `tbl_utama_pkg`.`id_utama` = ' $inD_buffer[1]'";
+        $hasilUpdate = $conn->query($sql_updateReceiveName);
+        if ($hasilUpdate) {
+            echo "Data telah tersimpan!";
+        } else {
+            echo "Data gagal disimpan!";
+        }
+    }
+
 }
 
 function tampilTombolTambahData() {
