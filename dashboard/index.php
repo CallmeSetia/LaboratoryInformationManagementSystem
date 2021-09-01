@@ -289,7 +289,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                      ';
                 $pkg_name = $row['additive'];
                 $itm_code = $row['lot_no'];
-                $id_pkg = $row['id_item_add'];
+                $id_pkg = $row['id_utama'];
                 $tgl_masuk = $row['date'];
                 $quantity = $row['quantity'];
 

@@ -5,7 +5,7 @@
     <title>Halaman Print</title>
     <link rel="stylesheet" href="../template_table/template/table-styling.css">
 </head>
-<body>
+<body onload="window.print()">
 <!-- <body onload="window.print()"> -->
 <div class="wrapper">
     <?php
@@ -18,7 +18,6 @@
         $data_print = $_POST['data_print'];
         $dP_buffer = explode('+', $data_print);
         if($dP_buffer[4] == '1') $appr =  "Approved"; else $appr =  "Declined";
-        print_r($dP_buffer);
         echo '<br><br>';
         /*if ($data_print[1] == "pm"){
             $wB_buffer = explode('+', )
