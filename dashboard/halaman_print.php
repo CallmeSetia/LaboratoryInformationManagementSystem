@@ -797,13 +797,6 @@
     </table>
             ';
         } elseif ($_GET['data'] == "add") {
-            $n_buffer = explode("#", $dP_buffer[6]);
-            $b_buffer = explode("#", $dP_buffer[7]);
-            $s_buffer = explode("#", $dP_buffer[8]);
-            $bRL_buffer = explode("#", $dP_buffer[9]);
-            $k_buffer = explode("#", $dP_buffer[6]);
-            $p_buffer = explode("#", $dP_buffer[7]);
-            $ka = explode("#", $dP_buffer[8]);
             if($dP_buffer[5] == '1') $apprA =  "Approved"; else $apprA =  "Declined";
             if($dP_buffer[1] == 'baseOil') $iC =  "Base Oil"; else $iC =  "Additive";
             echo '
@@ -833,10 +826,10 @@
                     <div style="float: left">
                         <table class="content-1a">
                             <tr><td>Item Check</td><td>:</td><td colspan="3">'. $iC .'</td></tr>
-                            <tr><td>Nama Product</td><td>:</td><td colspan="3">Nama produk</td></tr>
-                            <tr><td>Jumlah Product</td><td>:</td><td colspan="3">Jumlah produk</td></tr>
-                            <tr><td>Tanggal</td><td>:</td><td colspan="3">Tanggal</td></tr>
-                            <tr><td>Lot Number</td><td>:</td><td colspan="3">Lot Number</td></tr>
+                            <tr><td>Nama Product</td><td>:</td><td colspan="3">'. $dP_buffer[3] .'</td></tr>
+                            <tr><td>Jumlah Product</td><td>:</td><td colspan="3">'. $dP_buffer[2] .'</td></tr>
+                            <tr><td>Tanggal</td><td>:</td><td colspan="3">'. $dP_buffer[4] .'</td></tr>
+                            <tr><td>Lot Number</td><td>:</td><td colspan="3">'. $dP_buffer[6] .'</td></tr>
                         </table>
                     </div>
                     <div style="float: right">
@@ -851,13 +844,13 @@
                     <table class="content-2">
                         <tr><td>No</td><td style="width: 430px">Item Pengecekan</td><td rowspan="2" style="width: 80px; text-align: center">Result</td></tr>
                         <tr><td colspan="2">Visual</td></tr>
-                        <tr><td>1</td><td>Nama Produk sesuai dengan dokumen</td><td style="text-align: center">OK</td></tr>
-                        <tr><td>2</td><td>Berat Produk sesuai dengan packing list</td><td style="text-align: center">OK</td></tr>
-                        <tr><td>3</td><td>Seal terpasang dengan baik</td><td style="text-align: center">OK</td></tr>
-                        <tr><td>4</td><td>Bocor /lubang</td><td style="text-align: center">Ada</td></tr>
-                        <tr><td>5</td><td>Kotoran / Benda asing</td><td style="text-align: center">Ada</td></tr>
-                        <tr><td>6</td><td>Penyok</td><td style="text-align: center">Ada</td></tr>
-                        <tr><td>7</td><td>Karat</td><td style="text-align: center">Ada</td></tr>
+                        <tr><td>1</td><td>Nama Produk sesuai dengan dokumen</td><td style="text-align: center">'. $dP_buffer[7] .'</td></tr>
+                        <tr><td>2</td><td>Berat Produk sesuai dengan packing list</td><td style="text-align: center">'. $dP_buffer[8] .'</td></tr>
+                        <tr><td>3</td><td>Seal terpasang dengan baik</td><td style="text-align: center">'. $dP_buffer[9] .'</td></tr>
+                        <tr><td>4</td><td>Bocor /lubang</td><td style="text-align: center">'. $dP_buffer[10] .'</td></tr>
+                        <tr><td>5</td><td>Kotoran / Benda asing</td><td style="text-align: center">'. $dP_buffer[11] .'</td></tr>
+                        <tr><td>6</td><td>Penyok</td><td style="text-align: center">'. $dP_buffer[12] .'</td></tr>
+                        <tr><td>7</td><td>Karat</td><td style="text-align: center">'. $dP_buffer[13] .'</td></tr>
                     </table>
                 </div>
             </td>
@@ -867,6 +860,64 @@
     <br/>
     <hr style="border-top: 3px dotted black; width: 810px; margin: 0 auto;margin-top: 5px; margin-bottom: 5px"/>
     <br/>
+    
+    <table class="content">
+        <tr style="padding: 0px; overflow: hidden;">
+            <td style="padding: 0px" style="width: 180px"><img src="../template_table/logo/logo.png" alt="logo" style="width: 150px; padding-left: 5px; padding-right: 5px"/></td>
+            <td style="padding: 0px"><h1 style="text-align: center">Pengecekan Raw Material Non Bulk</h1></td>
+            <td style="width: 250px; padding: 0px">
+                <table class="content-0">
+                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[14] .'</td></tr>
+                    <tr><td>Revision</td><td>:</td><td>02</td></tr>
+                    <tr><td>Issued Date</td><td>:</td><td>
+                    <script>
+        var todayy = new Date();
+        const monthNamess = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        document.write(todayy.getDate()+"-"+monthNamess[todayy.getMonth()]+"-"+todayy.getFullYear());
+    </script>
+
+</td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div style="width:780px;height: 200px;">
+                    <div style="float: left">
+                        <table class="content-1a">
+                            <tr><td>Item Check</td><td>:</td><td colspan="3">'. $iC .'</td></tr>
+                            <tr><td>Nama Product</td><td>:</td><td colspan="3">'. $dP_buffer[3] .'</td></tr>
+                            <tr><td>Jumlah Product</td><td>:</td><td colspan="3">'. $dP_buffer[2] .'</td></tr>
+                            <tr><td>Tanggal</td><td>:</td><td colspan="3">'. $dP_buffer[4] .'</td></tr>
+                            <tr><td>Lot Number</td><td>:</td><td colspan="3">'. $dP_buffer[6] .'</td></tr>
+                        </table>
+                    </div>
+                    <div style="float: right">
+                        <table class="content-1b">
+                            <tr><td style="width: 80px; text-align: center">Acknowledge</td><td style="width: 80px; text-align: center">Approved</td><td style="width: 80px; text-align: center">Inspector</td></tr>
+                            <tr style="height: 50px"><td>ack</td><td style="width: 80px; text-align: center">'. $apprA .'</td><td>ins</td></tr>
+                            <tr><td style="text-align: center">PC</td><td style="text-align: center">QC</td><td style="text-align: center"> </td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="width:780px;margin-top: -65px;">
+                    <table class="content-2">
+                        <tr><td>No</td><td style="width: 430px">Item Pengecekan</td><td rowspan="2" style="width: 80px; text-align: center">Result</td></tr>
+                        <tr><td colspan="2">Visual</td></tr>
+                        <tr><td>1</td><td>Nama Produk sesuai dengan dokumen</td><td style="text-align: center">'. $dP_buffer[7] .'</td></tr>
+                        <tr><td>2</td><td>Berat Produk sesuai dengan packing list</td><td style="text-align: center">'. $dP_buffer[8] .'</td></tr>
+                        <tr><td>3</td><td>Seal terpasang dengan baik</td><td style="text-align: center">'. $dP_buffer[9] .'</td></tr>
+                        <tr><td>4</td><td>Bocor /lubang</td><td style="text-align: center">'. $dP_buffer[10] .'</td></tr>
+                        <tr><td>5</td><td>Kotoran / Benda asing</td><td style="text-align: center">'. $dP_buffer[11] .'</td></tr>
+                        <tr><td>6</td><td>Penyok</td><td style="text-align: center">'. $dP_buffer[12] .'</td></tr>
+                        <tr><td>7</td><td>Karat</td><td style="text-align: center">'. $dP_buffer[13] .'</td></tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
             ';
         } else {
             echo '<br><h4>Data tabel tidak tersedia karena type barang tidak sesuai aturan!</h4>';
