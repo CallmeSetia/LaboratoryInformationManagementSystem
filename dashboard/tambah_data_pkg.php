@@ -14,7 +14,7 @@ if ($koneksi->connect_errno) {
 $FLAG_INSERT = 0;
 
 $issueDates = formatTanggal();
-$ReceiveTime = date("h:i");
+$ReceiveTime = date("H:i");
 
 if (isset($_POST['submited'])) {
     // AMBIL DATA USER INPUT

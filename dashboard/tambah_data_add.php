@@ -18,7 +18,7 @@
 
 
     $issueDates = formatTanggal();
-    $ReceiveTime = date("h:i");
+    $ReceiveTime = date("H:i");
 
     if (isset($_POST['submited'])) {
         // AMBIL DATA USER INPUT

@@ -35,6 +35,18 @@ function tampilTombolTambahData()
 
     }
 }
+function tampilTombolExportData()
+{
+    if (strtolower((string)$_SESSION['role']) == "analyst") {
+        if ($_GET['page'] == "packaging") {
+            echo '<a href="export_data_pkg.php"><button class="btn btn-primary mb-2 " >+ Export Data</button></a>';
+        }
+        else {
+            echo '<a href="export_data_add.php"><button class="btn btn-primary mb-2 " >+ Export Data</button></a>';
+        }
+
+    }
+}
 
 //getId("pm", $row['id_item_pkg']); // pm, 19
 function getId($type, $number) {
@@ -59,13 +71,13 @@ function getDetailPKG($type, $number){
     $DB_DATABASE = "lims";
     $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
     // tbl_utama
-    echo $type;
+//    echo $type;
     $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_pkg_". $type ." LEFT JOIN tbl_utama_pkg ON tbl_detail_pkg_". $type . ".id_" . $type." = tbl_utama_pkg.id_utama LEFT JOIN tbl_data_item_pkg ON tbl_utama_pkg.id_item_pkg = tbl_data_item_pkg.id_item_pkg WHERE id_utama = ". $number);
     if ($num_rows = $queryDetail->num_rows > 0) {
         while ($rowP = $queryDetail->fetch_assoc()){
             if ($type == "pm") {
-
                 return ($rowP['id_pm']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_botol']. '+'  .$rowP['kondisi_screw']. '+'  .$rowP['tempat_lubang']. '+'  .$rowP['label_depan']. '+'  .$rowP['label_belakang']. '+'  .$rowP['cacat']. '+'  .$rowP['posisi_ldb']. '+'  .$rowP['kotoran']. '+'  .$rowP['benda_asing']. '+'  .$rowP['npt']. '+'  .$rowP['doc_no']);
+
             } elseif ($type == "pd") {
                 return ($rowP['id_pd']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_drum']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']. '+'  .$rowP['doc_no']);
             } elseif ($type == "pcb") {
@@ -206,6 +218,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                     $idT = getId("pm", $row['id_utama']);
                     $halamanPrint = "pm";
                     $dataCol = getDetailPKG("pm", $row['id_utama']);
+
                 } elseif ($itemCheck == "cap" || $itemCheck == "cover cap") {
 
                     $jenisPackage = "cap";
@@ -486,6 +499,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                     if (isset($_GET['page'])){
                         if($_GET['page'] == "packaging") {
                             tampilTombolTambahData();
+                            tampilTombolExportData();
                             echo '
                                     <div class="bio-skill-box box box-shadow text-left">
                                         <div class="row">
@@ -499,6 +513,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                         }
                         else if ($_GET['page'] == "additive"){
                             tampilTombolTambahData();
+                            tampilTombolExportData();
                             echo '
                                     <div class="bio-skill-box box box-shadow text-left">
                                         <div class="row">
