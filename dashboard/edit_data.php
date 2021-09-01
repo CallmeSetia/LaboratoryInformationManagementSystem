@@ -2,8 +2,32 @@
 require_once '../assets/functions.php';
 include  '../koneksi/koneksi.php';
 session_start();
+date_default_timezone_set('Asia/Jakarta');
 //print_r($_SESSION);
+$DB_HOST = "127.0.0.1";
+$DB_USER = "root";
+$DB_PASS = "";
+$DB_DATABASE = "lims";
+$koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
 
+if ($koneksi->connect_errno) {
+    echo "Connection Error: " . $koneksi->connect_error;
+}
+
+
+function formatTanggal() {
+    date_default_timezone_set('Asia/Jakarta');
+
+    $tgl = date("d"); // date("Y-m-d")
+    $bulan =  date("m");
+    $tahun = date("Y");
+
+    $templateNamaBulan = ["Jan", "Feb", "Mar", "Apr","May", "Jun","Jul","Aug", "Sep", "Oct", "Nov","Dec"];
+
+    $bulan = $templateNamaBulan[((int) $bulan) - 1];
+
+    return $tgl."-".$bulan."-".$tahun;
+}
 
 function tampilTombolTambahData() {
     if (strtolower((string) $_SESSION['role']) == "siteman") {
@@ -144,6 +168,15 @@ function formShow(){
                                         </div>
                                         <?php
                                         $jd = '';
+                                        // ==== KONEKSI DATABASE
+
+                                        $sqlSelect_utama = "SELECT * FROM `tbl_utama_pkg` WHERE `id_utama` = '$dE_buffer[3]'";
+                                        $hasilSelect_utama = $koneksi->query($sqlSelect_utama);
+                                        $row_utama = $hasilSelect_utama-> fetch_assoc();
+                                        //print_r($row_utama);
+
+
+
                                         if (isset($_GET['type'])){
                                             if ($_GET['type'] == "material") {
                                                 $jd = "pm";
@@ -159,6 +192,11 @@ function formShow(){
 </div>
 
 <div class="form-group mb-4">
+    <label for="jamMsk">Jam Masuk</label>
+    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
+</div>
+<hr>
+<div class="form-group mb-4">
     <label for="approval">Approval</label><br/>
     <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
 </div>
@@ -167,16 +205,24 @@ function formShow(){
     <label for="jumlahProduct">Jumlah Product</label>
     <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
 </div>
-
+<div class="form-group mb-4">
+    <label for="finnish_time">Finnish Time</label>
+    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
+</div>
+<div class="form-group mb-4">
+    <label for="received_name">Received Name</label>
+    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
+</div>
 <div class="form-group mb-4">
     <label for="cekSampel">Cek Sampel</label>
     <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
 </div>
 
-<div class="form-group mb-4">
+ <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
-</div>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
+</div> 
+
 
 <div class="form-group mb-4">
     <label for="NPT">NPT</label><br/>
@@ -214,26 +260,37 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-
+<div class="form-group mb-4">
+    <label for="jamMsk">Jam Masuk</label>
+    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
+</div>
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
     </div>
 
-    <div class="form-group mb-4">
-        <label for="jumlahProduct">Jumlah Product</label>
-        <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
-    </div>
+   <div class="form-group mb-4">
+    <label for="jumlahProduct">Jumlah Product</label>
+    <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
+</div>
+<div class="form-group mb-4">
+    <label for="finnish_time">Finnish Time</label>
+    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
+</div>
+<div class="form-group mb-4">
+    <label for="received_name">Received Name</label>
+    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
+</div>
 
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-    <div class="form-group mb-4">
+     <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
-    </div>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
+</div> 
 
     <div class="form-row mb-4">
         <label for="pengecekan">Pengecekan</label><br/>
@@ -260,7 +317,10 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-
+<div class="form-group mb-4">
+    <label for="jamMsk">Jam Masuk</label>
+    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
+</div>
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
@@ -271,12 +331,20 @@ function formShow(){
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
 
+<div class="form-group mb-4">
+    <label for="finnish_time">Finnish Time</label>
+    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
+</div>
+<div class="form-group mb-4">
+    <label for="received_name">Received Name</label>
+    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
+</div>
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-    <div class="form-group mb-4">
+  <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
     <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
     </div>
@@ -310,6 +378,10 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
+    <div class="form-group mb-4">
+    <label for="jamMsk">Jam Masuk</label>
+    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
+</div>
 
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
@@ -320,16 +392,23 @@ function formShow(){
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
-
+<div class="form-group mb-4">
+    <label for="finnish_time">Finnish Time</label>
+    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
+</div>
+<div class="form-group mb-4">
+    <label for="received_name">Received Name</label>
+    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
+</div>
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-    <div class="form-group mb-4">
+<div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
-    </div>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
+</div> 
 
     <div class="form-row mb-4">
         <label for="pengecekan">Pengecekan</label><br/>
@@ -357,7 +436,10 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-
+<div class="form-group mb-4">
+    <label for="jamMsk">Jam Masuk</label>
+    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
+</div>
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
@@ -367,16 +449,23 @@ function formShow(){
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
-
+<div class="form-group mb-4">
+    <label for="finnish_time">Finnish Time</label>
+    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
+</div>
+<div class="form-group mb-4">
+    <label for="received_name">Received Name</label>
+    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
+</div>
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-    <div class="form-group mb-4">
+   <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
-    </div>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
+</div> 
 
     <div class="form-group mb-4">
         <label for="COA">COA</label><br/>
@@ -410,7 +499,10 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-
+<div class="form-group mb-4">
+    <label for="jamMsk">Jam Masuk</label>
+    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
+</div>
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
@@ -420,6 +512,14 @@ function formShow(){
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
+<div class="form-group mb-4">
+    <label for="finnish_time">Finnish Time</label>
+    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
+</div>
+<div class="form-group mb-4">
+    <label for="received_name">Received Name</label>
+    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
+</div>
 
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
@@ -428,8 +528,8 @@ function formShow(){
 
     <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
-    </div>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
+</div> 
 
     <div class="form-row mb-4">
         <label for="pengecekan">Pengecekan</label><br/>
@@ -482,17 +582,17 @@ function formShow(){
 
     <div class="form-group mb-4">
         <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
+        <input type="text" class="form-control" id="namaProduct" name="namaProduct" value="'.$dE_buffer[1].'" placeholder="Nama Product">
     </div>
     <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
     
-    <div class="form-group mb-4">
+     <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
-    </div>
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
+</div> 
 
     <div class="form-row mb-4">
         <label for="check_form">Pengecekan</label><br/>

@@ -32,7 +32,10 @@ if (isset($_POST['id_utama'])) {
             $jenisData = "pm";
         } elseif (strtolower((string) $jenis) == "ibc") {
             $jenisData = "ibc";
-        } else {
+        }elseif (strtolower((string) $jenis) == "lbl") {
+            $jenisData = "ibc";
+        }
+        else {
             $jenisData = "x";
         }
         echo "PE";

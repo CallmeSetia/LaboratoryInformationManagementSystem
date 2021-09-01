@@ -62,17 +62,19 @@ function getDetailPKG($type, $number){
     $queryDetail = $koneksi->query("SELECT * FROM tbl_detail_pkg_". $type ." LEFT JOIN tbl_utama_pkg ON tbl_detail_pkg_". $type . ".id_" . $type." = tbl_utama_pkg.id_utama LEFT JOIN tbl_data_item_pkg ON tbl_utama_pkg.id_item_pkg = tbl_data_item_pkg.id_item_pkg WHERE id_utama = ". $number);
     if ($num_rows = $queryDetail->num_rows > 0) {
         while ($rowP = $queryDetail->fetch_assoc()){
-            if ($type = "pm") {
+            if ($type == "pm") {
+
                 return ($rowP['id_pm']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_botol']. '+'  .$rowP['kondisi_screw']. '+'  .$rowP['tempat_lubang']. '+'  .$rowP['label_depan']. '+'  .$rowP['label_belakang']. '+'  .$rowP['cacat']. '+'  .$rowP['posisi_ldb']. '+'  .$rowP['kotoran']. '+'  .$rowP['benda_asing']. '+'  .$rowP['npt']. '+'  .$rowP['doc_no']);
-            } elseif ($type = "pd") {
+            } elseif ($type == "pd") {
                 return ($rowP['id_pd']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_drum']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']. '+'  .$rowP['doc_no']);
-            } elseif ($type = "pcb") {
+            } elseif ($type == "pcb") {
                 return ($rowP['id_pcb']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_cart']. '+'  .$rowP['warna_cart']. '+'  .$rowP['kotoran_l']. '+'  .$rowP['gambar']. '+'  .$rowP['label']. '+'  .$rowP['kotoran_d']. '+'  .$rowP['coa']. '+'  .$rowP['doc_no']);
-            } elseif ($type = "pc") {
+            } elseif ($type == "pc") {
+//                echo "INI PC";
                 return ($rowP['id_pc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_cap']. '+'  .$rowP['kotoran']. '+'  .$rowP['goresan_pc']. '+'  .$rowP['cacat_pc']. '+'  .$rowP['lubang']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['terdapat_bami']. '+'  .$rowP['doc_no']);
-            } elseif ($type = "p") {
+            } elseif ($type == "p") {
                 return ($rowP['id_p']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['warna_pail']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['terdapat_lpb']. '+'  .$rowP['kondisi_seal']. '+'  .$rowP['kotoran']. '+'  .$rowP['karat']. '+'  .$rowP['benda_asing']. '+'  .$rowP['bau_ytb']. '+'  .$rowP['doc_no']);
-            } elseif ($type = "ibc") {
+            } elseif ($type == "ibc") {
                 return ($rowP['id_ibc']. '+'  .$rowP['quantity']. '+'  .$rowP['packaging_name']. '+'  .$rowP['tgl_cek']. '+'  .$rowP['approval']. '+'  .$rowP['cek_sampel']. '+'  .$rowP['kondisi_vn']. '+'  .$rowP['terdapat_lk']. '+'  .$rowP['kotoran']. '+'  .$rowP['air_oli']. '+'  .$rowP['doc_no']);
             } else {
                 return 0;
@@ -111,8 +113,8 @@ function getDetailADD($number){
     }
 }
 
-function tampilTombolPrint($idAF, $idTF, $pP, $dataIn){
-    if($idAF == $idTF) {
+function tampilTombolPrint($idAF, $idTF, $pP, $dataIn, $approval){
+    if($idAF == $idTF && $approval == 1) {
         return '<form action="../dashboard/halaman_print.php?data='. $pP .'" method="POST"><button name="data_print" value="'. $dataIn .'" class="btn btn-primary mb-2 ">Print</button></form>';
     }
     else {
@@ -158,7 +160,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 <th>Received</th>
                 <th>Finnish Time</th>
                 <th>Status Approval</th>
-                <th colspan="2" class=""> ACTION</th>
+                <th colspan="" class=""> ACTION</th>
                 
                 </tr>
             </thead>
@@ -196,6 +198,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
 
                 $tgl_masuk = $row['date'];
                 $idA = $row['id_utama'];
+//                echo $itemCheck."-";
 
                 if ($itemCheck == "botol" || $itemCheck == "tube") {
                     $jenisPackage = "material";
@@ -203,8 +206,10 @@ function tampilTabel($jenis_tabel, $koneksi) {
                     $halamanPrint = "pm";
                     $dataCol = getDetailPKG("pm", $row['id_utama']);
                 } elseif ($itemCheck == "cap" || $itemCheck == "cover cap") {
+
                     $jenisPackage = "cap";
                     $idT = getId("pc", $row['id_utama']);
+//                    echo "hai";
                     $halamanPrint = "pc";
                     $dataCol = getDetailPKG("pc", $row['id_utama']);
                 } elseif ($itemCheck == "pail") {
@@ -227,14 +232,42 @@ function tampilTabel($jenis_tabel, $koneksi) {
                     $idT = getId("ibc", $row['id_utama']);
                     $halamanPrint = "ibc";
                     $dataCol = getDetailPKG("ibc", $row['id_utama']);
-                } else {
+                }
+                else {
                     $idT = "";
                     $halamanPrint = "";
                     $dataCol = "";
                 }
 
+                if ($itemCheck == "label") {
+                    $jenisPackage = "lbl";
+
+                }
+                // APPROVAL
+
+                $approval = 0;
+                $sql_select_aproval = "SELECT * FROM tbl_detail_pkg_" . $halamanPrint . " WHERE id_".$halamanPrint." = '$id_utama'";
+                $hasilApproval = $koneksi->query($sql_select_aproval);
+                if ($hasilApproval) {
+                    if ($num_rows = $hasilApproval->num_rows > 0) {
+                        $row_detail = $hasilApproval->fetch_assoc();
+
+                        if ($row_detail['approval'] != 0 && $row_detail['approval'] != NULL  ) {
+                            $approval = 1;
+                        }
+                    }
+                }
+
+                if ($approval == 1 ) {
+                    echo "<td>OKE</td>";
+                }
+                else {
+                    echo "<td>TIDAK</td>";
+                }
+
+                // ACTION
                 if (strtolower((string) $_SESSION['role']) == "analyst") {
-                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_utama, $tgl_masuk, $quantity). tampilTombolPrint($idA, $idT, $halamanPrint, $dataCol) .'</td>';
+                    echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_utama, $tgl_masuk, $quantity). tampilTombolPrint($idA, $idT, $halamanPrint, $dataCol, $approval) .'</td>';
                 }
                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
                     echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_utama, NULL).'</td>';
@@ -267,6 +300,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 <th>Lot Number</th>
                 <th>Additive</th>
                 <th>Weight</th>
+                <th>Approval</th>
                 <th>Quantity</th>
                 <th colspan="" class=""> ACTION</th>
                 </tr>
@@ -297,8 +331,28 @@ function tampilTabel($jenis_tabel, $koneksi) {
                 $idT = getIdA($row['id_utama']);
                 $dataCol = getDetailADD($row['id_utama']);
 
+                // APPROVAL
+                $approval = 0;
+                $sql_select_aproval = "SELECT * FROM tbl_detail_add  WHERE id_add = '$id_pkg'";
+                $hasilApproval = $koneksi->query($sql_select_aproval);
+                if ($hasilApproval) {
+                    if ($num_rows = $hasilApproval->num_rows > 0) {
+                        $row_detail = $hasilApproval->fetch_assoc();
+
+                        if ($row_detail['approval'] != 0 && $row_detail['approval'] != NULL  ) {
+                            $approval = 1;
+                        }
+                    }
+                }
+
+                if ($approval == 1 ) {
+                    echo "<td>OKE</td>";
+                }
+                else {
+                    echo "<td>TIDAK</td>";
+                }
                    if (strtolower((string) $_SESSION['role']) == "analyst") {
-                       echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk, $quantity). tampilTombolPrint($idA, $idT, "add", $dataCol) .'</td>';
+                       echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk, $quantity). tampilTombolPrint($idA, $idT, "add", $dataCol, $approval) .'</td>';
                    }
                    else if (strtolower((string) $_SESSION['role']) == "siteman") {
                         echo '<td>'.tampilTombolEditData($row['id_utama'], "additive", NULL, NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "additive", NULL, NULL, NULL).'</td>';

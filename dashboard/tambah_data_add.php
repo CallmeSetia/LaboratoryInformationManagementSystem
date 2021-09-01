@@ -13,6 +13,13 @@
     // === INSERT TO MYSQL
     $FLAG_INSERT = 0;
 
+
+
+
+
+    $issueDates = formatTanggal();
+    $ReceiveTime = date("h:i");
+
     if (isset($_POST['submited'])) {
         // AMBIL DATA USER INPUT
             print_r($_POST);
@@ -54,8 +61,21 @@
     }
 
 
+    function formatTanggal() {
+        date_default_timezone_set('Asia/Jakarta');
 
-    //$item_kode = (string) $dataDariMysql;
+        $tgl = date("d"); // date("Y-m-d")
+        $bulan =  date("m");
+        $tahun = date("Y");
+
+        $templateNamaBulan = ["Jan", "Feb", "Mar", "Apr","May", "Jun","Jul","Aug", "Sep", "Oct", "Nov","Dec"];
+
+        $bulan = $templateNamaBulan[((int) $bulan) - 1];
+
+        return $tgl."-".$bulan."-".$tahun;
+    }
+
+//$item_kode = (string) $dataDariMysql;
 
 
 
@@ -135,7 +155,7 @@
                         <div class="bio-skill-box box box-shadow text-left">
                             <h2 >Tambah Data Additive</h2>
                             <?php
-                            echo $FLAG_INSERT;
+//                            echo $FLAG_INSERT;
                             if ($FLAG_INSERT == 1) {
                                 echo '
                                     <div class="alert alert-success mb-4" role="alert">
@@ -168,16 +188,16 @@
 
                                         <div class="form-group mb-4">
                                             <label for="docNumber">Document No.</label>
-                                            <input type="text" class="form-control" id="docNumber" name="docNumber" placeholder="Doc No">
+                                            <input type="text" class="form-control" id="docNumber" name="docNumber" placeholder="Doc No" required>
                                         </div>
                                         <div class="form-group mb-4">
                                             <label for="issuedDate">Issued Date</label>
-                                            <input type="text" class="form-control" id="issuedDate" name="issuedDate" placeholder="Issued Date">
+                                            <input type="text" class="form-control" id="issuedDate" name="issuedDate"  value="<?= $issueDates; ?>" placeholder="Issued Date">
                                         </div>
 
                                         <div class="form-group mb-4">
                                             <label for="lotNumber">Lot Number</label>
-                                            <input type="text" class="form-control" id="lotNumber" name="lotNumber" placeholder="Lot Number">
+                                            <input type="text" class="form-control" id="lotNumber" name="lotNumber" placeholder="Lot Number" required>
                                         </div>
 
                                         <div class="form-row mb-4">
@@ -201,14 +221,14 @@
 
                                             <div class="form-group col-md-5">
                                                 <label for="Weight">Weight</label>
-                                                <input type="text" class="form-control" id="itemWeight" name="itemWeight" placeholder="Weight">
+                                                <input type="text" class="form-control" id="itemWeight" name="itemWeight" placeholder="Weight" required>
                                             </div>
 
                                         </div>
 
                                         <div class="form-group mb-4">
                                             <label for="Quantity">Quantity</label>
-                                            <input type="text" class="form-control" id="Quantity" name="Quantity" placeholder="Quantity">
+                                            <input type="text" class="form-control" id="Quantity" name="Quantity" placeholder="Quantity" required>
                                         </div>
 
                                         <input type="hidden" name="submited" value="submited" />

@@ -13,6 +13,9 @@ if ($koneksi->connect_errno) {
 // === INSERT TO MYSQL
 $FLAG_INSERT = 0;
 
+$issueDates = formatTanggal();
+$ReceiveTime = date("h:i");
+
 if (isset($_POST['submited'])) {
     // AMBIL DATA USER INPUT
     //    print_r($_POST);
@@ -32,7 +35,7 @@ if (isset($_POST['submited'])) {
     $remark = $_POST['remark'];
 
     $Submitted = $_POST['Submitted'];
-    $Received = $_POST['Received'];
+    $Received = "";
 
     // ==== KONEKSI DATABASE
     $koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
@@ -62,7 +65,19 @@ function tampilTombolTambahData() {
         echo '<a href="tambah_data.php"><button class="btn btn-primary mb-2 " >+ Tambah Data</button></a>';
     }
 }
+function formatTanggal() {
+    date_default_timezone_set('Asia/Jakarta');
 
+    $tgl = date("d"); // date("Y-m-d")
+    $bulan =  date("m");
+    $tahun = date("Y");
+
+    $templateNamaBulan = ["Jan", "Feb", "Mar", "Apr","May", "Jun","Jul","Aug", "Sep", "Oct", "Nov","Dec"];
+
+    $bulan = $templateNamaBulan[((int) $bulan) - 1];
+
+    return $tgl."-".$bulan."-".$tahun;
+}
 
 
 //$item_kode = (string) $dataDariMysql;
@@ -152,8 +167,8 @@ function tampilTombolTambahData() {
                                         <strong> INSERT Success! </strong> <br> Please wait :)</button>
                                     </div> 
                                     <script>
-                                         setTimeout(function(){
-                                            window.location.href = "../index.php?page=packaging;
+                                          setTimeout(function(){
+                                            window.location.href = "index.php?page=packaging";
                                          }, 500);
                                       </script>
                                     ';
@@ -161,7 +176,7 @@ function tampilTombolTambahData() {
                             echo '
                                     <div class="alert alert-danger mb-4" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">X</button>
-                                        <strong>Login Failed!</strong> <br> Please Check Your Password :(
+                                        <strong>Ada Keasalahan!</strong> <br> Mohon masukan disesuaikan formatan
                                     </div>
                                     ';
                         }
@@ -177,23 +192,23 @@ function tampilTombolTambahData() {
 
                                     <div class="form-group mb-4">
                                         <label for="docNumber">Document No.</label>
-                                        <input type="text" class="form-control" id="docNumber" name="docNumber" placeholder="Doc No">
+                                        <input type="text" class="form-control" id="docNumber" name="docNumber" placeholder="Doc No" required>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="issuedDate">Issued Date</label>
-                                        <input type="text" class="form-control" id="issuedDate" name="issuedDate" placeholder="Issued Date">
+                                        <input type="text" class="form-control" id="issuedDate" name="issuedDate" value="<?php echo $issueDates; ?>" placeholder="Issued Date" required>
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label for="issuedDate">Receive Time</label>
-                                        <input type="text" class="form-control" id="receiveTime" name="receiveTime" placeholder="Receive Time">
+                                        <input type="text" class="form-control" id="receiveTime" name="receiveTime" value="<?php echo $ReceiveTime; ?>" placeholder="Receive Time" required>
                                     </div>
 
                                     <div class="form-row mb-4">
                                         <div class="form-group col-md-4">
                                             <label for="itemCode">Item Code</label> <br>
 
-                                            <select class="selectpicker"  id="itemCode" name="itemCode" data-live-search="true">
+                                            <select class="selectpicker" id="itemCode" name="itemCode" data-live-search="true" required>
                                                 <option value="" selected disabled hidden>Item Code</option>
                                                 <?php
                                                 $sqlSelectItem = "SELECT * FROM `tbl_data_item_pkg`";
@@ -210,40 +225,36 @@ function tampilTombolTambahData() {
 
                                         <div class="form-group col-md-5">
                                             <label for="productName">Product Name</label>
-                                            <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name">
+                                            <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name" required>
                                         </div>
 
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label for="Quantity">Quantity</label>
-                                        <input type="text" class="form-control" id="Quantity" name="Quantity" placeholder="Quantity">
+                                        <input type="text" class="form-control" id="Quantity" name="Quantity" placeholder="Quantity" required>
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label for="PackagingCondition">Packaging Condition</label>
-                                        <input type="text" class="form-control" id="PackagingCondition" name="PackagingCondition" placeholder="Packaging Condition">
+                                        <input type="text" class="form-control" id="PackagingCondition" name="PackagingCondition" placeholder="Packaging Condition" >
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label for="status">Status</label>
-                                        <input type="text" class="form-control" id="status" name="status"  placeholder="Status" required>
+                                        <input type="text" class="form-control" id="status" name="status"  placeholder="Status" >
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label for="remark">Remark</label>
-                                        <input type="text" class="form-control" id="remark"  name="remark"  placeholder="Remark">
+                                        <input type="text" class="form-control" id="remark"  name="remark"  placeholder="Remark" >
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label for="Submitted">Submitted Name</label>
-                                        <input type="text" class="form-control" id="Submitted" name="Submitted"  placeholder="Submitted Name">
+                                        <input type="text" class="form-control" id="Submitted" name="Submitted"  placeholder="Submitted Name" required>
                                     </div>
 
-                                    <div class="form-group mb-4">
-                                        <label for="Received">Received Name</label>
-                                        <input type="text" class="form-control" id="Received" name="Received" placeholder="Received Name">
-                                    </div>
 
                                     <input type="hidden" name="submited" value="submited" />
                                     <div class="form-group mb-4">
@@ -261,8 +272,6 @@ function tampilTombolTambahData() {
                                                 $("#productName").val(splitText[1]);
                                                 $("#itemId").val(splitText[0]); // idItem
                                                 // console.log($(this).val().split("+%"));
-
-
 
                                                 var selectedItemCode = $(this).find('option:selected').text();
                                                 var arr =  selectedItemCode.split("-");
