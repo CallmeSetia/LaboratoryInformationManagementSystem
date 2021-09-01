@@ -163,10 +163,10 @@
     </table><p style="width: 810px; margin: 0 auto">* Pengecekan dilakukan apabila diperlukan</p>
         ';
         } elseif ($_GET['data'] == "ibc") {
-            $kVN_buffer = explode("#", $dP_buffer[6]);
-            $tLK_buffer = explode("#", $dP_buffer[7]);
-            $k_buffer = explode("#", $dP_buffer[8]);
-            $aO_buffer = explode("#", $dP_buffer[9]);
+            $kVN_buffer = explode("#", $dP_buffer[7]);
+            $tLK_buffer = explode("#", $dP_buffer[8]);
+            $k_buffer = explode("#", $dP_buffer[9]);
+            $aO_buffer = explode("#", $dP_buffer[10]);
             echo '
             <table class="content">
         <tr style="padding: 0px; overflow: hidden;">
@@ -174,7 +174,7 @@
             <td style="padding: 0px"><h1 style="text-align: center">Pengecekan Sample IBC</h1></td>
             <td style="width: 250px; padding: 0px">
                 <table class="content-0">
-                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[10] .'</td></tr>
+                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[11] .'</td></tr>
                     <tr><td>Revision</td><td>:</td><td>00</td></tr>
                     <tr><td>Issued Date</td><td>:</td><td>
                     <script>
@@ -233,7 +233,7 @@
             <td style="padding: 0px"><h1 style="text-align: center">Pengecekan Sample IBC</h1></td>
             <td style="width: 250px; padding: 0px">
                 <table class="content-0">
-                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[10] .'</td></tr>
+                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[11] .'</td></tr>
                     <tr><td>Revision</td><td>:</td><td>00</td></tr>
                     <tr><td>Issued Date</td><td>:</td><td>
                     <script>
@@ -292,7 +292,7 @@
             <td style="padding: 0px"><h1 style="text-align: center">Pengecekan Sample IBC</h1></td>
             <td style="width: 250px; padding: 0px">
                 <table class="content-0">
-                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[10] .'</td></tr>
+                    <tr><td>Doc No</td><td>:</td><td>'. $dP_buffer[11] .'</td></tr>
                     <tr><td>Revision</td><td>:</td><td>00</td></tr>
                     <tr><td>Issued Date</td><td>:</td><td>
                     <script>
