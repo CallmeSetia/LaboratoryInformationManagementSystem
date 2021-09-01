@@ -237,7 +237,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                     echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_utama, $tgl_masuk, $quantity). tampilTombolPrint($idA, $idT, $halamanPrint, $dataCol) .'</td>';
                 }
                 else if (strtolower((string) $_SESSION['role']) == "siteman") {
-                    echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_utama, NULL).'</td>';
+                    echo '<td>'.tampilTombolEditData($row['id_utama'], "packaging", NULL, NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "packaging", $jenisPackage, $id_utama, NULL).'</td>';
                 }
 
                 echo ' </tr>';
@@ -301,7 +301,7 @@ function tampilTabel($jenis_tabel, $koneksi) {
                        echo '<td>'.tampilTombolEditData($jenisPackage, $pkg_name, $itm_code, $id_pkg, $tgl_masuk, $quantity). tampilTombolPrint($idA, $idT, "add", $dataCol) .'</td>';
                    }
                    else if (strtolower((string) $_SESSION['role']) == "siteman") {
-                        echo '<td>'.tampilTombolEditData($row['id_utama'], "additive", NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "additive", NULL, NULL, NULL).'</td>';
+                        echo '<td>'.tampilTombolEditData($row['id_utama'], "additive", NULL, NULL, NULL, NULL).tampilTombolHapusData($row['id_utama'], "additive", NULL, NULL, NULL).'</td>';
                    }
 
 
