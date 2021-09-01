@@ -26,7 +26,6 @@
 
     $jd = '';
     if (isset($_GET['data'])){
-
         if ($_GET['data'] == "pm") {
             $wB_buffer = explode("#", $dP_buffer[6]);
             $kS_buffer = explode("#", $dP_buffer[7]);
@@ -163,12 +162,11 @@
         </tr>
     </table><p style="width: 810px; margin: 0 auto">* Pengecekan dilakukan apabila diperlukan</p>
         ';
-        }
-        elseif ($_GET['data'] == "ibc") {
-            $kVN_buffer = explode("#", $dP_buffer[7]);
-            $tLK_buffer = explode("#", $dP_buffer[8]);
-            $k_buffer = explode("#", $dP_buffer[9]);
-            $aO_buffer = explode("#", $dP_buffer[10]);
+        } elseif ($_GET['data'] == "ibc") {
+            $kVN_buffer = explode("#", $dP_buffer[6]);
+            $tLK_buffer = explode("#", $dP_buffer[7]);
+            $k_buffer = explode("#", $dP_buffer[8]);
+            $aO_buffer = explode("#", $dP_buffer[9]);
             echo '
             <table class="content">
         <tr style="padding: 0px; overflow: hidden;">
@@ -216,15 +214,8 @@
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Kondisi Valve Nozzle</td><td>'. $kVN_buffer[0] .'</td><td>'. $kVN_buffer[1] .'</td><td>'. $kVN_buffer[2] .'</td><td>'. $kVN_buffer[3] .'</td><td>'. $kVN_buffer[4] .'</td><td>'. $kVN_buffer[5] .'</td><td>'. $kVN_buffer[6] .'</td><td>'. $kVN_buffer[7] .'</td></tr>
                         <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td colspan="10">Kondisi Dalam</td></tr>
                         <tr><td>1</td><td>Kotoran</td><td>'. $k_buffer[0] .'</td><td>'. $k_buffer[1] .'</td><td>'. $k_buffer[2] .'</td><td>'. $k_buffer[3] .'</td><td>'. $k_buffer[4] .'</td><td>'. $k_buffer[5] .'</td><td>'. $k_buffer[6] .'</td><td>'. $k_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $k_buffer[0] .'</td><td>'. $k_buffer[1] .'</td><td>'. $k_buffer[2] .'</td><td>'. $k_buffer[3] .'</td><td>'. $k_buffer[4] .'</td><td>'. $k_buffer[5] .'</td><td>'. $k_buffer[6] .'</td><td>'. $k_buffer[7] .'</td></tr>
-                        
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                         <tr><td>2</td></td><td>Air / Oli</td><td>'. $aO_buffer[0] .'</td><td>'. $aO_buffer[1] .'</td><td>'. $aO_buffer[2] .'</td><td>'. $aO_buffer[3] .'</td><td>'. $aO_buffer[4] .'</td><td>'. $aO_buffer[5] .'</td><td>'. $aO_buffer[6] .'</td><td>'. $aO_buffer[7] .'</td></tr>
                     </table>
                 </div>
@@ -282,15 +273,8 @@
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Kondisi Valve Nozzle</td><td>'. $kVN_buffer[0] .'</td><td>'. $kVN_buffer[1] .'</td><td>'. $kVN_buffer[2] .'</td><td>'. $kVN_buffer[3] .'</td><td>'. $kVN_buffer[4] .'</td><td>'. $kVN_buffer[5] .'</td><td>'. $kVN_buffer[6] .'</td><td>'. $kVN_buffer[7] .'</td></tr>
                         <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td colspan="10">Kondisi Dalam</td></tr>
                         <tr><td>1</td><td>Kotoran</td><td>'. $k_buffer[0] .'</td><td>'. $k_buffer[1] .'</td><td>'. $k_buffer[2] .'</td><td>'. $k_buffer[3] .'</td><td>'. $k_buffer[4] .'</td><td>'. $k_buffer[5] .'</td><td>'. $k_buffer[6] .'</td><td>'. $k_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $k_buffer[0] .'</td><td>'. $k_buffer[1] .'</td><td>'. $k_buffer[2] .'</td><td>'. $k_buffer[3] .'</td><td>'. $k_buffer[4] .'</td><td>'. $k_buffer[5] .'</td><td>'. $k_buffer[6] .'</td><td>'. $k_buffer[7] .'</td></tr>
-                        
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                         <tr><td>2</td></td><td>Air / Oli</td><td>'. $aO_buffer[0] .'</td><td>'. $aO_buffer[1] .'</td><td>'. $aO_buffer[2] .'</td><td>'. $aO_buffer[3] .'</td><td>'. $aO_buffer[4] .'</td><td>'. $aO_buffer[5] .'</td><td>'. $aO_buffer[6] .'</td><td>'. $aO_buffer[7] .'</td></tr>
                     </table>
                 </div>
@@ -348,15 +332,8 @@
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Kondisi Valve Nozzle</td><td>'. $kVN_buffer[0] .'</td><td>'. $kVN_buffer[1] .'</td><td>'. $kVN_buffer[2] .'</td><td>'. $kVN_buffer[3] .'</td><td>'. $kVN_buffer[4] .'</td><td>'. $kVN_buffer[5] .'</td><td>'. $kVN_buffer[6] .'</td><td>'. $kVN_buffer[7] .'</td></tr>
                         <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td colspan="10">Kondisi Dalam</td></tr>
                         <tr><td>1</td><td>Kotoran</td><td>'. $k_buffer[0] .'</td><td>'. $k_buffer[1] .'</td><td>'. $k_buffer[2] .'</td><td>'. $k_buffer[3] .'</td><td>'. $k_buffer[4] .'</td><td>'. $k_buffer[5] .'</td><td>'. $k_buffer[6] .'</td><td>'. $k_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $k_buffer[0] .'</td><td>'. $k_buffer[1] .'</td><td>'. $k_buffer[2] .'</td><td>'. $k_buffer[3] .'</td><td>'. $k_buffer[4] .'</td><td>'. $k_buffer[5] .'</td><td>'. $k_buffer[6] .'</td><td>'. $k_buffer[7] .'</td></tr>
-                        
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                         <tr><td>2</td></td><td>Air / Oli</td><td>'. $aO_buffer[0] .'</td><td>'. $aO_buffer[1] .'</td><td>'. $aO_buffer[2] .'</td><td>'. $aO_buffer[3] .'</td><td>'. $aO_buffer[4] .'</td><td>'. $aO_buffer[5] .'</td><td>'. $aO_buffer[6] .'</td><td>'. $aO_buffer[7] .'</td></tr>
                     </table>
                 </div>
@@ -364,8 +341,7 @@
         </tr>
     </table>
             ';
-        }
-        elseif ($_GET['data'] == "p") {
+        } elseif ($_GET['data'] == "p") {
             $wP_buffer = explode("#", $dP_buffer[6]);
             $tLK_buffer = explode("#", $dP_buffer[7]);
             $tLPB_buffer = explode("#", $dP_buffer[8]);
@@ -427,20 +403,14 @@
                         <tr><td>1</td><td>Kotoran</td><td>'. $ko_buffer[0] .'</td><td>'. $ko_buffer[1] .'</td><td>'. $ko_buffer[2] .'</td><td>'. $ko_buffer[3] .'</td><td>'. $ko_buffer[4] .'</td><td>'. $ko_buffer[5] .'</td><td>'. $ko_buffer[6] .'</td><td>'. $ko_buffer[7] .'</td></tr>
                         <tr><td>2</td></td><td>Karat</td><td>'. $ka_buffer[0] .'</td><td>'. $ka_buffer[1] .'</td><td>'. $ka_buffer[2] .'</td><td>'. $ka_buffer[3] .'</td><td>'. $ka_buffer[4] .'</td><td>'. $ka_buffer[5] .'</td><td>'. $ka_buffer[6] .'</td><td>'. $ka_buffer[7] .'</td></tr>
                         <tr><td>3</td><td>Benda Asing</td><td>'. $bA_buffer[0] .'</td><td>'. $bA_buffer[1] .'</td><td>'. $bA_buffer[2] .'</td><td>'. $bA_buffer[3] .'</td><td>'. $bA_buffer[4] .'</td><td>'. $bA_buffer[5] .'</td><td>'. $bA_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td>4</td><td>Bau yang tidak biasa</td><td>'. $kYTB_buffer[0] .'</td><td>'. $kYTB_buffer[1] .'</td><td>'. $kYTB_buffer[2] .'</td><td>'. $kYTB_buffer[3] .'</td><td>'. $kYTB_buffer[4] .'</td><td>'. $kYTB_buffer[5] .'</td><td>'. $kYTB_buffer[6] .'</td></tr>
-=======
-                        
-                        <tr><td>4</td><td>Bau yang tidak biasa</td><td>'. $kYTB_buffer[0] .'</td><td>'. $kYTB_buffer[1] .'</td><td>'. $kYTB_buffer[2] .'</td><td>'. $kYTB_buffer[3] .'</td><td>'. $kYTB_buffer[4] .'</td><td>'. $kYTB_buffer[5] .'</td><td>'. $kYTB_buffer[6] .'</td><td>'. $kYTB_buffer[7] .'</td></tr>
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                     </table>
                 </div>
             </td>
         </tr>
     </table>
             ';
-        }
-        elseif ($_GET['data'] == "pc") {
+        } elseif ($_GET['data'] == "pc") {
             $wC_buffer = explode("#", $dP_buffer[6]);
             $ko_buffer = explode("#", $dP_buffer[7]);
             $gPC_buffer = explode("#", $dP_buffer[8]);
@@ -494,11 +464,7 @@
                         <tr><td style="height: 40px">No</td><td style="width: 240px" >Item Pengecekan</td><td style="width: 50px; text-align: center">1</td><td style="width: 50px; text-align: center">2</td><td style="width: 50px; text-align: center">3</td><td style="width: 50px; text-align: center">4</td><td style="width: 50px; text-align: center">5</td><td style="width: 50px; text-align: center">6</td><td style="width: 50px; text-align: center">7</td><td style="width: 50px; text-align: center">8</td></tr>
                         <tr><td>1</td><td>Warna Cap</td><td>'. $wC_buffer[0] .'</td><td>'. $wC_buffer[1] .'</td><td>'. $wC_buffer[2] .'</td><td>'. $wC_buffer[3] .'</td><td>'. $wC_buffer[4] .'</td><td>'. $wC_buffer[5] .'</td><td>'. $wC_buffer[6] .'</td><td>'. $wC_buffer[7] .'</td></tr>
                         <tr><td>2</td><td>Kotoran</td><td>'. $ko_buffer[0] .'</td><td>'. $ko_buffer[1] .'</td><td>'. $ko_buffer[2] .'</td><td>'. $ko_buffer[3] .'</td><td>'. $ko_buffer[4] .'</td><td>'. $ko_buffer[5] .'</td><td>'. $ko_buffer[6] .'</td><td>'. $ko_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td>3</td><td>Goresan pada cap</td><td>'. $gPC_buffer[0] .'</td><td>'. $gPC_buffer[1] .'</td><td>'. $gPC_buffer[2] .'</td><td>'. $gPC_buffer[3] .'</td><td>'. $gPC_buffer[4] .'</td><td>'. $gPC_buffer[5] .'</td><td>'. $gPC_buffer[6] .'</td><td>'. $gPC_buffer[7] .'</td></tr>
-=======
-                        <tr><td>3</td><td>Goresan pada cap</td><td>'. $gPC_buffer[0] .'</td><td>'. $gPC_buffer[1] .'</td><td>'. $gPC_buffer[2] .'</td><td>'. $gPC_buffer[3] .'</td><td>'. $gPC_buffer[4] .'</td><td>'. $gPC_buffer[5] .'</td><td>'. $gPC_buffer[6] .'</td><td>'. $gPC_buffer[7] .'</tr>
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                         <tr><td>4</td><td>Cacat pada cap</td><td>'. $cPC_buffer[0] .'</td><td>'. $cPC_buffer[1] .'</td><td>'. $cPC_buffer[2] .'</td><td>'. $cPC_buffer[3] .'</td><td>'. $cPC_buffer[4] .'</td><td>'. $cPC_buffer[5] .'</td><td>'. $cPC_buffer[6] .'</td><td>'. $cPC_buffer[7] .'</td></tr>
                         <tr><td>5</td><td>Lubang</td><td>'. $l_buffer[0] .'</td><td>'. $l_buffer[1] .'</td><td>'. $l_buffer[2] .'</td><td>'. $l_buffer[3] .'</td><td>'. $l_buffer[4] .'</td><td>'. $l_buffer[5] .'</td><td>'. $l_buffer[6] .'</td><td>'. $l_buffer[7] .'</td></tr>
                         <tr><td>6</td><td>Kondisi Seal</td><td>'. $kS_buffer[0] .'</td><td>'. $kS_buffer[1] .'</td><td>'. $kS_buffer[2] .'</td><td>'. $kS_buffer[3] .'</td><td>'. $kS_buffer[4] .'</td><td>'. $kS_buffer[5] .'</td><td>'. $kS_buffer[6] .'</td><td>'. $kS_buffer[7] .'</td></tr>
@@ -569,8 +535,7 @@
         </tr>
     </table>
             ';
-        }
-        elseif ($_GET['data'] == "pcb") {
+        } elseif ($_GET['data'] == "pcb") {
             $kC_buffer = explode("#", $dP_buffer[6]);
             $wC_buffer = explode("#", $dP_buffer[7]);
             $kL_buffer = explode("#", $dP_buffer[8]);
@@ -625,24 +590,11 @@
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Kondisi Carton</td><td>'. $kC_buffer[0] .'</td><td>'. $kC_buffer[1] .'</td><td>'. $kC_buffer[2] .'</td><td>'. $kC_buffer[3] .'</td><td>'. $kC_buffer[4] .'</td><td>'. $kC_buffer[5] .'</td><td>'. $kC_buffer[6] .'</td><td>'. $kC_buffer[7] .'</td></tr>
                         <tr><td>2</td><td>Warna Carton</td><td>'. $wC_buffer[0] .'</td><td>'. $wC_buffer[1] .'</td><td>'. $wC_buffer[2] .'</td><td>'. $wC_buffer[3] .'</td><td>'. $wC_buffer[4] .'</td><td>'. $wC_buffer[5] .'</td><td>'. $wC_buffer[6] .'</td><td>'. $wC_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td>3</td><td>Kotoran</td><td>'. $kL_buffer[0] .'</td><td>'. $kL_buffer[1] .'</td><td>'. $kL_buffer[2] .'</td><td>'. $kL_buffer[3] .'</td><td>'. $kL_buffer[4] .'</td><td>'. $kL_buffer[5] .'</td><td>'. $kL_buffer[6] .'</td><td>'. $kL_buffer[7] .'</td></tr>
                         <tr><td>4</td><td>Gambar</td><td>'. $g_buffer[0] .'</td><td>'. $g_buffer[1] .'</td><td>'. $g_buffer[2] .'</td><td>'. $g_buffer[3] .'</td><td>'. $g_buffer[4] .'</td><td>'. $g_buffer[5] .'</td><td>'. $g_buffer[6] .'</td><td>'. $g_buffer[7] .'</td></tr>
                         <tr><td>5</td><td>Label</td><td>'. $l_buffer[0] .'</td><td>'. $l_buffer[1] .'</td><td>'. $l_buffer[2] .'</td><td>'. $l_buffer[3] .'</td><td>'. $l_buffer[4] .'</td><td>'. $l_buffer[5] .'</td><td>'. $l_buffer[6] .'</td><td>'. $l_buffer[7] .'</td></tr>
                         <tr><td colspan="10">Kondisi Dalam</td></tr>
                         <tr><td>1</td><td>Kotoran</td><td>'. $kD_buffer[0] .'</td><td>'. $kD_buffer[1] .'</td><td>'. $kD_buffer[2] .'</td><td>'. $kD_buffer[3] .'</td><td>'. $kD_buffer[4] .'</td><td>'. $kD_buffer[5] .'</td><td>'. $kD_buffer[6] .'</td><td>'. $kD_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td>3</td><td>Kotoran</td><td>'. $kL_buffer[0] .'</td><td>'. $kL_buffer[1] .'</td><td>'. $kL_buffer[2] .'</td><td>'. $kL_buffer[3] .'</td><td>'. $kL_buffer[4] .'</td><td>'. $kL_buffer[5] .'</td><td>'. $kL_buffer[6] .'</td><td>'. $kL_buffer[7] .'</td></tr>
-                        
-                        <tr><td>4</td><td>Gambar</td><td>'. $g_buffer[0] .'</td><td>'. $g_buffer[1] .'</td><td>'. $g_buffer[2] .'</td><td>'. $g_buffer[3] .'</td><td>'. $g_buffer[4] .'</td><td>'. $g_buffer[5] .'</td><td>'. $g_buffer[6] .'</td><td>'. $g_buffer[7] .'</td></tr>
-                        
-                        <tr><td>5</td><td>Label</td><td>'. $l_buffer[0] .'</td><td>'. $l_buffer[1] .'</td><td>'. $l_buffer[2] .'</td><td>'. $l_buffer[3] .'</td><td>'. $l_buffer[4] .'</td><td>'. $l_buffer[5] .'</td><td>'. $l_buffer[6] .'</td><td>'. $l_buffer[7] .'</td></tr>
-                        
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $kD_buffer[0] .'</td><td>'. $kD_buffer[1] .'</td><td>'. $kD_buffer[2] .'</td><td>'. $kD_buffer[3] .'</td><td>'. $kD_buffer[4] .'</td><td>'. $kD_buffer[5] .'</td><td>'. $kD_buffer[6] .'</td><td>'. $kD_buffer[7] .'</td></tr>
-                        
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                     </table>
                 </div>
             </td>
@@ -700,32 +652,18 @@
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Kondisi Carton</td><td>'. $kC_buffer[0] .'</td><td>'. $kC_buffer[1] .'</td><td>'. $kC_buffer[2] .'</td><td>'. $kC_buffer[3] .'</td><td>'. $kC_buffer[4] .'</td><td>'. $kC_buffer[5] .'</td><td>'. $kC_buffer[6] .'</td><td>'. $kC_buffer[7] .'</td></tr>
                         <tr><td>2</td><td>Warna Carton</td><td>'. $wC_buffer[0] .'</td><td>'. $wC_buffer[1] .'</td><td>'. $wC_buffer[2] .'</td><td>'. $wC_buffer[3] .'</td><td>'. $wC_buffer[4] .'</td><td>'. $wC_buffer[5] .'</td><td>'. $wC_buffer[6] .'</td><td>'. $wC_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td>3</td><td>Kotoran</td><td>'. $kL_buffer[0] .'</td><td>'. $kL_buffer[1] .'</td><td>'. $kL_buffer[2] .'</td><td>'. $kL_buffer[3] .'</td><td>'. $kL_buffer[4] .'</td><td>'. $kL_buffer[5] .'</td><td>'. $kL_buffer[6] .'</td><td>'. $kL_buffer[7] .'</td></tr>
                         <tr><td>4</td><td>Gambar</td><td>'. $g_buffer[0] .'</td><td>'. $g_buffer[1] .'</td><td>'. $g_buffer[2] .'</td><td>'. $g_buffer[3] .'</td><td>'. $g_buffer[4] .'</td><td>'. $g_buffer[5] .'</td><td>'. $g_buffer[6] .'</td><td>'. $g_buffer[7] .'</td></tr>
                         <tr><td>5</td><td>Label</td><td>'. $l_buffer[0] .'</td><td>'. $l_buffer[1] .'</td><td>'. $l_buffer[2] .'</td><td>'. $l_buffer[3] .'</td><td>'. $l_buffer[4] .'</td><td>'. $l_buffer[5] .'</td><td>'. $l_buffer[6] .'</td><td>'. $l_buffer[7] .'</td></tr>
                         <tr><td colspan="10">Kondisi Dalam</td></tr>
                         <tr><td>1</td><td>Kotoran</td><td>'. $kD_buffer[0] .'</td><td>'. $kD_buffer[1] .'</td><td>'. $kD_buffer[2] .'</td><td>'. $kD_buffer[3] .'</td><td>'. $kD_buffer[4] .'</td><td>'. $kD_buffer[5] .'</td><td>'. $kD_buffer[6] .'</td><td>'. $kD_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td>3</td><td>Kotoran</td><td>'. $kL_buffer[0] .'</td><td>'. $kL_buffer[1] .'</td><td>'. $kL_buffer[2] .'</td><td>'. $kL_buffer[3] .'</td><td>'. $kL_buffer[4] .'</td><td>'. $kL_buffer[5] .'</td><td>'. $kL_buffer[6] .'</td><td>'. $kL_buffer[7] .'</td></tr>
-                        
-                        <tr><td>4</td><td>Gambar</td><td>'. $g_buffer[0] .'</td><td>'. $g_buffer[1] .'</td><td>'. $g_buffer[2] .'</td><td>'. $g_buffer[3] .'</td><td>'. $g_buffer[4] .'</td><td>'. $g_buffer[5] .'</td><td>'. $g_buffer[6] .'</td><td>'. $g_buffer[7] .'</td></tr>
-                        
-                        <tr><td>5</td><td>Label</td><td>'. $l_buffer[0] .'</td><td>'. $l_buffer[1] .'</td><td>'. $l_buffer[2] .'</td><td>'. $l_buffer[3] .'</td><td>'. $l_buffer[4] .'</td><td>'. $l_buffer[5] .'</td><td>'. $l_buffer[6] .'</td><td>'. $l_buffer[7] .'</td></tr>
-                        
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $kD_buffer[0] .'</td><td>'. $kD_buffer[1] .'</td><td>'. $kD_buffer[2] .'</td><td>'. $kD_buffer[3] .'</td><td>'. $kD_buffer[4] .'</td><td>'. $kD_buffer[5] .'</td><td>'. $kD_buffer[6] .'</td><td>'. $kD_buffer[7] .'</td></tr>
-                        
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                     </table>
                 </div>
             </td>
         </tr>
     </table>
             ';
-        }
-        elseif ($_GET['data'] == "pd") {
+        } elseif ($_GET['data'] == "pd") {
             $wD_buffer = explode("#", $dP_buffer[6]);
             $tLK_buffer = explode("#", $dP_buffer[7]);
             $tLPB_buffer = explode("#", $dP_buffer[8]);
@@ -780,7 +718,6 @@
                         <tr><td>No</td><td style="width: 240px">Item Pengecekan</td><td rowspan="2" style="width: 50px; text-align: center">1</td><td rowspan="2" style="width: 50px; text-align: center">2</td><td rowspan="2" style="width: 50px; text-align: center">3</td><td rowspan="2" style="width: 50px; text-align: center">4</td><td rowspan="2" style="width: 50px; text-align: center">5</td><td rowspan="2" style="width: 50px; text-align: center">6</td><td rowspan="2" style="width: 50px; text-align: center">7</td><td rowspan="2" style="width: 50px; text-align: center">8</td></tr>
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Warna Drum</td><td>'. $wD_buffer[0] .'</td><td>'. $wD_buffer[1] .'</td><td>'. $wD_buffer[2] .'</td><td>'. $wD_buffer[3] .'</td><td>'. $wD_buffer[4] .'</td><td>'. $wD_buffer[5] .'</td><td>'. $wD_buffer[6] .'</td><td>'. $wD_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td></tr>
                         <tr><td>3</td><td>Terdapat lekukan pada bodi</td><td>'. $tLPB_buffer[0] .'</td><td>'. $tLPB_buffer[1] .'</td><td>'. $tLPB_buffer[2] .'</td><td>'. $tLPB_buffer[3] .'</td><td>'. $tLPB_buffer[4] .'</td><td>'. $tLPB_buffer[5] .'</td><td>'. $tLPB_buffer[6] .'</td><td>'. $tLPB_buffer[7] .'</td></tr>
                         <tr><td>4</td><td>Kondisi seal</td><td>'. $kS_buffer[0] .'</td><td>'. $kS_buffer[1] .'</td><td>'. $kS_buffer[2] .'</td><td>'. $kS_buffer[3] .'</td><td>'. $kS_buffer[4] .'</td><td>'. $kS_buffer[5] .'</td><td>'. $kS_buffer[6] .'</td><td>'. $kS_buffer[7] .'</td></tr>
@@ -789,21 +726,6 @@
                         <tr><td>2</td><td>Karat</td><td>'. $ka_buffer[0] .'</td><td>'. $ka_buffer[1] .'</td><td>'. $ka_buffer[2] .'</td><td>'. $ka_buffer[3] .'</td><td>'. $ka_buffer[4] .'</td><td>'. $ka_buffer[5] .'</td><td>'. $ka_buffer[6] .'</td><td>'. $ka_buffer[7] .'</td></tr>
                         <tr><td>3</td><td>Benda Asing</td><td>'. $bA_buffer[0] .'</td><td>'. $bA_buffer[1] .'</td><td>'. $bA_buffer[2] .'</td><td>'. $bA_buffer[3] .'</td><td>'. $bA_buffer[4] .'</td><td>'. $bA_buffer[5] .'</td><td>'. $bA_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
                         <tr><td>4</td></td><td>Bau yang tidak biasa</td><td>'. $bYTB_buffer[0] .'</td><td>'. $bYTB_buffer[1] .'</td><td>'. $bYTB_buffer[2] .'</td><td>'. $bYTB_buffer[3] .'</td><td>'. $bYTB_buffer[4] .'</td><td>'. $bYTB_buffer[5] .'</td><td>'. $bYTB_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td>/tr>
-                        <tr><td>3</td><td>Terdapat lekukan pada bodi</td><td>'. $tLPB_buffer[0] .'</td><td>'. $tLPB_buffer[1] .'</td><td>'. $tLPB_buffer[2] .'</td><td>'. $tLPB_buffer[3] .'</td><td>'. $tLPB_buffer[4] .'</td><td>'. $tLPB_buffer[5] .'</td><td>'. $tLPB_buffer[6] .'</td><td>'. $tLPB_buffer[7] .'</td></tr>
-                        
-                        <tr><td>4</td><td>Kondisi seal</td><td>'. $kS_buffer[0] .'</td><td>'. $kS_buffer[1] .'</td><td>'. $kS_buffer[2] .'</td><td>'. $kS_buffer[3] .'</td><td>'. $kS_buffer[4] .'</td><td>'. $kS_buffer[5] .'</td><td>'. $kS_buffer[6] .'</td><td>'. $kS_buffer[7] .'</td></tr>
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $ko_buffer[0] .'</td><td>'. $ko_buffer[1] .'</td><td>'. $ko_buffer[2] .'</td><td>'. $ko_buffer[3] .'</td><td>'. $ko_buffer[4] .'</td><td>'. $ko_buffer[5] .'</td><td>'. $ko_buffer[6] .'</td><td>'. $ko_buffer[7] .'</td></tr>
-                        
-                        <tr><td>2</td><td>Karat</td><td>'. $ka_buffer[0] .'</td><td>'. $ka_buffer[1] .'</td><td>'. $ka_buffer[2] .'</td><td>'. $ka_buffer[3] .'</td><td>'. $ka_buffer[4] .'</td><td>'. $ka_buffer[5] .'</td><td>'. $ka_buffer[6] .'</td><td>'. $ka_buffer[7] .'</td></tr>
-                        
-                        <tr><td>3</td><td>Benda Asing</td><td>'. $bA_buffer[0] .'</td><td>'. $bA_buffer[1] .'</td><td>'. $bA_buffer[2] .'</td><td>'. $bA_buffer[3] .'</td><td>'. $bA_buffer[4] .'</td><td>'. $bA_buffer[5] .'</td><td>'. $bA_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
-                        
-                        <tr><td>4</td></td><td>Bau yang tidak biasa</td><td>'. $bYTB_buffer[0] .'</td><td>'. $bYTB_buffer[1] .'</td><td>'. $bYTB_buffer[2] .'</td><td>'. $bYTB_buffer[3] .'</td><td>'. $bYTB_buffer[4] .'</td><td>'. $bYTB_buffer[5] .'</td><td>'. $bYTB_buffer[6] .'</td><td>'. $bYTB_buffer[7] .'</td></tr>
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                     </table>
                 </div>
             </td>
@@ -859,7 +781,6 @@
                         <tr><td>No</td><td style="width: 240px">Item Pengecekan</td><td rowspan="2" style="width: 50px; text-align: center">1</td><td rowspan="2" style="width: 50px; text-align: center">2</td><td rowspan="2" style="width: 50px; text-align: center">3</td><td rowspan="2" style="width: 50px; text-align: center">4</td><td rowspan="2" style="width: 50px; text-align: center">5</td><td rowspan="2" style="width: 50px; text-align: center">6</td><td rowspan="2" style="width: 50px; text-align: center">7</td><td rowspan="2" style="width: 50px; text-align: center">8</td></tr>
                         <tr><td colspan="2">Kondisi Luar</td></tr>
                         <tr><td>1</td><td>Warna Drum</td><td>'. $wD_buffer[0] .'</td><td>'. $wD_buffer[1] .'</td><td>'. $wD_buffer[2] .'</td><td>'. $wD_buffer[3] .'</td><td>'. $wD_buffer[4] .'</td><td>'. $wD_buffer[5] .'</td><td>'. $wD_buffer[6] .'</td><td>'. $wD_buffer[7] .'</td></tr>
-<<<<<<< HEAD
                         <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td></tr>
                         <tr><td>3</td><td>Terdapat lekukan pada bodi</td><td>'. $tLPB_buffer[0] .'</td><td>'. $tLPB_buffer[1] .'</td><td>'. $tLPB_buffer[2] .'</td><td>'. $tLPB_buffer[3] .'</td><td>'. $tLPB_buffer[4] .'</td><td>'. $tLPB_buffer[5] .'</td><td>'. $tLPB_buffer[6] .'</td><td>'. $tLPB_buffer[7] .'</td></tr>
                         <tr><td>4</td><td>Kondisi seal</td><td>'. $kS_buffer[0] .'</td><td>'. $kS_buffer[1] .'</td><td>'. $kS_buffer[2] .'</td><td>'. $kS_buffer[3] .'</td><td>'. $kS_buffer[4] .'</td><td>'. $kS_buffer[5] .'</td><td>'. $kS_buffer[6] .'</td><td>'. $kS_buffer[7] .'</td></tr>
@@ -868,25 +789,9 @@
                         <tr><td>2</td><td>Karat</td><td>'. $ka_buffer[0] .'</td><td>'. $ka_buffer[1] .'</td><td>'. $ka_buffer[2] .'</td><td>'. $ka_buffer[3] .'</td><td>'. $ka_buffer[4] .'</td><td>'. $ka_buffer[5] .'</td><td>'. $ka_buffer[6] .'</td><td>'. $ka_buffer[7] .'</td></tr>
                         <tr><td>3</td><td>Benda Asing</td><td>'. $bA_buffer[0] .'</td><td>'. $bA_buffer[1] .'</td><td>'. $bA_buffer[2] .'</td><td>'. $bA_buffer[3] .'</td><td>'. $bA_buffer[4] .'</td><td>'. $bA_buffer[5] .'</td><td>'. $bA_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
                         <tr><td>4</td></td><td>Bau yang tidak biasa</td><td>'. $bYTB_buffer[0] .'</td><td>'. $bYTB_buffer[1] .'</td><td>'. $bYTB_buffer[2] .'</td><td>'. $bYTB_buffer[3] .'</td><td>'. $bYTB_buffer[4] .'</td><td>'. $bYTB_buffer[5] .'</td><td>'. $bYTB_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
-=======
-                        
-                        <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td>'. $tLK_buffer[0] .'</td><td>'. $tLK_buffer[1] .'</td><td>'. $tLK_buffer[2] .'</td><td>'. $tLK_buffer[3] .'</td><td>'. $tLK_buffer[4] .'</td><td>'. $tLK_buffer[5] .'</td><td>'. $tLK_buffer[6] .'</td><td>'. $tLK_buffer[7] .'</td>/tr>
-                        <tr><td>3</td><td>Terdapat lekukan pada bodi</td><td>'. $tLPB_buffer[0] .'</td><td>'. $tLPB_buffer[1] .'</td><td>'. $tLPB_buffer[2] .'</td><td>'. $tLPB_buffer[3] .'</td><td>'. $tLPB_buffer[4] .'</td><td>'. $tLPB_buffer[5] .'</td><td>'. $tLPB_buffer[6] .'</td><td>'. $tLPB_buffer[7] .'</td></tr>
-                        
-                        <tr><td>4</td><td>Kondisi seal</td><td>'. $kS_buffer[0] .'</td><td>'. $kS_buffer[1] .'</td><td>'. $kS_buffer[2] .'</td><td>'. $kS_buffer[3] .'</td><td>'. $kS_buffer[4] .'</td><td>'. $kS_buffer[5] .'</td><td>'. $kS_buffer[6] .'</td><td>'. $kS_buffer[7] .'</td></tr>
-                        <tr><td colspan="10">Kondisi Dalam</td></tr>
-                        <tr><td>1</td><td>Kotoran</td><td>'. $ko_buffer[0] .'</td><td>'. $ko_buffer[1] .'</td><td>'. $ko_buffer[2] .'</td><td>'. $ko_buffer[3] .'</td><td>'. $ko_buffer[4] .'</td><td>'. $ko_buffer[5] .'</td><td>'. $ko_buffer[6] .'</td><td>'. $ko_buffer[7] .'</td></tr>
-                        
-                        <tr><td>2</td><td>Karat</td><td>'. $ka_buffer[0] .'</td><td>'. $ka_buffer[1] .'</td><td>'. $ka_buffer[2] .'</td><td>'. $ka_buffer[3] .'</td><td>'. $ka_buffer[4] .'</td><td>'. $ka_buffer[5] .'</td><td>'. $ka_buffer[6] .'</td><td>'. $ka_buffer[7] .'</td></tr>
-                        
-                        <tr><td>3</td><td>Benda Asing</td><td>'. $bA_buffer[0] .'</td><td>'. $bA_buffer[1] .'</td><td>'. $bA_buffer[2] .'</td><td>'. $bA_buffer[3] .'</td><td>'. $bA_buffer[4] .'</td><td>'. $bA_buffer[5] .'</td><td>'. $bA_buffer[6] .'</td><td>'. $bA_buffer[7] .'</td></tr>
-                        
-                        <tr><td>4</td></td><td>Bau yang tidak biasa</td><td>'. $bYTB_buffer[0] .'</td><td>'. $bYTB_buffer[1] .'</td><td>'. $bYTB_buffer[2] .'</td><td>'. $bYTB_buffer[3] .'</td><td>'. $bYTB_buffer[4] .'</td><td>'. $bYTB_buffer[5] .'</td><td>'. $bYTB_buffer[6] .'</td><td>'. $bYTB_buffer[7] .'</td></tr>
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
                     </table>
             ';
-        }
-        elseif ($_GET['data'] == "add") {
+        } elseif ($_GET['data'] == "add") {
             if($dP_buffer[5] == '1') $apprA =  "Approved"; else $apprA =  "Declined";
             if($dP_buffer[1] == 'baseOil') $iC =  "Base Oil"; else $iC =  "Additive";
             echo '
@@ -1009,8 +914,7 @@
         </tr>
     </table>
             ';
-        }
-        else {
+        } else {
             echo '<br><h4>Data tabel tidak tersedia karena type barang tidak sesuai aturan!</h4>';
             echo '
                                                 <style>

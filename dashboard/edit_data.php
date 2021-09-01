@@ -2,32 +2,8 @@
 require_once '../assets/functions.php';
 include  '../koneksi/koneksi.php';
 session_start();
-date_default_timezone_set('Asia/Jakarta');
 //print_r($_SESSION);
-$DB_HOST = "127.0.0.1";
-$DB_USER = "root";
-$DB_PASS = "";
-$DB_DATABASE = "lims";
-$koneksi = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_DATABASE);
 
-if ($koneksi->connect_errno) {
-    echo "Connection Error: " . $koneksi->connect_error;
-}
-
-
-function formatTanggal() {
-    date_default_timezone_set('Asia/Jakarta');
-
-    $tgl = date("d"); // date("Y-m-d")
-    $bulan =  date("m");
-    $tahun = date("Y");
-
-    $templateNamaBulan = ["Jan", "Feb", "Mar", "Apr","May", "Jun","Jul","Aug", "Sep", "Oct", "Nov","Dec"];
-
-    $bulan = $templateNamaBulan[((int) $bulan) - 1];
-
-    return $tgl."-".$bulan."-".$tahun;
-}
 
 function tampilTombolTambahData() {
     if (strtolower((string) $_SESSION['role']) == "siteman") {
@@ -168,15 +144,6 @@ function formShow(){
                                         </div>
                                         <?php
                                         $jd = '';
-                                        // ==== KONEKSI DATABASE
-
-                                        $sqlSelect_utama = "SELECT * FROM `tbl_utama_pkg` WHERE `id_utama` = '$dE_buffer[3]'";
-                                        $hasilSelect_utama = $koneksi->query($sqlSelect_utama);
-                                        $row_utama = $hasilSelect_utama-> fetch_assoc();
-                                        //print_r($row_utama);
-
-
-
                                         if (isset($_GET['type'])){
                                             if ($_GET['type'] == "material") {
                                                 $jd = "pm";
@@ -192,11 +159,6 @@ function formShow(){
 </div>
 
 <div class="form-group mb-4">
-    <label for="jamMsk">Jam Masuk</label>
-    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
-</div>
-<hr>
-<div class="form-group mb-4">
     <label for="approval">Approval</label><br/>
     <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
 </div>
@@ -205,24 +167,16 @@ function formShow(){
     <label for="jumlahProduct">Jumlah Product</label>
     <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
 </div>
-<div class="form-group mb-4">
-    <label for="finnish_time">Finnish Time</label>
-    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
-</div>
-<div class="form-group mb-4">
-    <label for="received_name">Received Name</label>
-    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
-</div>
+
 <div class="form-group mb-4">
     <label for="cekSampel">Cek Sampel</label>
     <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
 </div>
 
- <div class="form-group mb-4">
+<div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
-</div> 
-
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+</div>
 
 <div class="form-group mb-4">
     <label for="NPT">NPT</label><br/>
@@ -248,8 +202,7 @@ function formShow(){
     * Pengecekan dilakukan apabila diperlukan
 </div>
                                                 ';
-                                            }
-                                            elseif ($_GET['type'] == "ibc") {
+                                            } elseif ($_GET['type'] == "ibc") {
                                                 $jd = "ibc";
                                                 echo '
                                                 <div class="form-group mb-4">
@@ -261,37 +214,26 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="jamMsk">Jam Masuk</label>
-    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
-</div>
+
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
     </div>
 
-   <div class="form-group mb-4">
-    <label for="jumlahProduct">Jumlah Product</label>
-    <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
-</div>
-<div class="form-group mb-4">
-    <label for="finnish_time">Finnish Time</label>
-    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
-</div>
-<div class="form-group mb-4">
-    <label for="received_name">Received Name</label>
-    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
-</div>
+    <div class="form-group mb-4">
+        <label for="jumlahProduct">Jumlah Product</label>
+        <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
+    </div>
 
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-     <div class="form-group mb-4">
+    <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
-</div> 
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+    </div>
 
     <div class="form-row mb-4">
         <label for="pengecekan">Pengecekan</label><br/>
@@ -306,8 +248,7 @@ function formShow(){
         </table>
     </div>
                                                 ';
-                                            }
-                                            elseif ($_GET['type'] == "pail") {
+                                            } elseif ($_GET['type'] == "pail") {
                                                 $jd = "p";
                                                 echo '
                                                 <div class="form-group mb-4">
@@ -319,10 +260,7 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="jamMsk">Jam Masuk</label>
-    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
-</div>
+
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
@@ -333,20 +271,12 @@ function formShow(){
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
 
-<div class="form-group mb-4">
-    <label for="finnish_time">Finnish Time</label>
-    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
-</div>
-<div class="form-group mb-4">
-    <label for="received_name">Received Name</label>
-    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
-</div>
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-  <div class="form-group mb-4">
+    <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
     <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
     </div>
@@ -368,8 +298,7 @@ function formShow(){
         </table>
     </div>
                                                 ';
-                                            }
-                                            elseif ($_GET['type'] == "cap") {
+                                            } elseif ($_GET['type'] == "cap") {
                                                 $jd = "pc";
                                                 echo '
                                                 <div class="form-group mb-4">
@@ -381,10 +310,6 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-  <div class="form-group mb-4">
-    <label for="jamMsk">Jam Masuk</label>
-    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
-</div>
 
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
@@ -395,24 +320,16 @@ function formShow(){
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="finnish_time">Finnish Time</label>
-    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
-</div>
-<div class="form-group mb-4">
-    <label for="received_name">Received Name</label>
-    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
-</div>
+
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
- <div class="form-group mb-4">
+    <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
-</div> 
-
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+    </div>
 
     <div class="form-row mb-4">
         <label for="pengecekan">Pengecekan</label><br/>
@@ -428,8 +345,7 @@ function formShow(){
         </table>
     </div>
                                                 ';
-                                            }
-                                            elseif ($_GET['type'] == "cartonbox") {
+                                            } elseif ($_GET['type'] == "cartonbox") {
                                                 $jd = "pcb";
                                                 echo '
                                                 <div class="form-group mb-4">
@@ -441,10 +357,7 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="jamMsk">Jam Masuk</label>
-    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
-</div>
+
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
@@ -454,23 +367,16 @@ function formShow(){
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="finnish_time">Finnish Time</label>
-    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
-</div>
-<div class="form-group mb-4">
-    <label for="received_name">Received Name</label>
-    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
-</div>
+
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
         <input type="text" class="form-control" id="cekSampel" name="cekSampel" placeholder="Cek Sampel">
     </div>
 
-   <div class="form-group mb-4">
+    <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
-</div> 
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+    </div>
 
     <div class="form-group mb-4">
         <label for="COA">COA</label><br/>
@@ -484,19 +390,11 @@ function formShow(){
             <tr><td colspan="2">Kondisi Luar</td></tr>
             <tr><td>1</td><td>Kondisi Carton</td><td><input type="radio" name="1,1" value="OK" checked/>OK<br/><input type="radio" name="1,1" value="NG"/>NG</td><td><input type="radio" name="1,2" value="OK" checked/>OK<br/><input type="radio" name="1,2" value="NG"/>NG</td><td><input type="radio" name="1,3" value="OK" checked/>OK<br/><input type="radio" name="1,3" value="NG"/>NG</td><td><input type="radio" name="1,4" value="OK" checked/>OK<br/><input type="radio" name="1,4" value="NG"/>NG</td><td><input type="radio" name="1,5" value="OK" checked/>OK<br/><input type="radio" name="1,5" value="NG"/>NG</td><td><input type="radio" name="1,6" value="OK" checked/>OK<br/><input type="radio" name="1,6" value="NG"/>NG</td><td><input type="radio" name="1,7" value="OK" checked/>OK<br/><input type="radio" name="1,7" value="NG"/>NG</td><td><input type="radio" name="1,8" value="OK" checked/>OK<br/><input type="radio" name="1,8" value="NG"/>NG</td><</tr>
             <tr><td>2</td><td>Warna Carton</td><td><input type="radio" name="2,1" value="OK" checked/>OK<br/><input type="radio" name="2,1" value="NG"/>NG</td><td><input type="radio" name="2,2" value="OK" checked/>OK<br/><input type="radio" name="2,2" value="NG"/>NG</td><td><input type="radio" name="2,3" value="OK" checked/>OK<br/><input type="radio" name="2,3" value="NG"/>NG</td><td><input type="radio" name="2,4" value="OK" checked/>OK<br/><input type="radio" name="2,4" value="NG"/>NG</td><td><input type="radio" name="2,5" value="OK" checked/>OK<br/><input type="radio" name="2,5" value="NG"/>NG</td><td><input type="radio" name="2,6" value="OK" checked/>OK<br/><input type="radio" name="2,6" value="NG"/>NG</td><td><input type="radio" name="2,7" value="OK" checked/>OK<br/><input type="radio" name="2,7" value="NG"/>NG</td><td><input type="radio" name="2,8" value="OK" checked/>OK<br/><input type="radio" name="2,8" value="NG"/>NG</td><</tr>
-<<<<<<< HEAD
             <tr><td>3</td><td>Kotoran</td><td><input type="radio" name="3,1" value="Ada" checked/>Ada<br/><input type="radio" name="3,1" value="Tidak"/>Tidak</td><td><input type="radio" name="3,2" value="Ada" checked/>Ada<br/><input type="radio" name="3,2" value="Tidak"/>Tidak</td><td><input type="radio" name="3,3" value="Ada" checked/>Ada<br/><input type="radio" name="3,3" value="Tidak"/>Tidak</td><td><input type="radio" name="3,4" value="Ada" checked/>Ada<br/><input type="radio" name="3,4" value="Tidak"/>Tidak</td><td><input type="radio" name="3,5" value="Ada" checked/>Ada<br/><input type="radio" name="3,5" value="Tidak"/>Tidak</td><td><input type="radio" name="3,6" value="Ada" checked/>Ada<br/><input type="radio" name="3,6" value="Tidak"/>Tidak</td><td><input type="radio" name="3,7" value="Ada" checked/>Ada<br/><input type="radio" name="3,7" value="Tidak"/>Tidak</td><td><input type="radio" name="3,8" value="Ada" checked/>Ada<br/><input type="radio" name="3,8" value="Tidak"/>Tidak</td></tr>
             <tr><td>4</td><td>Gambar</td><td><input type="radio" name="4,1" value="Ada" checked/>Ada<br/><input type="radio" name="4,1" value="Tidak"/>Tidak</td><td><input type="radio" name="4,2" value="Ada" checked/>Ada<br/><input type="radio" name="4,2" value="Tidak"/>Tidak</td><td><input type="radio" name="4,3" value="Ada" checked/>Ada<br/><input type="radio" name="4,3" value="Tidak"/>Tidak</td><td><input type="radio" name="4,4" value="Ada" checked/>Ada<br/><input type="radio" name="4,4" value="Tidak"/>Tidak</td><td><input type="radio" name="4,5" value="Ada" checked/>Ada<br/><input type="radio" name="4,5" value="Tidak"/>Tidak</td><td><input type="radio" name="4,6" value="Ada" checked/>Ada<br/><input type="radio" name="4,6" value="Tidak"/>Tidak</td><td><input type="radio" name="4,7" value="Ada" checked/>Ada<br/><input type="radio" name="4,7" value="Tidak"/>Tidak</td><td><input type="radio" name="4,8" value="Ada" checked/>Ada<br/><input type="radio" name="4,8" value="Tidak"/>Tidak</td></tr>
             <tr><td>5</td><td>Label</td><td><input type="radio" name="5,1" value="Ada" checked/>Ada<br/><input type="radio" name="5,1" value="Tidak"/>Tidak</td><td><input type="radio" name="5,2" value="Ada" checked/>Ada<br/><input type="radio" name="5,2" value="Tidak"/>Tidak</td><td><input type="radio" name="5,3" value="Ada" checked/>Ada<br/><input type="radio" name="5,3" value="Tidak"/>Tidak</td><td><input type="radio" name="5,4" value="Ada" checked/>Ada<br/><input type="radio" name="5,4" value="Tidak"/>Tidak</td><td><input type="radio" name="5,5" value="Ada" checked/>Ada<br/><input type="radio" name="5,5" value="Tidak"/>Tidak</td><td><input type="radio" name="5,6" value="Ada" checked/>Ada<br/><input type="radio" name="5,6" value="Tidak"/>Tidak</td><td><input type="radio" name="5,7" value="Ada" checked/>Ada<br/><input type="radio" name="5,7" value="Tidak"/>Tidak</td><td><input type="radio" name="5,8" value="Ada" checked/>Ada<br/><input type="radio" name="5,8" value="Tidak"/>Tidak</td></tr>
             <tr><td colspan="10">Kondisi Dalam</td></tr>
             <tr><td>1</td><td>Kotoran</td><td><input type="radio" name="6,1" value="Ada" checked/>Ada<br/><input type="radio" name="6,1" value="Tidak"/>Tidak</td><td><input type="radio" name="6,2" value="Ada" checked/>Ada<br/><input type="radio" name="6,2" value="Tidak"/>Tidak</td><td><input type="radio" name="6,3" value="Ada" checked/>Ada<br/><input type="radio" name="6,3" value="Tidak"/>Tidak</td><td><input type="radio" name="6,4" value="Ada" checked/>Ada<br/><input type="radio" name="6,4" value="Tidak"/>Tidak</td><td><input type="radio" name="6,5" value="Ada" checked/>Ada<br/><input type="radio" name="6,5" value="Tidak"/>Tidak</td><td><input type="radio" name="6,6" value="Ada" checked/>Ada<br/><input type="radio" name="6,6" value="Tidak"/>Tidak</td><td><input type="radio" name="6,7" value="Ada" checked/>Ada<br/><input type="radio" name="6,7" value="Tidak"/>Tidak</td><td><input type="radio" name="6,8" value="Ada" checked/>Ada<br/><input type="radio" name="6,8" value="Tidak"/>Tidak</td></tr>
-=======
-            <tr><td>3</td><td>Kotoran</td><td><input type="radio" name="3,1" value="Ada" checked/>Ada<br/><input type="radio" name="3,1" value="Tidak"/>Tidak</td><td><input type="radio" name="3,2" value="Ada" checked/>Ada<br/><input type="radio" name="3,2" value="Tidak"/>Tidak</td><td><input type="radio" name="3,3" value="Ada" checked/>Ada<br/><input type="radio" name="3,3" value="Tidak"/>Tidak</td><td><input type="radio" name="3,4" value="Ada" checked/>Ada<br/><input type="radio" name="3,4" value="Tidak"/>Tidak</td><td><input type="radio" name="3,5" value="Ada" checked/>Ada<br/><input type="radio" name="3,5" value="Tidak"/>Tidak</td><td><input type="radio" name="3,6" value="Ada" checked/>Ada<br/><input type="radio" name="3,6" value="Tidak"/>Tidak</td><td><input type="radio" name="3,7" value="Ada" checked/>Ada<br/><input type="radio" name="3,7" value="Tidak"/>Tidak</td><td><input type="radio" name="3,8" value="Ada" checked/>Ada<br/><input type="radio" name="3,8" value="Tidak"/>Tidak</td>      </tr>
-            <tr><td>4</td><td>Gambar</td><td><input type="radio" name="4,1" value="Ada" checked/>Ada<br/><input type="radio" name="4,1" value="Tidak"/>Tidak</td><td><input type="radio" name="4,2" value="Ada" checked/>Ada<br/><input type="radio" name="4,2" value="Tidak"/>Tidak</td><td><input type="radio" name="4,3" value="Ada" checked/>Ada<br/><input type="radio" name="4,3" value="Tidak"/>Tidak</td><td><input type="radio" name="4,4" value="Ada" checked/>Ada<br/><input type="radio" name="4,4" value="Tidak"/>Tidak</td><td><input type="radio" name="4,5" value="Ada" checked/>Ada<br/><input type="radio" name="4,5" value="Tidak"/>Tidak</td><td><input type="radio" name="4,6" value="Ada" checked/>Ada<br/><input type="radio" name="4,6" value="Tidak"/>Tidak</td><td><input type="radio" name="4,7" value="Ada" checked/>Ada<br/><input type="radio" name="4,7" value="Tidak"/>Tidak</td><td><input type="radio" name="4,8" value="Ada" checked/>Ada<br/><input type="radio" name="4,8" value="Tidak"/>Tidak</td>       </tr>
-            <tr><td>5</td><td>Label</td><td><input type="radio" name="5,1" value="Ada" checked/>Ada<br/><input type="radio" name="5,1" value="Tidak"/>Tidak</td><td><input type="radio" name="5,2" value="Ada" checked/>Ada<br/><input type="radio" name="5,2" value="Tidak"/>Tidak</td><td><input type="radio" name="5,3" value="Ada" checked/>Ada<br/><input type="radio" name="5,3" value="Tidak"/>Tidak</td><td><input type="radio" name="5,4" value="Ada" checked/>Ada<br/><input type="radio" name="5,4" value="Tidak"/>Tidak</td><td><input type="radio" name="5,5" value="Ada" checked/>Ada<br/><input type="radio" name="5,5" value="Tidak"/>Tidak</td><td><input type="radio" name="5,6" value="Ada" checked/>Ada<br/><input type="radio" name="5,6" value="Tidak"/>Tidak</td><td><input type="radio" name="5,7" value="Ada" checked/>Ada<br/><input type="radio" name="5,7" value="Tidak"/>Tidak</td><td><input type="radio" name="5,8" value="Ada" checked/>Ada<br/><input type="radio" name="5,8" value="Tidak"/>Tidak</td>        </tr>
-            <tr><td colspan="10">Kondisi Dalam</td></tr>
-            <tr><td>1</td><td>Kotoran</td><td><input type="radio" name="6,1" value="Ada" checked/>Ada<br/><input type="radio" name="6,1" value="Tidak"/>Tidak</td><td><input type="radio" name="6,2" value="Ada" checked/>Ada<br/><input type="radio" name="6,2" value="Tidak"/>Tidak</td><td><input type="radio" name="6,3" value="Ada" checked/>Ada<br/><input type="radio" name="6,3" value="Tidak"/>Tidak</td><td><input type="radio" name="6,4" value="Ada" checked/>Ada<br/><input type="radio" name="6,4" value="Tidak"/>Tidak</td><td><input type="radio" name="6,5" value="Ada" checked/>Ada<br/><input type="radio" name="6,5" value="Tidak"/>Tidak</td><td><input type="radio" name="6,6" value="Ada" checked/>Ada<br/><input type="radio" name="6,6" value="Tidak"/>Tidak</td><td><input type="radio" name="6,7" value="Ada" checked/>Ada<br/><input type="radio" name="6,7" value="Tidak"/>Tidak</td><td><input type="radio" name="6,8" value="Ada" checked/>Ada<br/><input type="radio" name="6,8" value="Tidak"/>Tidak</td>      </tr>
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
         </table>
     </div>
                                                 ';
@@ -512,10 +410,7 @@ function formShow(){
     <label for="tglIn">Tanggal Item Masuk</label><br/>
     <p id="tglIn" style="font-size: medium">'.$dE_buffer[4].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="jamMsk">Jam Masuk</label>
-    <p id="jamMsk" style="font-size: medium">'.$row_utama["receive_time"].' </p>
-</div>
+
     <div class="form-group mb-4">
         <label for="approval">Approval</label><br/>
         <table style="font-size: medium"><tr><td style="padding:10px;"><input type="radio" id="approval" name="approval" value="1" checked/>Approve</td><td style="padding:10px;"><input id="approval" type="radio" name="approval" value="0"/>Decline</td></tr></table>
@@ -525,14 +420,6 @@ function formShow(){
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
-<div class="form-group mb-4">
-    <label for="finnish_time">Finnish Time</label>
-    <input type="text" class="form-control" id="finnish_time" name="finnish_time" value="'.date("h:i").'" placeholder="Jam:Menit">
-</div>
-<div class="form-group mb-4">
-    <label for="received_name">Received Name</label>
-    <input type="text" class="form-control" id="received_name" name="received_name"  placeholder="Received Name">
-</div>
 
     <div class="form-group mb-4">
         <label for="cekSampel">Cek Sampel</label>
@@ -541,8 +428,8 @@ function formShow(){
 
     <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
-</div> 
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+    </div>
 
     <div class="form-row mb-4">
         <label for="pengecekan">Pengecekan</label><br/>
@@ -550,7 +437,6 @@ function formShow(){
             <tr><td>No</td><td style="width: 400px">Item Pengecekan</td><td rowspan="2" style="width: 80px; text-align: center">1</td><td rowspan="2" style="width: 80px; text-align: center">2</td><td rowspan="2" style="width: 80px; text-align: center">3</td><td rowspan="2" style="width: 80px; text-align: center">4</td><td rowspan="2" style="width: 80px; text-align: center">5</td><td rowspan="2" style="width: 80px; text-align: center">6</td><td rowspan="2" style="width: 80px; text-align: center">7</td><td rowspan="2" style="width: 80px; text-align: center">8</td></tr>
             <tr><td colspan="2">Kondisi Luar</td></tr>
             <tr><td>1</td><td>Warna Drum</td><td><input type="radio" name="1,1" value="OK" checked/>OK<br/><input type="radio" name="1,1" value="NG"/>NG</td><td><input type="radio" name="1,2" value="OK" checked/>OK<br/><input type="radio" name="1,2" value="NG"/>NG</td><td><input type="radio" name="1,3" value="OK" checked/>OK<br/><input type="radio" name="1,3" value="NG"/>NG</td><td><input type="radio" name="1,4" value="OK" checked/>OK<br/><input type="radio" name="1,4" value="NG"/>NG</td><td><input type="radio" name="1,5" value="OK" checked/>OK<br/><input type="radio" name="1,5" value="NG"/>NG</td><td><input type="radio" name="1,6" value="OK" checked/>OK<br/><input type="radio" name="1,6" value="NG"/>NG</td><td><input type="radio" name="1,7" value="OK" checked/>OK<br/><input type="radio" name="1,7" value="NG"/>NG</td><td><input type="radio" name="1,8" value="OK" checked/>OK<br/><input type="radio" name="1,8" value="NG"/>NG</td><</tr>
-<<<<<<< HEAD
             <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td><input type="radio" name="2,1" value="Ada" checked/>Ada<br/><input type="radio" name="2,1" value="Tidak"/>Tidak</td><td><input type="radio" name="2,2" value="Ada" checked/>Ada<br/><input type="radio" name="2,2" value="Tidak"/>Tidak</td><td><input type="radio" name="2,3" value="Ada" checked/>Ada<br/><input type="radio" name="2,3" value="Tidak"/>Tidak</td><td><input type="radio" name="2,4" value="Ada" checked/>Ada<br/><input type="radio" name="2,4" value="Tidak"/>Tidak</td><td><input type="radio" name="2,5" value="Ada" checked/>Ada<br/><input type="radio" name="2,5" value="Tidak"/>Tidak</td><td><input type="radio" name="2,6" value="Ada" checked/>Ada<br/><input type="radio" name="2,6" value="Tidak"/>Tidak</td><td><input type="radio" name="2,7" value="Ada" checked/>Ada<br/><input type="radio" name="2,7" value="Tidak"/>Tidak</td><td><input type="radio" name="2,8" value="Ada" checked/>Ada<br/><input type="radio" name="2,8" value="Tidak"/>Tidak</td></tr>
             <tr><td>3</td><td>Terdapat lekukan pada bodi</td><td><input type="radio" name="3,1" value="Ada" checked/>Ada<br/><input type="radio" name="3,1" value="Tidak"/>Tidak</td><td><input type="radio" name="3,2" value="Ada" checked/>Ada<br/><input type="radio" name="3,2" value="Tidak"/>Tidak</td><td><input type="radio" name="3,3" value="Ada" checked/>Ada<br/><input type="radio" name="3,3" value="Tidak"/>Tidak</td><td><input type="radio" name="3,4" value="Ada" checked/>Ada<br/><input type="radio" name="3,4" value="Tidak"/>Tidak</td><td><input type="radio" name="3,5" value="Ada" checked/>Ada<br/><input type="radio" name="3,5" value="Tidak"/>Tidak</td><td><input type="radio" name="3,6" value="Ada" checked/>Ada<br/><input type="radio" name="3,6" value="Tidak"/>Tidak</td><td><input type="radio" name="3,7" value="Ada" checked/>Ada<br/><input type="radio" name="3,7" value="Tidak"/>Tidak</td><td><input type="radio" name="3,8" value="Ada" checked/>Ada<br/><input type="radio" name="3,8" value="Tidak"/>Tidak</td></tr>
             <tr><td>4</td><td>Kondisi Seal</td><td><input type="radio" name="4,1" value="OK" checked/>OK<br/><input type="radio" name="4,1" value="NG"/>NG</td><td><input type="radio" name="4,2" value="OK" checked/>OK<br/><input type="radio" name="4,2" value="NG"/>NG</td><td><input type="radio" name="4,3" value="OK" checked/>OK<br/><input type="radio" name="4,3" value="NG"/>NG</td><td><input type="radio" name="4,4" value="OK" checked/>OK<br/><input type="radio" name="4,4" value="NG"/>NG</td><td><input type="radio" name="4,5" value="OK" checked/>OK<br/><input type="radio" name="4,5" value="NG"/>NG</td><td><input type="radio" name="4,6" value="OK" checked/>OK<br/><input type="radio" name="4,6" value="NG"/>NG</td><td><input type="radio" name="4,7" value="OK" checked/>OK<br/><input type="radio" name="4,7" value="NG"/>NG</td><td><input type="radio" name="4,8" value="OK" checked/>OK<br/><input type="radio" name="4,8" value="NG"/>NG</td><</tr>
@@ -559,16 +445,6 @@ function formShow(){
             <tr><td>2</td><td>Karat</td><td><input type="radio" name="6,1" value="Ada" checked/>Ada<br/><input type="radio" name="6,1" value="Tidak"/>Tidak</td><td><input type="radio" name="6,2" value="Ada" checked/>Ada<br/><input type="radio" name="6,2" value="Tidak"/>Tidak</td><td><input type="radio" name="6,3" value="Ada" checked/>Ada<br/><input type="radio" name="6,3" value="Tidak"/>Tidak</td><td><input type="radio" name="6,4" value="Ada" checked/>Ada<br/><input type="radio" name="6,4" value="Tidak"/>Tidak</td><td><input type="radio" name="6,5" value="Ada" checked/>Ada<br/><input type="radio" name="6,5" value="Tidak"/>Tidak</td><td><input type="radio" name="6,6" value="Ada" checked/>Ada<br/><input type="radio" name="6,6" value="Tidak"/>Tidak</td><td><input type="radio" name="6,7" value="Ada" checked/>Ada<br/><input type="radio" name="6,7" value="Tidak"/>Tidak</td><td><input type="radio" name="6,8" value="Ada" checked/>Ada<br/><input type="radio" name="6,8" value="Tidak"/>Tidak</td></tr>
             <tr><td>3</td><td>Benda Asing</td><td><input type="radio" name="7,1" value="Ada" checked/>Ada<br/><input type="radio" name="7,1" value="Tidak"/>Tidak</td><td><input type="radio" name="7,2" value="Ada" checked/>Ada<br/><input type="radio" name="7,2" value="Tidak"/>Tidak</td><td><input type="radio" name="7,3" value="Ada" checked/>Ada<br/><input type="radio" name="7,3" value="Tidak"/>Tidak</td><td><input type="radio" name="7,4" value="Ada" checked/>Ada<br/><input type="radio" name="7,4" value="Tidak"/>Tidak</td><td><input type="radio" name="7,5" value="Ada" checked/>Ada<br/><input type="radio" name="7,5" value="Tidak"/>Tidak</td><td><input type="radio" name="7,6" value="Ada" checked/>Ada<br/><input type="radio" name="7,6" value="Tidak"/>Tidak</td><td><input type="radio" name="7,7" value="Ada" checked/>Ada<br/><input type="radio" name="7,7" value="Tidak"/>Tidak</td><td><input type="radio" name="7,8" value="Ada" checked/>Ada<br/><input type="radio" name="7,8" value="Tidak"/>Tidak</td></tr>
             <tr><td>4</td><td>Bau yang tidak biasa</td><td><input type="radio" name="8,1" value="Ada" checked/>Ada<br/><input type="radio" name="8,1" value="Tidak"/>Tidak</td><td><input type="radio" name="8,2" value="Ada" checked/>Ada<br/><input type="radio" name="8,2" value="Tidak"/>Tidak</td><td><input type="radio" name="8,3" value="Ada" checked/>Ada<br/><input type="radio" name="8,3" value="Tidak"/>Tidak</td><td><input type="radio" name="8,4" value="Ada" checked/>Ada<br/><input type="radio" name="8,4" value="Tidak"/>Tidak</td><td><input type="radio" name="8,5" value="Ada" checked/>Ada<br/><input type="radio" name="8,5" value="Tidak"/>Tidak</td><td><input type="radio" name="8,6" value="Ada" checked/>Ada<br/><input type="radio" name="8,6" value="Tidak"/>Tidak</td><td><input type="radio" name="8,7" value="Ada" checked/>Ada<br/><input type="radio" name="8,7" value="Tidak"/>Tidak</td><td><input type="radio" name="8,8" value="Ada" checked/>Ada<br/><input type="radio" name="8,8" value="Tidak"/>Tidak</td></tr>
-=======
-            <tr><td>2</td><td>Terdapat lubang/kebocoran</td><td><input type="radio" name="2,1" value="Ada" checked/>Ada<br/><input type="radio" name="2,1" value="Tidak"/>Tidak</td><td><input type="radio" name="2,2" value="Ada" checked/>Ada<br/><input type="radio" name="2,2" value="Tidak"/>Tidak</td><td><input type="radio" name="2,3" value="Ada" checked/>Ada<br/><input type="radio" name="2,3" value="Tidak"/>Tidak</td><td><input type="radio" name="2,4" value="Ada" checked/>Ada<br/><input type="radio" name="2,4" value="Tidak"/>Tidak</td><td><input type="radio" name="2,5" value="Ada" checked/>Ada<br/><input type="radio" name="2,5" value="Tidak"/>Tidak</td><td><input type="radio" name="2,6" value="Ada" checked/>Ada<br/><input type="radio" name="2,6" value="Tidak"/>Tidak</td><td><input type="radio" name="2,7" value="Ada" checked/>Ada<br/><input type="radio" name="2,7" value="Tidak"/>Tidak</td><td><input type="radio" name="2,8" value="Ada" checked/>Adaa<br/><input type="radio" name="2,8" value="Tidak"/>Tidak</td> </tr>
-            <tr><td>3</td><td>Terdapat lekukan pada bodi</td><td><input type="radio" name="3,1" value="Ada" checked/>Ada<br/><input type="radio" name="3,1" value="Tidak"/>Tidak</td><td><input type="radio" name="3,2" value="Ada" checked/>Ada<br/><input type="radio" name="3,2" value="Tidak"/>Tidak</td><td><input type="radio" name="3,3" value="Ada" checked/>Ada<br/><input type="radio" name="3,3" value="Tidak"/>Tidak</td><td><input type="radio" name="3,4" value="Ada" checked/>Ada<br/><input type="radio" name="3,4" value="Tidak"/>Tidak</td><td><input type="radio" name="3,5" value="Ada" checked/>Ada<br/><input type="radio" name="3,5" value="Tidak"/>Tidak</td><td><input type="radio" name="3,6" value="Ada" checked/>Ada<br/><input type="radio" name="3,6" value="Tidak"/>Tidak</td><td><input type="radio" name="3,7" value="Ada" checked/>Ada<br/><input type="radio" name="3,7" value="Tidak"/>Tidak</td><td><input type="radio" name="3,8" value="Ada" checked/>Ada<br/><input type="radio" name="3,8" value="Tidak"/>Tidak</td></tr>
-            <tr><td>4</td><td>Kondisi Seal</td><td><input type="radio" name="4,1" value="OK" checked/>OK<br/><input type="radio" name="4,1" value="NG"/>NG</td><td><input type="radio" name="4,2" value="OK" checked/>OK<br/><input type="radio" name="4,2" value="NG"/>NG</td><td><input type="radio" name="4,3" value="OK" checked/>OK<br/><input type="radio" name="4,3" value="NG"/>NG</td><td><input type="radio" name="4,4" value="OK" checked/>OK<br/><input type="radio" name="4,4" value="NG"/>NG</td><td><input type="radio" name="4,5" value="OK" checked/>OK<br/><input type="radio" name="4,5" value="NG"/>NG</td><td><input type="radio" name="4,6" value="OK" checked/>OK<br/><input type="radio" name="4,6" value="NG"/>NG</td><td><input type="radio" name="4,7" value="OK" checked/>OK<br/><input type="radio" name="4,7" value="NG"/>NG</td><td><input type="radio" name="4,8" value="OK" checked/>OK<br/><input type="radio" name="4,8" value="NG"/>NG</td><</tr>
-            <tr><td colspan="10">Kondisi Dalam</td></tr>
-            <tr><td>1</td><td>Kotoran</td><td><input type="radio" name="5,1" value="Ada" checked/>Ada<br/><input type="radio" name="5,1" value="Tidak"/>Tidak</td><td><input type="radio" name="5,2" value="Ada" checked/>Ada<br/><input type="radio" name="5,2" value="Tidak"/>Tidak</td><td><input type="radio" name="5,3" value="Ada" checked/>Ada<br/><input type="radio" name="5,3" value="Tidak"/>Tidak</td><td><input type="radio" name="5,4" value="Ada" checked/>Ada<br/><input type="radio" name="5,4" value="Tidak"/>Tidak</td><td><input type="radio" name="5,5" value="Ada" checked/>Ada<br/><input type="radio" name="5,5" value="Tidak"/>Tidak</td><td><input type="radio" name="5,6" value="Ada" checked/>Ada<br/><input type="radio" name="5,6" value="Tidak"/>Tidak</td><td><input type="radio" name="5,7" value="Ada" checked/>Ada<br/><input type="radio" name="5,7" value="Tidak"/>Tidak</td><td><input type="radio" name="5,8" value="Ada" checked/>Ada<br/><input type="radio" name="5,8" value="Tidak"/>Tidak</td>              </tr>
-            <tr><td>2</td><td>Karat</td><td>  <input type="radio" name="6,1" value="Ada" checked/>Ada<br/><input type="radio" name="6,1" value="Tidak"/>Tidak</td><td><input type="radio" name="6,2" value="Ada" checked/>Ada<br/><input type="radio" name="6,2" value="Tidak"/>Tidak</td><td><input type="radio" name="6,3" value="Ada" checked/>Ada<br/><input type="radio" name="6,3" value="Tidak"/>Tidak</td><td><input type="radio" name="6,4" value="Ada" checked/>Ada<br/><input type="radio" name="6,4" value="Tidak"/>Tidak</td><td><input type="radio" name="6,5" value="Ada" checked/>Ada<br/><input type="radio" name="6,5" value="Tidak"/>Tidak</td><td><input type="radio" name="6,6" value="Ada" checked/>Ada<br/><input type="radio" name="6,6" value="Tidak"/>Tidak</td><td><input type="radio" name="6,7" value="Ada" checked/>Ada<br/><input type="radio" name="6,7" value="Tidak"/>Tidak</td><td><input type="radio" name="6,8" value="Ada" checked/>Ada<br/><input type="radio" name="6,8" value="Tidak"/>Tidak</td>              </tr>
-            <tr><td>3</td><td>Benda Asing</td><td><input type="radio" name="7,1" value="Ada" checked/>Ada<br/><input type="radio" name="7,1" value="Tidak"/>Tidak</td><td><input type="radio" name="7,2" value="Ada" checked/>Ada<br/><input type="radio" name="7,2" value="Tidak"/>Tidak</td><td><input type="radio" name="7,3" value="Ada" checked/>Ada<br/><input type="radio" name="7,3" value="Tidak"/>Tidak</td><td><input type="radio" name="7,4" value="Ada" checked/>Ada<br/><input type="radio" name="7,4" value="Tidak"/>Tidak</td><td><input type="radio" name="7,5" value="Ada" checked/>Ada<br/><input type="radio" name="7,5" value="Tidak"/>Tidak</td><td><input type="radio" name="7,6" value="Ada" checked/>Ada<br/><input type="radio" name="7,6" value="Tidak"/>Tidak</td><td><input type="radio" name="7,7" value="Ada" checked/>Ada<br/><input type="radio" name="7,7" value="Tidak"/>Tidak</td><td><input type="radio" name="7,8" value="Ada" checked/>Ada<br/><input type="radio" name="7,8" value="Tidak"/>Tidak</td>          </tr>
-            <tr><td>4</td><td>Bau yang tidak biasa</td><td><input type="radio" name="8,1" value="Ada" checked/>Ada<br/><input type="radio" name="8,1" value="Tidak"/>Tidak</td><td><input type="radio" name="8,2" value="Ada" checked/>Ada<br/><input type="radio" name="8,2" value="Tidak"/>Tidak</td><td><input type="radio" name="8,3" value="Ada" checked/>Ada<br/><input type="radio" name="8,3" value="Tidak"/>Tidak</td><td><input type="radio" name="8,4" value="Ada" checked/>Ada<br/><input type="radio" name="8,4" value="Tidak"/>Tidak</td><td><input type="radio" name="8,5" value="Ada" checked/>Ada<br/><input type="radio" name="8,5" value="Tidak"/>Tidak</td><td><input type="radio" name="8,6" value="Ada" checked/>Ada<br/><input type="radio" name="8,6" value="Tidak"/>Tidak</td><td><input type="radio" name="8,7" value="Ada" checked/>Ada<br/><input type="radio" name="8,7" value="Tidak"/>Tidak</td><td><input type="radio" name="8,8" value="Ada" checked/>Ada<br/><input type="radio" name="8,8" value="Tidak"/>Tidak</td> </tr>
->>>>>>> 2c896b222fc0a16ea65c52f53d1b23371adcc3f4
         </table>
     </div>
                                                 ';
@@ -606,17 +482,17 @@ function formShow(){
 
     <div class="form-group mb-4">
         <label for="namaProduct">Nama Product</label>
-        <input type="text" class="form-control" id="namaProduct" name="namaProduct" value="'.$dE_buffer[1].'" placeholder="Nama Product">
+        <input type="text" class="form-control" id="namaProduct" name="namaProduct" placeholder="Nama Product">
     </div>
     <div class="form-group mb-4">
         <label for="jumlahProduct">Jumlah Product</label>
         <p id="jumlahProduct" style="font-size: medium">'.$dE_buffer[5].'</p>
     </div>
     
-     <div class="form-group mb-4">
+    <div class="form-group mb-4">
     <label for="tglEdit">Tanggal Pengecekan</label>
-    <input type="text" class="form-control" id="tanggal" name="tgl_cek" value="'.formatTanggal().'" placeholder="Tanggal-Bulan-Tahun">
-</div> 
+    <input type="text" class="form-control" id="tanggal" name="tgl_cek" placeholder="Tanggal-Bulan-Tahun">
+    </div>
 
     <div class="form-row mb-4">
         <label for="check_form">Pengecekan</label><br/>
